@@ -1,0 +1,37 @@
+$font: 'Source Sans Pro', sans-serif;
+
+header {
+
+	position: absolute;
+	padding: 24px;
+
+	font-family: $font;
+
+	section, img {
+		display: inline-block;
+		vertical-align: middle;
+		margin-right: 14px;
+	}
+
+	p {
+		margin: 8px 0;
+
+		&:first-child {margin-top: 0}
+		&:last-child {margin-bottom: 0}
+	}
+
+	img {
+		width: 80px;
+		height: 80px;
+		border-radius: 6px;
+	}
+}
+
+p.title {
+	font-size: 24px;
+}
+
+p.subtitle {
+	font-size: 18px;
+	color: #999999;
+}
