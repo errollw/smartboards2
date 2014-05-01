@@ -14,7 +14,7 @@ var mt_start_pts = [],
     midpt_mt_start_pts;     // midpoint between both mt start pts
 
 // the image to move
-var raster;
+var transform_item;
 
 // Only executed our code once the DOM is ready.
 window.onload = function() {
@@ -23,9 +23,9 @@ window.onload = function() {
     var canvas = document.getElementById('myCanvas');
     paper.setup(canvas);
 
-    // Create a test raster image
-    raster = new Raster('peppers.jpg');
-    raster.position = view.center;
+    // Create a test transform_item image
+    transform_item = new Raster('http://upload.wikimedia.org/wikipedia/en/2/24/Lenna.png');
+    transform_item.position = view.center;
 
     // bind touch handlers for multi-touch operations
     // see: https://developer.mozilla.org/en-US/docs/Web/Guide/Events/Touch_events
@@ -45,7 +45,11 @@ window.onload = function() {
 
 function handle_mouse_down(evt) {
 
-    save();
+    edit_mode = "TRANSFORM";
+
+    console.log(project.hitTest([evt.pageX, evt.pageY]))
+
+    transform_item = project.hitTest([evt.pageX, evt.pageY]).item
 
     if (current_pointers.length == 0){
         current_pointers[0] = copy_mouse(evt);
@@ -62,11 +66,11 @@ function handle_mouse_move(evt) {
         prev_pointers[0] = copy_mouse(current_pointers[0]);
         current_pointers[0] = copy_mouse(evt);
 
-        // update raster position based on pointer delta
+        // update transform_item position based on pointer delta
         prev_pt = new Point(prev_pointers[0].pageX, prev_pointers[0].pageY);
         current_pt = new Point(current_pointers[0].pageX, current_pointers[0].pageY);
         var delta = current_pt.subtract(prev_pt);
-        raster.position = raster.position.add(delta);
+        transform_item.position = transform_item.position.add(delta);
     }
 }
 
@@ -93,9 +97,9 @@ function handle_touch_start(evt) {
         current_pointers.push(copyTouch(touches[i]));
         prev_pointers.push(copyTouch(touches[i]));
 
-        if (raster.hitTest([touches[i].pageX, touches[i].pageY])){
+        if (transform_item.hitTest([touches[i].pageX, touches[i].pageY])){
             edit_mode = "TRANSFORM";
-            raster.selected = true;
+            transform_item.selected = true;
         }
     }
 
@@ -105,9 +109,9 @@ function handle_touch_start(evt) {
         mt_start_pts[1] = new Point(current_pointers[1].pageX, current_pointers[1].pageY);
         vec_mt_start_pts = mt_start_pts[0].subtract(mt_start_pts[1]);
         midpt_mt_start_pts = mt_start_pts[0].add(mt_start_pts[1]).divide(2);
-        raster.mt_start_position = raster.position;
-        raster.mt_start_rotation = raster.rotation;
-        raster.mt_start_scaling  = raster.scaling;
+        transform_item.mt_start_position = transform_item.position;
+        transform_item.mt_start_rotation = transform_item.rotation;
+        transform_item.mt_start_scaling  = transform_item.scaling;
     }
 }
 
@@ -130,13 +134,13 @@ function handle_touch_move(evt) {
         }
     }
 
-    // if just one touch, move the raster
+    // if just one touch, move the transform_item
     if (current_pointers.length == 1) {
 
         prev_pt_1 = new Point(prev_pointers[0].pageX, prev_pointers[0].pageY);
         touch_pt_1 = new Point(current_pointers[0].pageX, current_pointers[0].pageY);
         var diff = touch_pt_1.subtract(prev_pt_1);
-        raster.position = raster.position.add(diff);
+        transform_item.position = transform_item.position.add(diff);
     }
 
     // TODO: WORK OUT TRANSFORMS BETWEEN POINTS AS 4x3 MATRIX
@@ -148,17 +152,17 @@ function handle_touch_move(evt) {
         var vec_touch = touch_pt_1.subtract(touch_pt_2);    
         var midpt_touch = touch_pt_1.add(touch_pt_2).divide(2);
 
-        // move the raster
+        // move the transform_item
         var diff = midpt_touch.subtract(midpt_mt_start_pts)
-        raster.position = raster.mt_start_position.add(diff);
+        transform_item.position = transform_item.mt_start_position.add(diff);
 
-        // rotate the raster
+        // rotate the transform_item
         var d_rot = vec_touch.angle - vec_mt_start_pts.angle;
-        raster.rotation = raster.mt_start_rotation + d_rot;
+        transform_item.rotation = transform_item.mt_start_rotation + d_rot;
 
-        // scale the raster
+        // scale the transform_item
         var d_scale = vec_touch.length / vec_mt_start_pts.length;
-        raster.scaling = raster.mt_start_scaling.multiply([d_scale,d_scale]);
+        transform_item.scaling = transform_item.mt_start_scaling.multiply([d_scale,d_scale]);
     }
 
 }
