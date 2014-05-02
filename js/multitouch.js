@@ -17,11 +17,14 @@ var mt_start_pts = [],
 var transform_item;
 
 // Only executed our code once the DOM is ready.
-window.onload = function() {
+$(document).ready(function() {
 
     // Create an empty project and a view for the canvas
     var canvas = document.getElementById('myCanvas');
     paper.setup(canvas);
+
+    canvas.width  = 1080;
+    canvas.height = 1920;
 
     // Create a test transform_item image
     transform_item = new Raster('http://upload.wikimedia.org/wikipedia/en/2/24/Lenna.png');
@@ -41,7 +44,7 @@ window.onload = function() {
     canv.addEventListener("mousemove", handle_mouse_move, false);
     canv.addEventListener("mouseup",   handle_mouse_up,   false);
     canv.addEventListener("mouseout",  handle_mouse_up,   false);
-}
+});
 
 function handle_mouse_down(evt) {
 

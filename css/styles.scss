@@ -1,5 +1,15 @@
 $font: 'Source Sans Pro', sans-serif;
 
+body, html {
+	width: 100%;
+	height: 100%;
+	background-color: #CCC;
+}
+
+canvas {
+	background-color: white;
+}
+
 header {
 
 	position: absolute;

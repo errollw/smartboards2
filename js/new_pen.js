@@ -101,7 +101,7 @@ function handleMove(evt) {
         if (!speed_histories[idx]){
             speed_histories[idx] = [];
             for(var i = 0; i < speed_history_length; i++)
-                speed_histories[idx][i] = speed;
+                speed_histories[idx][i] = 0;
             first_drag = false;
         }
 
@@ -153,7 +153,6 @@ function handleEnd(evt) {
 
             if (!speed_histories[idx]) {
                 draw_dot(currentTouches[idx]);
-                console.log("TEST")
             }
 
             previousTouches.splice(idx, 1);
