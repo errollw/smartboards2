@@ -13,6 +13,9 @@ canvas {
 header {
 
 	position: absolute;
+	left: 0;
+	top: 0;
+
 	padding: 24px;
 
 	font-family: $font;
@@ -20,7 +23,7 @@ header {
 	section, img {
 		display: inline-block;
 		vertical-align: middle;
-		margin-right: 14px;
+		margin-right: 18px;
 	}
 
 	p {
@@ -33,7 +36,23 @@ header {
 	img {
 		width: 80px;
 		height: 80px;
-		border-radius: 6px;
+		border-radius: 16px;
+	}
+}
+
+aside {
+
+	position: absolute;
+	right: 0;
+	top: 0;
+
+	padding: 24px;
+
+	div {
+		background-color: #EEE;
+		width: 80px;
+		height: 80px;
+		border-radius: 16px;
 	}
 }
 

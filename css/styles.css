@@ -8,12 +8,14 @@ canvas {
 
 header {
   position: absolute;
+  left: 0;
+  top: 0;
   padding: 24px;
   font-family: "Source Sans Pro", sans-serif; }
   header section, header img {
     display: inline-block;
     vertical-align: middle;
-    margin-right: 14px; }
+    margin-right: 18px; }
   header p {
     margin: 8px 0; }
     header p:first-child {
@@ -23,7 +25,18 @@ header {
   header img {
     width: 80px;
     height: 80px;
-    border-radius: 6px; }
+    border-radius: 16px; }
+
+aside {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 24px; }
+  aside div {
+    background-color: #EEE;
+    width: 80px;
+    height: 80px;
+    border-radius: 16px; }
 
 p.title {
   font-size: 24px; }
