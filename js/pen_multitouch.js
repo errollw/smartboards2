@@ -1,54 +1,30 @@
 // make the paper scope global, by injecting it into window:
 paper.install(window);
 
-// keep track of touches
+// keep track of touches for pen drawing
 var currentTouches = [];  // touches currently active on this frame
 var previousTouches = []; // touches that registered last frame
 
-var min_delta = 4;
-
-var path;
-
-var strokes = [];
-
-var SPEED_MIN = 4,
-    SPEED_MAX = 10;
-
-var speed_histories = [];
-var speed_history_length = 8;
-
-var first_drags = true;
+var min_delta = 8;
 
 // Only executed our code once the DOM is ready.
-window.onload = function() {
+$(document).ready(function() {
 
     // Create an empty project and a view for the canvas
     var canvas = document.getElementById('myCanvas');
     paper.setup(canvas);
 
-    // Bind touch handlers for multi-touch operations
+    // Bind touch handlers for multi-touch pen drawing
     // see: https://developer.mozilla.org/en-US/docs/Web/Guide/Events/Touch_events
     var canv = document.getElementsByTagName("canvas")[0];
-    canv.addEventListener("touchstart",  handleStart,  false);
-    canv.addEventListener("touchend",    handleEnd,    false);
-    canv.addEventListener("touchcancel", handleCancel, false);
-    canv.addEventListener("touchleave",  handleEnd,    false);
-    canv.addEventListener("touchmove",   handleMove,   false);
-}
+    canv.addEventListener("touchstart",  handle_touch_start_pen,  false);
+    canv.addEventListener("touchend",    handle_touch_end_pen,    false);
+    canv.addEventListener("touchcancel", handle_touch_cancel_pen, false);
+    canv.addEventListener("touchleave",  handle_touch_end_pen,    false);
+    canv.addEventListener("touchmove",   handle_touch_move_pen,   false);
+});
 
-function speed_to_thickness(speed, speed_history){
-
-    speed_history.shift();
-    speed_history.push(speed);
-
-    var sum = 0;
-    for(var i = 0; i < speed_history.length; i++)
-        sum += parseInt(speed_history[i]);
-    
-    return 12-(sum/speed_history.length);
-}
-
-function handleStart(evt) {
+function handle_touch_start_pen(evt) {
     evt.preventDefault();
     var touches = evt.changedTouches;
           
@@ -64,7 +40,7 @@ function handleStart(evt) {
     }
 }
 
-function handleMove(evt) {
+function handle_touch_move_pen(evt) {
     evt.preventDefault();
     var touches = evt.changedTouches;
 
@@ -73,10 +49,10 @@ function handleMove(evt) {
 
         if (idx >= 0) {
 
-            // do not register new point unless tool has moved
+            // do not register new point unless tool has moved a certain distance
             prev_pt = new Point(previousTouches[idx].pageX, previousTouches[idx].pageY);
             touch_pt = new Point(touches[i].pageX, touches[i].pageY);
-            if (prev_pt.subtract(touch_pt).length < min_delta) break;
+            if (prev_pt.subtract(touch_pt).length < min_delta) continue;
 
             //robutstly set previous touch point before changing the current touch array
             previousTouches[idx] = currentTouches[idx] ? copyTouch(currentTouches[idx]) : copyTouch(touches[i]);
@@ -97,16 +73,8 @@ function handleMove(evt) {
         var speed = diff.length;
         speed = Math.min(SPEED_MAX, Math.max(SPEED_MIN, speed));
 
-        // reset smoothing speed window at the beginning of a stroke
-        if (!speed_histories[idx]){
-            speed_histories[idx] = [];
-            for(var i = 0; i < speed_history_length; i++)
-                speed_histories[idx][i] = 0;
-            first_drag = false;
-        }
-
         // get thickness to draw at that point
-        var thickness = speed_to_thickness(speed, speed_histories[idx]);
+        var thickness = speed_to_thickness(speed, idx);
 
         // make orthogonal vector to simulate brush thickness
         var step = diff.normalize(thickness);
@@ -119,28 +87,12 @@ function handleMove(evt) {
         strokes[idx].add(top);
         strokes[idx].insert(0, bottom);
 
-        strokes[idx].smooth();
+//        strokes[idx].smooth();
     }
 
 }
 
-function draw_dot(point){
-    var path = new Path();
-    path.fillColor = '#00000';
-    path.closed = true;
-    var center = new Point(point.pageX, point.pageY);
-    
-    for (var i = 0; i < 6; i++) {
-        var delta = new Point({
-            length: (10 * 0.7) + (Math.random() * 10 * 0.3),
-            angle: (360 / 6) * i
-        });
-        path.add(center.add(delta));
-    }
-    path.smooth();
-}
-
-function handleEnd(evt) {
+function handle_touch_end_pen(evt) {
     evt.preventDefault();
     console.log("touchend/touchleave.");
     var touches = evt.changedTouches;
@@ -153,6 +105,10 @@ function handleEnd(evt) {
 
             if (!speed_histories[idx]) {
                 draw_dot(currentTouches[idx]);
+            } else {
+                console.log(touches[i])
+                strokes[idx].add([touches[i].pageX, touches[i].pageY]);
+                strokes[idx].simplify(5);
             }
 
             previousTouches.splice(idx, 1);
@@ -165,7 +121,7 @@ function handleEnd(evt) {
     }
 }
 
-function handleCancel(evt) {
+function handle_touch_cancel_pen(evt) {
     evt.preventDefault();
     var touches = evt.changedTouches;
 

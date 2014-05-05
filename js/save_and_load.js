@@ -14,8 +14,11 @@ function load(){
 
 	project.clear();
 
+    $.ajaxSetup({ cache: false });
+
 	$.getJSON("content/"+r_id+".json", function(json_data){
-      project.importJSON(json_data);
+        project.importJSON(json_data);
+        view.update();
     });
 
 }

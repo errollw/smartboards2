@@ -30,7 +30,7 @@ $(document).ready(function() {
     transform_item = new Raster('http://upload.wikimedia.org/wikipedia/en/2/24/Lenna.png');
     transform_item.position = view.center;
 
-    // bind touch handlers for multi-touch operations
+    // bind touch handlers for multi-touch transforms
     // see: https://developer.mozilla.org/en-US/docs/Web/Guide/Events/Touch_events
     var canv = document.getElementsByTagName("canvas")[0];
     canv.addEventListener("touchstart",  handle_touch_start,  false);
@@ -39,7 +39,7 @@ $(document).ready(function() {
     canv.addEventListener("touchleave",  handle_touch_end,    false);
     canv.addEventListener("touchmove",   handle_touch_move,   false);
 
-    // bind mouse handlers for standard interaction
+    // bind mouse handlers for mouse-based transforms
     canv.addEventListener("mousedown", handle_mouse_down, false);
     canv.addEventListener("mousemove", handle_mouse_move, false);
     canv.addEventListener("mouseup",   handle_mouse_up,   false);
