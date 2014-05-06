@@ -32,7 +32,7 @@ $(document).ready(function() {
         selection_in_progress_rect = new Shape.Rectangle(selection_start_pt, event.point)
         selection_in_progress_rect.strokeColor = color_PETER_RIVER;
         selection_in_progress_rect.fillColor = color_PETER_RIVER;
-        selection_in_progress_rect.fillColor.alpha = 0.1;
+        selection_in_progress_rect.fillColor.alpha = 0.05;
 
         items =  project.getItems({
             bounds: function(rect) {
