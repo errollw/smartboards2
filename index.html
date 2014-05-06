@@ -16,6 +16,8 @@
 <script type="text/javascript" src="js/jquery.js"></script>
 
 <script type="text/javascript" src="js/sb2.controls.js"></script>
+<script type="text/javascript" src="js/sb2.color_picker.js"></script>
+
 <script type="text/javascript" src="js/sb2.touch_utils.js"></script>
 
 <script type="text/javascript" src="js/sb2.pen_utils.js"></script>
@@ -25,6 +27,8 @@
 <script type="text/javascript" src="js/sb2.eraser_utils.js"></script>
 <script type="text/javascript" src="js/sb2.eraser_mouse.js"></script>
 <script type="text/javascript" src="js/sb2.eraser_multitouch.js"></script>
+
+<script type="text/javascript" src="js/sb2.cursor_mouse.js"></script>
 
 <script type="text/javascript" src="js/sb2.save_and_load.js"></script>
 
@@ -37,8 +41,11 @@
 		<p class='subtitle'>PhD student, master of smartboards</p>
 	</section>
 </header>
-<aside>
-	<div>PEN</div>
+<aside id='controls'>
+	<div id='cursor'>CURSOR</div>
+	<div id='pen'>PEN</div>
+	<div id='color_picker'></div>
+	<div id='eraser'>ERASER</div>
 </aside>
 <canvas id='myCanvas' width='1080' height='1920'></canvas>
 </body>

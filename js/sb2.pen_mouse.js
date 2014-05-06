@@ -30,7 +30,7 @@ function handle_mouse_down_pen(evt) {
 
     // start drawing by making a new path
     pen_mouse_stroke = new Path();
-    pen_mouse_stroke.fillColor = '#00000';
+    pen_mouse_stroke.fillColor = get_pen_color();
     pen_mouse_stroke.add([evt.pageX, evt.pageY]);
 
     // record position of previous mouse pointer

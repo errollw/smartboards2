@@ -33,13 +33,13 @@ function speed_to_thickness(speed, speed_history_idx){
     for(var i = 0; i < speed_history.length; i++)
         sum += parseInt(speed_history[i]);
     
-    return 12-(sum/speed_history.length);
+    return (12-(sum/speed_history.length));
 }
 
 function draw_dot(point){
 
     var path = new Path();
-    path.fillColor = '#00000';
+    path.fillColor = get_pen_color();
     path.closed = true;
     var center = new Point(point.pageX, point.pageY);
     

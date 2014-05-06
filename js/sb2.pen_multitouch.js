@@ -40,7 +40,7 @@ function handle_touch_start_pen(evt) {
         previousTouches.push(copyTouch(touches[i]));
 
         var new_stroke = new Path();
-        new_stroke.fillColor = '#00000';
+        new_stroke.fillColor = get_pen_color();
         touch_pt = new Point(touches[i].pageX, touches[i].pageY);
         new_stroke.add(touch_pt);
         strokes.push(new_stroke);

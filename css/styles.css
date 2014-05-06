@@ -33,13 +33,21 @@ aside {
   top: 0;
   padding: 24px; }
   aside div {
-    display: table-cell;
+    -webkit-transition: all 0.1s ease-in-out;
+    display: block;
     text-align: center;
-    vertical-align: middle;
     background-color: #EEE;
     width: 80px;
     height: 80px;
-    border-radius: 16px; }
+    line-height: 80px;
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 24px;
+    margin-left: auto;
+    margin-right: 0; }
+    aside div.selected {
+      background-color: #DEDEDE;
+      box-shadow: 0 0 0 2px #DEDEDE; }
 
 p.title {
   font-size: 24px; }
@@ -47,3 +55,22 @@ p.title {
 p.subtitle {
   font-size: 18px;
   color: #999999; }
+
+#color_picker {
+  -webkit-transition: all 0.2s ease-in-out; }
+  #color_picker.closed {
+    width: 80px;
+    height: 80px; }
+    #color_picker.closed td:last-child {
+      width: 0; }
+  #color_picker.open {
+    width: 300px;
+    height: 240px; }
+  #color_picker table {
+    width: 100%;
+    height: 100%; }
+  #color_picker tr {
+    height: 20%; }
+  #color_picker td {
+    -webkit-transition: all 0.2s linear;
+    width: 20%; }
