@@ -24,6 +24,8 @@ $(document).ready(function() {
 
 function handle_mouse_down_pen(evt) {
 
+    if (edit_mode != "DRAWING") return;
+
     is_drawing_with_mouse = true;
 
     // start drawing by making a new path
@@ -37,7 +39,7 @@ function handle_mouse_down_pen(evt) {
 
 function handle_mouse_move_pen(evt) {
 
-    if (!is_drawing_with_mouse) return;
+    if (edit_mode != "DRAWING" || !is_drawing_with_mouse) return;
     
     // get the clamped speed that the user is drawing at
     mouse_pt = new Point(evt.pageX, evt.pageY);
@@ -45,7 +47,7 @@ function handle_mouse_move_pen(evt) {
     var delta_midpoint = mouse_pt.add(prev_mouse_pt).divide(2);
     var speed = delta.length;
 
-    if (speed < 4) return;
+    if (speed < min_delta_length) return;
 
     speed = Math.min(SPEED_MAX, Math.max(SPEED_MIN, speed));
     
@@ -71,10 +73,8 @@ function handle_mouse_move_pen(evt) {
 
 function handle_mouse_up_pen(evt) {
 
-    console.log(evt)
-
     // if not drawing, ignore event
-    if (!is_drawing_with_mouse) return;
+    if (edit_mode != "DRAWING" || !is_drawing_with_mouse) return;
 
     // if not moved, draw a dot, otherwise finish stroke
     if (!speed_histories[0]) {

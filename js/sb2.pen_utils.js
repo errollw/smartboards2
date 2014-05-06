@@ -1,17 +1,11 @@
 // make the paper scope global, by injecting it into window:
 paper.install(window);
 
-// keep track of touches
-var currentTouches = [];  // touches currently active on this frame
-var previousTouches = []; // touches that registered last frame
-
-var min_delta = 4;
-
 var path;
 
 var strokes = [];
 
-var SPEED_THRESH = 4;
+var min_delta_length = 8;
 
 var SPEED_MIN = 4,
     SPEED_MAX = 10;
@@ -19,9 +13,9 @@ var SPEED_MIN = 4,
 var speed_histories = [];
 var speed_history_length = 8;
 
-var first_drags = true;
-
 function speed_to_thickness(speed, speed_history_idx){
+
+    speed = Math.min(SPEED_MAX, Math.max(SPEED_MIN, speed));
 
     speed_history = speed_histories[speed_history_idx];
 
@@ -30,7 +24,6 @@ function speed_to_thickness(speed, speed_history_idx){
         speed_history = speed_histories[speed_history_idx] = [];
         for(var i = 0; i < speed_history_length; i++)
             speed_history[i] = speed;
-        console.log(speed)
     }   
 
     speed_history.shift();

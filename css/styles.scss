@@ -49,6 +49,11 @@ aside {
 	padding: 24px;
 
 	div {
+
+		display: table-cell;
+		text-align: center;
+		vertical-align: middle;
+
 		background-color: #EEE;
 		width: 80px;
 		height: 80px;
