@@ -1,3 +1,6 @@
+
+@import "colors";
+
 $font: 'Source Sans Pro', sans-serif;
 
 body, html {
@@ -50,11 +53,24 @@ aside {
 
 	div {
 
+		&#pen {
+			background-image: url("../assets/icon_pen.svg");
+			background-size: cover;
+		}
+
 		-webkit-transition: all 0.1s ease-in-out;
 
 		&.selected{
-			background-color: #DEDEDE;
-			box-shadow: 0 0 0 2px #DEDEDE;
+			// background-color: lighten($PETER-RIVER, 30%);
+			// box-shadow: 0 0 0 2px #DEDEDE;
+
+			// width:  90px;
+			// height: 90px;
+
+			// margin-top: -5px;
+			// margin-bottom: 19px;
+			// margin-left: auto;
+			 margin-right: 14px;	
 		}
 
 		display: block;
