@@ -1,0 +1,44 @@
+// ----- COLOR VARIABLE DECLARATIONS -----
+
+$TURQUOISE:         #1abc9c;
+	$GREEN-SEA:     #16a085;
+
+$EMERALD:           #2ecc71;
+	$NEPHRITIS:     #27ae60;
+
+$PETER-RIVER:       #3498db;
+	 $BELIZE-HOLE:  #2980B9;
+
+$AMETHYST:          #9b59b6;
+	$WISTERIA:      #8e44ad;
+
+$WET-ASPHALT:       #34495e;
+	$MIDNIGHT-BLUE: #2c3e50;
+
+$SUN-FLOWER:        #f1c40f;
+	$ORANGE:        #f39c12;
+
+$CARROT:            #e67e22;
+	$PUMPKIN:       #d35400;
+
+$ALIZARIN:          #e74c3c;
+	$POMEGRANATE:   #c0392b;
+
+$CLOUDS:            #ECF0F1;
+	$SILVER:        #BDC3C7;
+
+$CONCRETE:          #95A5A6;
+	$ASBESTOS:      #7f8c8d;
+
+// $stripe-colors: #e74c3c 6.03479255314%, #000000 12.5145124316%, #FFFFFF 16.9987357824%, #2ecc71 21.2581616148%, #e74c3c 24.9958108896%, #000000 28.8872402846%, #2ecc71 35.1966150444%, #e74c3c 39.7998061271%, #FFFFFF 46.3110104794%, #3498db 49.9910011386%, #FFFFFF 54.221404846%, #e74c3c 59.1498084011%, #FFFFFF 65.0700569911%, #000000 70.6406122289%, #FFFFFF 76.5522819235%, #2ecc71 82.1573831044%, #000000 85.6839506266%, #2ecc71 89.8456911188%, #3498db 94.1892098587%, #e74c3c 100.0%;
+// $stripe-colors: #e74c3c 5.27753735388%, #3498db 8.73611957954%, #000000 14.7854951264%, #3498db 19.5631718227%, #e74c3c 24.6876664093%, #000000 29.2688822989%, #2ecc71 32.6832943924%, #e74c3c 38.398214903%, #000000 43.7324140842%, #3498db 49.6958366028%, #000000 54.9707747639%, #3498db 60.6457776643%, #2ecc71 64.7579437013%, #e74c3c 70.3296203137%, #000000 75.8061501837%, #3498db 79.1395219454%, #e74c3c 85.2177846922%, #2ecc71 88.5781105505%, #3498db 94.4854798966%, #000000 100.0%;
+
+$stripe-colors: #FFFFFF 0px, #3498db 18px, #000000 30px, #FFFFFF 42px, #2ecc71 52px, #3498db 64px, #e74c3c 82px, #3498db 97px, #000000 108px, #3498db 120px, #e74c3c 131px, #FFFFFF 145px, #000000 158px, #3498db 173px, #FFFFFF 187px, #3498db 198px, #2ecc71 216px, #000000 232px, #e74c3c 250px, #000000 262px;
+
+.green  { background-color: $EMERALD;     &:hover{background-color: lighten($EMERALD, 5%)} }
+.orange { background-color: $CARROT;      &:hover{background-color: lighten($CARROT, 5%)} }
+.red    { background-color: $ALIZARIN;    &:hover{background-color: lighten($ALIZARIN, 5%)} }
+.blue   { background-color: $PETER-RIVER; &:hover{background-color: lighten($PETER-RIVER, 5%)} }
+.teal   { background-color: $TURQUOISE;   &:hover{background-color: lighten($TURQUOISE, 5%)} }
+.purple { background-color: $AMETHYST;    &:hover{background-color: lighten($AMETHYST, 5%)} }
+.yellow { background-color: $SUN-FLOWER;  &:hover{background-color: lighten($SUN-FLOWER, 5%)} }
