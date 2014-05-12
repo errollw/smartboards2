@@ -84,7 +84,8 @@ aside {
       background-image: url("../assets/icon_pen.svg");
       background-size: cover; }
     aside div.selected {
-      margin-right: 14px; }
+      width: 90px;
+      height: 90px; }
 
 p.title {
   font-size: 24px; }

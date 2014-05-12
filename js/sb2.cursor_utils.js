@@ -45,5 +45,6 @@ function make_selection_group(){
     selected_group_rect.fillColor = color_PETER_RIVER;
     selected_group_rect.fillColor.alpha = 0.05;
     selected_group.addChild(selected_group_rect);
+    selected_group.selected = true;
 
 }

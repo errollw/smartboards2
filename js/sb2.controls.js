@@ -20,11 +20,9 @@ $(document).on("keydown", function (evt) {
         set_edit_mode("TRANSFORMING");
     } else if (key == 'i') {
         imageUrlPrompt();
-    } else { //if( key == 8 || key == 46 ){
+    } else {
 
-        // TODO: remove selected items
-
-        console.log(evt)
+        console.log(evt.keyCode)
         //return false;
     }
 
@@ -43,8 +41,9 @@ function set_edit_mode(new_edit_mode){
 
     edit_mode = new_edit_mode;
 
-    // adjust touch sensitivity
+    // adjust touch & mouse sensitivity
     min_delta_touch = (edit_mode == "DRAWING") ? 4 : 1;
+    min_delta_mouse = (edit_mode == "DRAWING") ? 4 : 1;
 
     // potentially cancel all selection procedures
     if (edit_mode == "DRAWING" || edit_mode == "ERASING"){

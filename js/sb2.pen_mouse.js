@@ -3,8 +3,6 @@ paper.install(window);
 
 var pen_mouse_stroke;
 
-var prev_mouse_pt;
-
 var is_drawing_with_mouse = false;
 
 // Only executed our code once the DOM is ready.
@@ -31,10 +29,8 @@ function handle_mouse_down_pen(evt) {
     // start drawing by making a new path
     pen_mouse_stroke = new Path();
     pen_mouse_stroke.fillColor = get_pen_color();
-    pen_mouse_stroke.add([evt.pageX, evt.pageY]);
+    pen_mouse_stroke.add(currentMouse);
 
-    // record position of previous mouse pointer
-    prev_mouse_pt = new Point(evt.pageX, evt.pageY);
 }
 
 function handle_mouse_move_pen(evt) {
@@ -42,9 +38,8 @@ function handle_mouse_move_pen(evt) {
     if (edit_mode != "DRAWING" || !is_drawing_with_mouse) return;
     
     // get the clamped speed that the user is drawing at
-    mouse_pt = new Point(evt.pageX, evt.pageY);
-    var delta = prev_mouse_pt.subtract(mouse_pt);
-    var delta_midpoint = mouse_pt.add(prev_mouse_pt).divide(2);
+    var delta = previousMouse.subtract(currentMouse);
+    var delta_midpoint = currentMouse.add(previousMouse).divide(2);
     var speed = delta.length;
 
     // get thickness to draw at that point
@@ -60,9 +55,6 @@ function handle_mouse_move_pen(evt) {
     pen_mouse_stroke.add(top);
     pen_mouse_stroke.insert(0, bottom);
 
-    // update previous mouse position
-    prev_mouse_pt = mouse_pt;
-
 }
 
 function handle_mouse_up_pen(evt) {
@@ -72,11 +64,11 @@ function handle_mouse_up_pen(evt) {
 
     // if not moved, draw a dot, otherwise finish stroke
     if (!speed_histories[0]) {
-        draw_dot(new Point(evt.pageX, evt.pageY));
+        draw_dot(previousMouse);
     } else {
 
         // close, smooth and simplify path
-        pen_mouse_stroke.add([evt.pageX, evt.pageY]);
+        pen_mouse_stroke.add(previousMouse);
         pen_mouse_stroke.closed = true;
         pen_mouse_stroke.smooth();
         pen_mouse_stroke.simplify(5);
