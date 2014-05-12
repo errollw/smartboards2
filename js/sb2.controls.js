@@ -5,8 +5,6 @@ $(document).on("keydown", function (evt) {
 
     var key = (String.fromCharCode(evt.keyCode)).toLowerCase();
 
-    $('#controls div').removeClass('selected');
-
     if (key == 'd') {
         set_edit_mode("DRAWING");
         $('#controls #pen').addClass('selected');
@@ -26,6 +24,12 @@ $(document).on("keydown", function (evt) {
         //return false;
     }
 
+});
+
+$(document).ready(function() {
+    $('#controls #pen').click(function(){set_edit_mode("DRAWING")});
+    $('#controls #eraser').click(function(){set_edit_mode("ERASING")});
+    $('#controls #cursor').click(function(){set_edit_mode("SELECTING")});
 });
 
 function imageUrlPrompt(){
@@ -50,6 +54,11 @@ function set_edit_mode(new_edit_mode){
         project.deselectAll();
         remove_selection_rects();
     }
+
+    $('#controls div').removeClass('selected');
+    $('#controls #pen').toggleClass('selected', edit_mode == "DRAWING");
+    $('#controls #eraser').toggleClass('selected', edit_mode == "ERASING");
+    $('#controls #cursor').toggleClass('selected', edit_mode == "SELECTING");
 
     view.update();
 }

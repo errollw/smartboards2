@@ -8,6 +8,8 @@ function save(){
 	json_string = project.exportJSON({asString:true});
 
 	$.post( "cgi-bin/upload_json.py", {'r_id': r_id, 'json_data': json_string });
+
+    console.log("SAVED");
 }
 
 function load(){
@@ -34,3 +36,18 @@ $(document).on("keypress", function (evt) {
   		load();
   	}
 });
+
+// load when document has loaded
+$(document).ready(load);
+
+
+// automatically saving
+
+var autosave_timeout = null,
+    autosave_timeout_ms = 5000;
+
+function schedule_autosave(){
+
+    window.clearTimeout(autosave_timeout);
+    autosave_timeout = window.setTimeout(save, autosave_timeout_ms);
+}
