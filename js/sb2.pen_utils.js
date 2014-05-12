@@ -1,27 +1,21 @@
 // make the paper scope global, by injecting it into window:
 paper.install(window);
 
-var path;
-
-var strokes = [];
-
-var min_delta_length = 8;
-
-var SPEED_MIN = 4,
-    SPEED_MAX = 10;
+var speed_min = 4,
+    speed_max = 10;
 
 var speed_histories = [];
 var speed_history_length = 8;
 
-function speed_to_thickness(speed, speed_history_idx){
+function speed_to_thickness(speed, touch_id){
 
-    speed = Math.min(SPEED_MAX, Math.max(SPEED_MIN, speed));
+    speed = Math.min(speed_max, Math.max(speed_min, speed));
 
-    speed_history = speed_histories[speed_history_idx];
+    speed_history = speed_histories[touch_id];
 
     // if no history exists for that stroke, create one
     if (!speed_history){
-        speed_history = speed_histories[speed_history_idx] = [];
+        speed_history = speed_histories[touch_id] = [];
         for(var i = 0; i < speed_history_length; i++)
             speed_history[i] = speed;
     }   
@@ -38,17 +32,16 @@ function speed_to_thickness(speed, speed_history_idx){
 
 function draw_dot(point){
 
-    var path = new Path();
-    path.fillColor = get_pen_color();
-    path.closed = true;
-    var center = new Point(point.pageX, point.pageY);
+    var dot_path = new Path();
+    dot_path.fillColor = get_pen_color();
+    dot_path.closed = true;
     
     for (var i = 0; i < 6; i++) {
         var delta = new Point({
             length: (10 * 0.7) + (Math.random() * 10 * 0.3),
             angle: (360 / 6) * i
         });
-        path.add(center.add(delta));
+        dot_path.add(point.add(delta));
     }
-    path.smooth();
+    dot_path.smooth();
 }

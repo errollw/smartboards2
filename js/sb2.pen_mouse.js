@@ -47,12 +47,6 @@ function handle_mouse_move_pen(evt) {
     var delta_midpoint = mouse_pt.add(prev_mouse_pt).divide(2);
     var speed = delta.length;
 
-    if (speed < min_delta_length) return;
-
-    speed = Math.min(SPEED_MAX, Math.max(SPEED_MIN, speed));
-    
-    // reset smoothing speed window at the beginning of a stroke
-
     // get thickness to draw at that point
     var thickness = speed_to_thickness(speed, 0);
 
@@ -78,7 +72,7 @@ function handle_mouse_up_pen(evt) {
 
     // if not moved, draw a dot, otherwise finish stroke
     if (!speed_histories[0]) {
-        draw_dot(evt);
+        draw_dot(new Point(evt.pageX, evt.pageY));
     } else {
 
         // close, smooth and simplify path
