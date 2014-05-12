@@ -28,20 +28,28 @@ $(document).ready(function() {
 function handle_mouse_down_cursor(evt) {
     if (edit_mode != "SELECTING") return;
 
-    var hitTest_result = project.hitTest(currentMouse);
+    project.deselectAll();
+    remove_selection_rects();   
 
-    console.log(hitTest_result)
+    var hitTest_result = project.hitTest(currentMouse);
 
     if (!hitTest_result){
 
-        project.deselectAll();
-        remove_selection_rects();
         selection_start_pt = currentMouse;
         is_selecting_with_mouse = true;
 
     } else if (hitTest_result.item.selected) {
 
-        edit_mode = "TRANSFORMING";
+        set_edit_mode("TRANSFORMING");
+        is_transforming_with_mouse = true;
+        selected_group.grab_pt = selected_group.position.subtract(currentMouse);
+
+    } else {
+
+        hitTest_result.item.selected = true;
+        make_selection_group();
+
+        set_edit_mode("TRANSFORMING");
         is_transforming_with_mouse = true;
         selected_group.grab_pt = selected_group.position.subtract(currentMouse);
 
@@ -51,15 +59,8 @@ function handle_mouse_down_cursor(evt) {
 function handle_mouse_move_cursor(evt) {
     if (edit_mode != "SELECTING" || !is_selecting_with_mouse) return;
 
-    var mouse_pt = new Point(evt.pageX, evt.pageY)
-
     // redraw the rectangle for selection in progress
-    if (selection_in_progress_rect) selection_in_progress_rect.remove();
-    selection_in_progress_rect = new Shape.Rectangle(selection_start_pt, mouse_pt)
-    selection_in_progress_rect.strokeColor = color_PETER_RIVER;
-    selection_in_progress_rect.fillColor = color_PETER_RIVER;
-    selection_in_progress_rect.fillColor.alpha = 0.05;
-
+    draw_selection_in_progress_rect(selection_start_pt, currentMouse);
     items =  select_items_in_rect();
 
     project.deselectAll();
@@ -69,17 +70,12 @@ function handle_mouse_move_cursor(evt) {
 }
 
 function handle_mouse_up_cursor(evt){
-    if (edit_mode != "SELECTING" || !is_selecting_with_mouse) return;
 
-    if (selection_in_progress_rect) selection_in_progress_rect.remove();
+    if (edit_mode != "SELECTING" || !is_selecting_with_mouse) return;
 
     remove_selection_rects();
 
-    selected_group = new Group(project.selectedItems)
-    selected_group_rect = new Shape.Rectangle(selected_group.bounds)
-    selected_group_rect.fillColor = color_PETER_RIVER;
-    selected_group_rect.fillColor.alpha = 0.05;
-    selected_group.addChild(selected_group_rect);
+    make_selection_group();
 
     project.deselectAll();
     selected_group.selected = true;

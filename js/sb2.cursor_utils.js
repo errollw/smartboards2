@@ -37,3 +37,13 @@ function draw_selection_in_progress_rect(pt1, pt2){
     selection_in_progress_rect.fillColor = color_PETER_RIVER;
     selection_in_progress_rect.fillColor.alpha = 0.05;
 }
+
+function make_selection_group(){
+
+    selected_group = new Group(project.selectedItems)
+    selected_group_rect = new Shape.Rectangle(selected_group.bounds)
+    selected_group_rect.fillColor = color_PETER_RIVER;
+    selected_group_rect.fillColor.alpha = 0.05;
+    selected_group.addChild(selected_group_rect);
+
+}

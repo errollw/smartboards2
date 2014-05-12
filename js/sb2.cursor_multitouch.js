@@ -74,11 +74,7 @@ function handle_touch_end_cursor(evt) {
 
     remove_selection_rects();
 
-    selected_group = new Group(project.selectedItems)
-    selected_group_rect = new Shape.Rectangle(selected_group.bounds)
-    selected_group_rect.fillColor = color_PETER_RIVER;
-    selected_group_rect.fillColor.alpha = 0.05;
-    selected_group.addChild(selected_group_rect);
+    make_selection_group();
 
     project.deselectAll();
     selected_group.selected = true;
