@@ -105,6 +105,4 @@ function handle_touch_end_pen(evt) {
     }
 
     is_drawing_with_multitouch = !($.isEmptyObject(currentTouches));
-
-    schedule_autosave();
 }

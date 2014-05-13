@@ -58,8 +58,6 @@ function handle_mouse_up_pen(evt) {
 
     if (edit_mode != "DRAWING" || !is_drawing_with_mouse) return;
 
-    console.log(pen_mouse_stroke.bounds);
-
     if (!speed_histories[0]) {
 
         // if not moved, draw a dot, otherwise finish stroke
@@ -84,6 +82,4 @@ function handle_mouse_up_pen(evt) {
     }
 
     is_drawing_with_mouse = false;
-
-    schedule_autosave();
 }
