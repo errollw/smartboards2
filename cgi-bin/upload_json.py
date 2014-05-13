@@ -1,10 +1,8 @@
 #!/usr/bin/env python
 
-import xml.etree.ElementTree as ET
 import json
 import cgi
 import os
-import time
 
 from utils import simple_success_response_JSON
 
