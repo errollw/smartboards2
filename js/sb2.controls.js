@@ -18,7 +18,10 @@ $(document).on("keydown", function (evt) {
         set_edit_mode("TRANSFORMING");
     } else if (key == 'i') {
         imageUrlPrompt();
-    } else {
+    } else if (key == 'p') {
+        project.clear();
+        view.update();
+    }else {
 
         console.log(evt.keyCode)
         //return false;
@@ -32,6 +35,7 @@ $(document).ready(function() {
     $('#controls #cursor').click(function(){set_edit_mode("SELECTING")});
 });
 
+
 function imageUrlPrompt(){
     var url = prompt("Please enter image url", "image url");
 
@@ -40,6 +44,7 @@ function imageUrlPrompt(){
         transform_item.position = view.center;
     }
 }
+
 
 function set_edit_mode(new_edit_mode){
 

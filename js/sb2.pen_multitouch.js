@@ -49,10 +49,8 @@ function handle_touch_move_pen(evt) {
     for (var i=0; i < ts.length; i++) {
         var id = ts[i].identifier;
 
-        old_pt = previousTouches[id];
-        new_pt = currentTouches[id];
-        var delta = new_pt.subtract(old_pt);
-        var delta_midpoint = old_pt.add(new_pt).divide(2);
+        var delta = currentTouches[id].subtract(previousTouches[id]);
+        var delta_midpoint = previousTouches[id].add(currentTouches[id]).divide(2);
 
         // get thickness to draw at that point
         var thickness = speed_to_thickness(delta.length, id);
@@ -64,11 +62,9 @@ function handle_touch_move_pen(evt) {
         // add two points to either side of the drawn point
         var top = delta_midpoint.add(step);
         var bottom = delta_midpoint.subtract(step);
-        
         pen_touch_strokes[id].add(top);
         pen_touch_strokes[id].insert(0, bottom);
     }
-
 }
 
 function handle_touch_end_pen(evt) {
@@ -76,20 +72,34 @@ function handle_touch_end_pen(evt) {
 
     if (edit_mode != "DRAWING" || !is_drawing_with_multitouch) return;
 
-    // TODO: comment
     var ts = evt.changedTouches;
     for (var i=0; i < ts.length; i++) {
         var id = ts[i].identifier;
         
         if (!speed_histories[id]) {
+
+            // if not moved, draw a dot, otherwise finish stroke
             draw_dot(previousTouches[id]);
-            view.update();
+
+        } else if (pen_touch_strokes[id].bounds.area < dot_area_thresh){
+
+            // if the path is too small, convert it to a dot
+            pen_touch_strokes[id].remove();
+            draw_dot(previousTouches[id]);
+
         } else {
+
+            // otherwise close, smooth and simplify path
             pen_touch_strokes[id].add(previousTouches[id]);
+            pen_touch_strokes[id].closed = true;
+            pen_touch_strokes[id].smooth();
             pen_touch_strokes[id].simplify(5);
+
         }
+
         view.update();
 
+        // delete items in array as they are no longer used
         delete pen_touch_strokes[id];
         delete speed_histories[id];
     }

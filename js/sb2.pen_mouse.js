@@ -37,37 +37,43 @@ function handle_mouse_move_pen(evt) {
 
     if (edit_mode != "DRAWING" || !is_drawing_with_mouse) return;
     
-    // get the clamped speed that the user is drawing at
     var delta = previousMouse.subtract(currentMouse);
     var delta_midpoint = currentMouse.add(previousMouse).divide(2);
-    var speed = delta.length;
 
     // get thickness to draw at that point
-    var thickness = speed_to_thickness(speed, 0);
+    var thickness = speed_to_thickness(delta.length, 0);
 
     // make orthogonal vector to simulate brush thickness
     var step = delta.normalize(thickness);
     step.angle += 90;
 
-    // add two points to either side of the drawn point
+    // add two points to either side of the mouse point
     var top = delta_midpoint.add(step);
     var bottom = delta_midpoint.subtract(step);
     pen_mouse_stroke.add(top);
     pen_mouse_stroke.insert(0, bottom);
-
 }
 
 function handle_mouse_up_pen(evt) {
 
-    // if not drawing, ignore event
     if (edit_mode != "DRAWING" || !is_drawing_with_mouse) return;
 
-    // if not moved, draw a dot, otherwise finish stroke
+    console.log(pen_mouse_stroke.bounds);
+
     if (!speed_histories[0]) {
+
+        // if not moved, draw a dot, otherwise finish stroke
         draw_dot(previousMouse);
+
+    } else if (pen_mouse_stroke.bounds.area < dot_area_thresh){
+
+        // if the path is too small, convert it to a dot
+        pen_mouse_stroke.remove();
+        draw_dot(previousMouse);
+
     } else {
 
-        // close, smooth and simplify path
+        // otherwise close, smooth and simplify path
         pen_mouse_stroke.add(previousMouse);
         pen_mouse_stroke.closed = true;
         pen_mouse_stroke.smooth();
@@ -77,7 +83,7 @@ function handle_mouse_up_pen(evt) {
         speed_histories[0] = null;
     }
 
-    // clear drawing mode
     is_drawing_with_mouse = false;
 
+    schedule_autosave();
 }
