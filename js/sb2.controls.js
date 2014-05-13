@@ -6,22 +6,33 @@ $(document).on("keydown", function (evt) {
     var key = (String.fromCharCode(evt.keyCode)).toLowerCase();
 
     if (key == 'd') {
+
         set_edit_mode("DRAWING");
         $('#controls #pen').addClass('selected');
+
     } else if (key == 'e') {
+
         set_edit_mode("ERASING");
         $('#controls #eraser').addClass('selected');
+
     } else if (key == 'c') {
+
         set_edit_mode("SELECTING");
         $('#controls #cursor').addClass('selected');
+
     } else if (key == 't') {
+
         set_edit_mode("TRANSFORMING");
     } else if (key == 'i') {
+
         imageUrlPrompt();
+
     } else if (key == 'p') {
+
         project.clear();
         view.update();
-    }else {
+
+    } else {
 
         console.log(evt.keyCode)
         //return false;

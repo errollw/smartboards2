@@ -35,6 +35,10 @@ $(document).on("keypress", function (evt) {
   	if(key == 'l') {
   		load();
   	}
+
+    if(key == 'm') {
+        get_last_mod();
+    }
 });
 
 // load when document has loaded
@@ -50,4 +54,10 @@ function schedule_autosave(){
 
     window.clearTimeout(autosave_timeout);
     autosave_timeout = window.setTimeout(save, autosave_timeout_ms);
+}
+
+function get_last_mod(){
+    $.get( "cgi-bin/get_last_mod.py", {'r_id': r_id}, function(response){
+        console.log(response);
+    });
 }
