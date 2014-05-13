@@ -1,5 +1,5 @@
 
-var eraser_hit_options = { fill: true, tolerance: 4 }
+var eraser_hit_options = { fill: true, tolerance: 8}
 
 var eraser_step_dist = 4;
 
@@ -15,6 +15,8 @@ function hitTest_along_line(point1, point2){
 
 		var hitTest_pt = point1.add(delta_step.multiply(i));
 		var hitTest_result = project.hitTest(hitTest_pt, eraser_hit_options);
+
+		// TODO: avoid erasing Rasters
 
 		if (hitTest_result) hit_items.push(hitTest_result.item)
 	}
