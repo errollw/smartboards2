@@ -28,13 +28,12 @@ $(document).ready(function() {
 function handle_mouse_down_cursor(evt) {
     if (edit_mode != "SELECTING") return;
 
-    project.deselectAll();
-    remove_selection_rects();   
-
     var hitTest_result = project.hitTest(currentMouse);
 
     if (!hitTest_result){
 
+        project.deselectAll();
+        remove_selection_rects();   
         selection_start_pt = currentMouse;
         is_selecting_with_mouse = true;
 
@@ -46,7 +45,9 @@ function handle_mouse_down_cursor(evt) {
 
     } else {
 
+        project.deselectAll(); 
         hitTest_result.item.selected = true;
+        remove_selection_rects();         
         make_selection_group();
 
         set_edit_mode("TRANSFORMING");
@@ -74,11 +75,7 @@ function handle_mouse_up_cursor(evt){
     if (edit_mode != "SELECTING" || !is_selecting_with_mouse) return;
 
     remove_selection_rects();
-
     make_selection_group();
-
-    project.deselectAll();
-    selected_group.selected = true;
 
     is_selecting_with_mouse = false;
 }

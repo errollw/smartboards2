@@ -39,8 +39,10 @@ function handle_touch_start_cursor(evt) {
 
     } else if (hitTest_result.item) {
 
-        selected_group = new Group(hitTest_result.item)
-        selected_group.selected = true;
+        project.deselectAll(); 
+        hitTest_result.item.selected = true;
+        remove_selection_rects();         
+        make_selection_group();
 
         set_edit_mode("TRANSFORMING");
         is_transforming_with_multitouch = true;

@@ -49,7 +49,4 @@ function make_selection_group(){
     selected_group.addChild(selected_group_rect);
 
     selected_group.selected = true;
-
-    console.log(selected_group);
-
 }
