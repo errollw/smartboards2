@@ -8,7 +8,6 @@ var idle_timeout = moment.duration(10, 'seconds');
 
 function set_busy(){
     is_idle = false;
-    console.log("UI is busy");
 }
 
 function set_idle(){
@@ -16,7 +15,6 @@ function set_idle(){
     // can only be idle if no mouse or touches are active
     if ((getNumberOfTouches() == 0) && !isMouseDown){
         is_idle = true;
-        console.log("UI is idle");
     }
 }
 
@@ -26,7 +24,6 @@ $(document).ready(function(){
     var canvas = document.getElementById('myCanvas');
 
     var throttled_set_busy = _.throttle(set_busy, idle_throttle.asMilliseconds());
-
     var debounced_set_idle = _.debounce(set_idle, idle_timeout.asMilliseconds());
 
     // set busy on any activity (moving mouse)
