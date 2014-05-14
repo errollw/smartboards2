@@ -2,6 +2,8 @@
 var currentMouse = null;
 var previousMouse = null;
 
+var isMouseDown = false;
+
 min_delta_mouse = 2;
 
 // Only executed our code once the DOM is ready.
@@ -20,6 +22,7 @@ $(document).ready(function() {
 function handle_mouse_down(evt) {
     currentMouse = mouseToPoint(evt);
     previousMouse = mouseToPoint(evt);
+    isMouseDown = true;
 }
 
 function handle_mouse_move(evt) {
@@ -35,7 +38,11 @@ function handle_mouse_move(evt) {
 
 function handle_mouse_up(evt) {
     previousMouse = mouseToPoint(evt);
-    delete currentMouse;
+    isMouseDown = false;
+}
+
+function noMouse(){
+    return currentMouse;
 }
 
 function mouseToPoint(mouse){

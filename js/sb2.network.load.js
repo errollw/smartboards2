@@ -22,6 +22,10 @@ function load(){
 
 function load_if_out_of_date(){
 
+    // if not idle, skip attempting to load
+    if (!is_idle) return;
+
+    // GET the last time the server json file was modified
     $.get( "cgi-bin/get_last_mod.py", {'r_id': r_id}, function(resp){
 
         // resp.lastmod is Epoch TIMESTAMP (in seconds, not ms)
