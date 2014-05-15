@@ -16,9 +16,9 @@ function hitTest_along_line(point1, point2){
 		var hitTest_pt = point1.add(delta_step.multiply(i));
 		var hitTest_result = project.hitTest(hitTest_pt, eraser_hit_options);
 
-		// TODO: avoid erasing Rasters
-
-		if (hitTest_result) hit_items.push(hitTest_result.item)
+		if (hitTest_result && hitTest_result.item instanceof Path) {
+			hit_items.push(hitTest_result.item)
+		}
 	}
 
 	return hit_items;
