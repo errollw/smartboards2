@@ -59,6 +59,8 @@ function imageUrlPrompt(){
 
 function set_edit_mode(new_edit_mode){
 
+    hide_floatie();
+
     edit_mode = new_edit_mode;
 
     // adjust touch & mouse sensitivity

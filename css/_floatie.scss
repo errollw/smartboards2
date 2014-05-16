@@ -1,12 +1,24 @@
 #floatie {
 
+	user-select: none;
+
+	z-index: 200;
 	position: absolute;
 	left: 200px;
 	top: 200px;
 
-	padding: 16px;
+	padding: 8px;
 
-	background-color: white;
+
+	margin-top: 30px;
+	margin-left: -120px;
+
+	background-color: #EEE;
+
+   box-shadow: 1px 2px 4px 0px rgba(0,0,0,0.5);
+
+   border-radius: 16px;
+
 
 	div {
 		display: inline-block;
@@ -14,6 +26,33 @@
 		width: 80px;
 		height: 80px;
 
-		background-color: grey;
+		text-align: center;
+
+		margin: 0;
+
+		background-color: #EEE;
+		width: 80px;
+		height: 80px;
+		line-height: 80px;
 	}
+
+	
+}
+
+#floatie-triangle{
+
+	user-select: none;
+
+	position: absolute;
+
+	left: 200px;
+	top: 200px;
+
+	width: 30px;
+	height: 30px;
+	padding: 0px;
+	background-color: #EEE;
+	-webkit-transform:rotate(45deg);
+
+	box-shadow: 1px 2px 4px 0px rgba(0,0,0,0.5);
 }

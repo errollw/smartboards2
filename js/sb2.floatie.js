@@ -1,6 +1,4 @@
-function make_floatie_widget(){
-	
-}
+var is_floatie_open = false;
 
 $(document).ready(function() {
 
@@ -9,6 +7,10 @@ $(document).ready(function() {
     $('#floatie #send_to_back').click(send_selected_items_to_back);
 
     $('#floatie #send_to_front').click(flatten_project);
+
+    $('#floatie').click(hide_floatie);
+
+    hide_floatie();
 
 });
 
@@ -19,4 +21,25 @@ function remove_selected_items(){
 function send_selected_items_to_back(){
 	selected_group.sendToBack();
 	deselect_all();
+}
+
+function toggle_floatie(){
+	if (!is_floatie_open){
+		$('#floatie, #floatie-triangle').hide();
+	} else {
+		$('#floatie, #floatie-triangle').show();
+	}
+	is_floatie_open = !is_floatie_open;
+}
+
+function hide_floatie(){
+	$('#floatie, #floatie-triangle').hide();
+}
+
+function show_floatie(point){
+	$('#floatie, #floatie-triangle').show();
+	$('#floatie, #floatie-triangle').css({
+		top: point.y,
+		left: point.x
+	});
 }

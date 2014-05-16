@@ -96,6 +96,7 @@ function handle_touch_end_transform(evt) {
 
         edit_mode = "SELECTING";
         is_transforming_with_multitouch = false;
+        show_floatie(selected_group.position);
 
     }
 }

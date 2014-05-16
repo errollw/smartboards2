@@ -22,6 +22,8 @@ $(document).ready(function() {
 function handle_touch_start_cursor(evt) {
     if (edit_mode != "SELECTING") return;
 
+    hide_floatie();
+
     var hitTest_result = project.hitTest(currentTouches[0]);
 
     if (!hitTest_result){
@@ -72,13 +74,12 @@ function handle_touch_end_cursor(evt) {
 
     if (edit_mode != "SELECTING" || !is_selecting_with_multitouch) return;
 
-    if (selection_in_progress_rect) selection_in_progress_rect.remove();
-
     remove_selection_rects();
-    if (project.selectedItems.length>0) make_selection_group();
 
-    project.deselectAll();
-    selected_group.selected = true;
+    if (project.selectedItems.length>0){
+        make_selection_group();
+        show_floatie(selected_group.position);
+    }
 
     is_selecting_with_multitouch = (currentTouches[0]!=null);
 }
