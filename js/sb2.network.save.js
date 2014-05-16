@@ -7,6 +7,14 @@ var lastmod_client = moment();
 
 function save(){
 
+    // don't save if you're currently selecting or transforming
+    if (project.selectedItems.length > 0) {
+        console.log("Not saving, selected items: " + project.selectedItems);
+        return;
+    }
+
+    // simplify the project before exporting
+    flatten_project();
 	json_string = project.exportJSON({asString:true});
 
     function resp_fn(r){

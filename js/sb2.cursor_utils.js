@@ -41,6 +41,10 @@ function draw_selection_in_progress_rect(pt1, pt2){
 
 function make_selection_group(){
 
+    // don't bother if nothing is selected
+    if (project.selectedItems.length == 0) return;
+
+    // create the group of selected items
     selected_group = new Group(project.selectedItems)
 
     selected_group_rect = new Shape.Rectangle(selected_group.bounds)
@@ -49,4 +53,29 @@ function make_selection_group(){
     selected_group.addChild(selected_group_rect);
 
     selected_group.selected = true;
+}
+
+function deselect_all(){
+    remove_selection_rects();
+    project.deselectAll();
+}
+
+// loop over all project items to pull items out of groups
+function flatten_project(){
+
+    var groups = project.getItems({class: Group});
+
+    _.each(groups, function(grp){
+
+        // don't modify the layer
+        if(grp instanceof Layer) return;
+
+        // copy each item to the single active layer
+        var items = grp.children;
+        _.each(items, function(itm){ itm.copyTo(project.activeLayer); });
+
+        // finally get rid of the group
+        grp.remove();
+        delete grp
+    });
 }

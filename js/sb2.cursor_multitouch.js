@@ -75,8 +75,7 @@ function handle_touch_end_cursor(evt) {
     if (selection_in_progress_rect) selection_in_progress_rect.remove();
 
     remove_selection_rects();
-
-    make_selection_group();
+    if (project.selectedItems.length>0) make_selection_group();
 
     project.deselectAll();
     selected_group.selected = true;

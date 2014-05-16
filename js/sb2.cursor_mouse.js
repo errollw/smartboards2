@@ -75,7 +75,7 @@ function handle_mouse_up_cursor(evt){
     if (edit_mode != "SELECTING" || !is_selecting_with_mouse) return;
 
     remove_selection_rects();
-    make_selection_group();
+    if (project.selectedItems.length>0) make_selection_group();
 
     is_selecting_with_mouse = false;
 }

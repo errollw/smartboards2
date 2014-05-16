@@ -39,8 +39,13 @@ function load_if_out_of_date(){
             load();
         }
     });
-
 }
+
+
+function refresh_page(){
+    if (is_idle) location.reload(true)
+}
+
 
 var refresh_timeout_dur = moment.duration(2, 'minutes');
 var autoload_interval_dur = moment.duration(5, 'seconds');
@@ -55,6 +60,6 @@ $(document).ready(function(){
     window.setInterval(load_if_out_of_date, autoload_interval_dur.asMilliseconds());
 
     // refresh the whole page (no cache) every 2 minutes
-    window.setTimeout(function(){location.reload(true);}, refresh_timeout_dur.asMilliseconds());
+    window.setTimeout(refresh_page, refresh_timeout_dur.asMilliseconds());
     
 });

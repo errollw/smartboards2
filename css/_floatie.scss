@@ -1,0 +1,19 @@
+#floatie {
+
+	position: absolute;
+	left: 200px;
+	top: 200px;
+
+	padding: 16px;
+
+	background-color: white;
+
+	div {
+		display: inline-block;
+
+		width: 80px;
+		height: 80px;
+
+		background-color: grey;
+	}
+}
