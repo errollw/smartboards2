@@ -75,6 +75,8 @@ function set_edit_mode(new_edit_mode){
 
     if (edit_mode != "DRAWING"){
         $('div#pen').css('backgroundColor', "#EEEEEE");
+    } else {
+        set_pen_color(pen_color);
     }
 
     $('#controls div').removeClass('selected');
