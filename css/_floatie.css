@@ -1,20 +1,27 @@
 #floatie {
+  user-select: none;
   z-index: 200;
   position: absolute;
   left: 200px;
   top: 200px;
-  padding: 8px;
   margin-top: 30px;
+  margin-left: -120px;
   background-color: #EEE;
-  box-shadow: 1px 2px 4px 0px rgba(0, 0, 0, 0.5);
-  border-radius: 16px; }
+  border-radius: 8px;
+  overflow: hidden; }
   #floatie div {
     display: inline-block;
     width: 80px;
     height: 80px;
-    background-color: grey; }
+    text-align: center;
+    margin: 0;
+    background-color: #EEE;
+    width: 80px;
+    height: 80px;
+    line-height: 80px; }
 
 #floatie-triangle {
+  user-select: none;
   position: absolute;
   left: 200px;
   top: 200px;
@@ -22,5 +29,13 @@
   height: 30px;
   padding: 0px;
   background-color: #EEE;
-  -webkit-transform: rotate(45deg);
-  box-shadow: 1px 2px 4px 0px rgba(0, 0, 0, 0.5); }
+  -webkit-transform: rotate(45deg); }
+
+#trash {
+  background-image: url("../assets/icon_trash.svg"); }
+
+#send_to_front {
+  background-image: url("../assets/icon_send_to_front.svg"); }
+
+#send_to_back {
+  background-image: url("../assets/icon_send_to_back.svg"); }

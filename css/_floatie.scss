@@ -7,18 +7,14 @@
 	left: 200px;
 	top: 200px;
 
-	padding: 8px;
-
-
 	margin-top: 30px;
 	margin-left: -120px;
 
 	background-color: #EEE;
 
-   box-shadow: 1px 2px 4px 0px rgba(0,0,0,0.5);
+   	border-radius: 8px;
 
-   border-radius: 16px;
-
+   	overflow: hidden;
 
 	div {
 		display: inline-block;
@@ -53,6 +49,14 @@
 	padding: 0px;
 	background-color: #EEE;
 	-webkit-transform:rotate(45deg);
+}
 
-	box-shadow: 1px 2px 4px 0px rgba(0,0,0,0.5);
+#trash {
+	background-image: url("../assets/icon_trash.svg");
+}
+#send_to_front {
+	background-image: url("../assets/icon_send_to_front.svg");
+}
+#send_to_back {
+	background-image: url("../assets/icon_send_to_back.svg");
 }

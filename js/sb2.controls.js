@@ -56,7 +56,7 @@ function imageUrlPrompt(){
     }
 }
 
-
+// TODO: TIDY THIS UP!
 function set_edit_mode(new_edit_mode){
 
     hide_floatie();
@@ -71,6 +71,10 @@ function set_edit_mode(new_edit_mode){
     if (edit_mode == "DRAWING" || edit_mode == "ERASING"){
         project.deselectAll();
         remove_selection_rects();
+    }
+
+    if (edit_mode != "DRAWING"){
+        $('div#pen').css('backgroundColor', "#EEEEEE");
     }
 
     $('#controls div').removeClass('selected');

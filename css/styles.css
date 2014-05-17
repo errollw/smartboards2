@@ -39,12 +39,11 @@
   position: absolute;
   left: 200px;
   top: 200px;
-  padding: 8px;
   margin-top: 30px;
   margin-left: -120px;
   background-color: #EEE;
-  box-shadow: 1px 2px 4px 0px rgba(0, 0, 0, 0.5);
-  border-radius: 16px; }
+  border-radius: 8px;
+  overflow: hidden; }
   #floatie div {
     display: inline-block;
     width: 80px;
@@ -65,8 +64,16 @@
   height: 30px;
   padding: 0px;
   background-color: #EEE;
-  -webkit-transform: rotate(45deg);
-  box-shadow: 1px 2px 4px 0px rgba(0, 0, 0, 0.5); }
+  -webkit-transform: rotate(45deg); }
+
+#trash {
+  background-image: url("../assets/icon_trash.svg"); }
+
+#send_to_front {
+  background-image: url("../assets/icon_send_to_front.svg"); }
+
+#send_to_back {
+  background-image: url("../assets/icon_send_to_back.svg"); }
 
 body, html {
   width: 100%;
@@ -97,30 +104,38 @@ header {
     height: 80px;
     border-radius: 16px; }
 
+.icon-button {
+  background-size: cover; }
+
 aside {
   position: absolute;
   right: 0;
   top: 0;
-  padding: 24px; }
-  aside div {
-    -webkit-transition: all 0.1s ease-in-out;
-    display: block;
-    text-align: center;
+  margin: 24px; }
+  aside section {
     background-color: #EEE;
-    width: 80px;
-    height: 80px;
-    line-height: 80px;
-    border-radius: 16px;
-    overflow: hidden;
+    border-radius: 8px;
     margin-bottom: 24px;
-    margin-left: auto;
-    margin-right: 0; }
-    aside div#pen {
-      background-image: url("../assets/icon_pen.svg");
-      background-size: cover; }
+    overflow: hidden;
+    display: block; }
+    aside section.main-controls {
+      margin-left: auto;
+      width: 80px; }
+  aside div {
+    background-size: cover;
+    -webkit-transition: background-color 0.2s ease-in-out;
+    width: 80px;
+    height: 80px; }
     aside div.selected {
-      width: 90px;
-      height: 90px; }
+      background-color: #DDD; }
+    aside div#cursor {
+      background-image: url("../assets/icon_cursor.svg"); }
+    aside div#pen {
+      background-image: url("../assets/icon_pen.svg"); }
+      aside div#pen.selected {
+        background-image: url("../assets/icon_pen_selected.svg"); }
+    aside div#eraser {
+      background-image: url("../assets/icon_eraser.svg"); }
 
 p.title {
   font-size: 24px; }

@@ -30,4 +30,5 @@ function handle_mouse_up_transform(evt){
     is_transforming_with_mouse = false;
 
     edit_mode = "SELECTING";
+    show_floatie(selected_group.position);
 }

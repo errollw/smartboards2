@@ -51,7 +51,7 @@ function build_color_picker(){
 
 	$('#color_picker td').click(function(){
 		if (is_color_picker_open){
-			pen_color = $(this).css('backgroundColor');
+			set_pen_color($(this).css('backgroundColor'));
 			set_edit_mode("DRAWING");
 		}
 	});
@@ -63,6 +63,11 @@ $(document).ready(function(){
 
 function get_pen_color(){
 	return pen_color;
+}
+
+function set_pen_color(new_color){
+	pen_color = new_color;
+	$('div#pen').css('backgroundColor', pen_color);
 }
 
 function toggle_color_picker(){

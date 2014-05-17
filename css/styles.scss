@@ -44,51 +44,57 @@ header {
 	}
 }
 
+.icon-button {
+	background-size: cover;
+}
+
+
 aside {
 
 	position: absolute;
 	right: 0;
 	top: 0;
 
-	padding: 24px;
+	margin: 24px;
+
+	section {
+
+		background-color: #EEE;
+		border-radius: 8px;
+		margin-bottom: 24px;
+		overflow: hidden;
+
+		display: block;
+
+		&.main-controls {
+			margin-left:auto;
+			width: 80px
+		}
+	}
 
 	div {
 
+		&.selected{
+			background-color: #DDD;
+		}
+
+		&#cursor {
+			background-image: url("../assets/icon_cursor.svg");
+		}
 		&#pen {
 			background-image: url("../assets/icon_pen.svg");
-			background-size: cover;
+			&.selected { background-image: url("../assets/icon_pen_selected.svg");}
+		}
+		&#eraser {
+			background-image: url("../assets/icon_eraser.svg");
 		}
 
-		-webkit-transition: all 0.1s ease-in-out;
+		background-size: cover;
 
-		&.selected{
-			// background-color: lighten($PETER-RIVER, 30%);
-			// box-shadow: 0 0 0 2px #DEDEDE;
-
-			width:  90px;
-			height: 90px;
-
-			// margin-top: -5px;
-			// margin-bottom: 19px;
-			// margin-left: auto;
-			 // margin-right: 14px;	
-		}
-
-		display: block;
-		text-align: center;
-
-		background-color: #EEE;
+		-webkit-transition: background-color 0.2s ease-in-out;
+		
 		width: 80px;
 		height: 80px;
-		line-height: 80px;
-
-		border-radius: 16px;
-
-		overflow: hidden;
-
-		margin-bottom: 24px;
-		margin-left: auto;
-		margin-right: 0;	
 	}
 }
 
