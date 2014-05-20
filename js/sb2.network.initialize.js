@@ -28,8 +28,6 @@ $(document).ready(function(){
     	for (var i=0; i<json_data.users.length; i++){
     		addUser(json_data.users[i], i*gap_between_users)
     	}
-
-    	console.log(json_data)
     });
     
 });
