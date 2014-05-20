@@ -1,8 +1,6 @@
 // make the paper scope global, by injecting it into window:
 paper.install(window);
 
-r_id = "r_SS20";
-
 function load(){
 
 	$.getJSON("content/"+r_id+".json", function(json_data){
