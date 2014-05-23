@@ -41,7 +41,9 @@ function handle_mouse_move_pen(evt) {
     var delta_midpoint = currentMouse.add(previousMouse).divide(2);
 
     // get thickness to draw at that point
-    var thickness = speed_to_thickness(delta.length, 0);
+    var d_time = currentMouse.timestamp - previousMouse.timestamp
+    console.log(delta.length, d_time)
+    var thickness = speed_to_thickness(delta.length / d_time, 0);
 
     // make orthogonal vector to simulate brush thickness
     var step = delta.normalize(thickness);
@@ -71,10 +73,9 @@ function handle_mouse_up_pen(evt) {
 
     } else {
 
-        // otherwise close, smooth and simplify path
+        // otherwise close and simplify path
         pen_mouse_stroke.add(previousMouse);
         pen_mouse_stroke.closed = true;
-        pen_mouse_stroke.smooth();
         pen_mouse_stroke.simplify(5);
 
         // clear history for mouse-pen drawing

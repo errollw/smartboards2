@@ -70,7 +70,9 @@ function handle_touch_cancel(evt) {
 }
 
 function touchToPoint(touch){
-	return new Point(touch.pageX, touch.pageY);
+    var p = new Point(touch.pageX, touch.pageY);
+    p.timestamp = _.now();
+	return p;
 }
 
 function getNumberOfTouches(){

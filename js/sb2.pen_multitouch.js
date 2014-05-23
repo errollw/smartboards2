@@ -16,7 +16,7 @@ $(document).ready(function() {
     // see: https://developer.mozilla.org/en-US/docs/Web/Guide/Events/Touch_events
     canvas.addEventListener("touchstart",  handle_touch_start_pen,  false);
     canvas.addEventListener("touchend",    handle_touch_end_pen,    false);
-    canvas.addEventListener("touchcancel", handle_touch_end_pen, false);
+    canvas.addEventListener("touchcancel", handle_touch_end_pen,    false);
     canvas.addEventListener("touchleave",  handle_touch_end_pen,    false);
     canvas.addEventListener("touchmove",   handle_touch_move_pen,   false);
 
@@ -53,7 +53,8 @@ function handle_touch_move_pen(evt) {
         var delta_midpoint = previousTouches[id].add(currentTouches[id]).divide(2);
 
         // get thickness to draw at that point
-        var thickness = speed_to_thickness(delta.length, id);
+        var d_time = currentTouches[id].timestamp - previousTouches[id].timestamp
+        var thickness = speed_to_thickness(delta.length / d_time, id);
 
         // make orthogonal vector to simulate brush thickness
         var step = delta.normalize(thickness);
@@ -89,10 +90,9 @@ function handle_touch_end_pen(evt) {
 
         } else {
 
-            // otherwise close, smooth and simplify path
+            // otherwise close and simplify path
             pen_touch_strokes[id].add(previousTouches[id]);
             pen_touch_strokes[id].closed = true;
-            pen_touch_strokes[id].smooth();
             pen_touch_strokes[id].simplify(5);
 
         }

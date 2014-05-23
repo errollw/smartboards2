@@ -23,7 +23,7 @@ $(document).on("keydown", function (evt) {
     } else if (key == 't') {
 
         set_edit_mode("TRANSFORMING");
-    } else if (key == 'i') {
+    } else if (key == 'i') {p
 
         imageUrlPrompt();
 

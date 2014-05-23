@@ -20,6 +20,7 @@ $(document).ready(function() {
 });
 
 function handle_mouse_down(evt) {
+    console.log("MOUSE DOWN")
     currentMouse = mouseToPoint(evt);
     previousMouse = mouseToPoint(evt);
     isMouseDown = true;
@@ -27,7 +28,7 @@ function handle_mouse_down(evt) {
 
 function handle_mouse_move(evt) {
 
-    var new_pt = touchToPoint(evt);   
+    var new_pt = mouseToPoint(evt);   
 
     if ((new_pt).subtract(currentMouse).length < min_delta_mouse)
         return;
@@ -46,5 +47,7 @@ function noMouse(){
 }
 
 function mouseToPoint(mouse){
-	return new Point(mouse.pageX, mouse.pageY);
-}
+    var p = new Point(mouse.pageX, mouse.pageY);
+    p.timestamp = mouse.timeStamp;
+	return p;
+}p
