@@ -50,4 +50,4 @@ function mouseToPoint(mouse){
     var p = new Point(mouse.pageX, mouse.pageY);
     p.timestamp = mouse.timeStamp;
 	return p;
-}p
+}
