@@ -17,23 +17,23 @@
 <script type="text/javascript" src="js/lib/lodash.js"></script>
 
 <script type="text/javascript" src="js/sb2.settings.initialize.js"></script>
+<script type="text/javascript" src="js/sb2.settings.save.js"></script>
 
 </head>
-<body style="overflow:hidden; margin:0;">
-<h1>Room settings: r_SS20</h1>
-<div id='sortable'>
+<body>
+
 	<section>
-		<span>User ID</span> <input type="text" name="name"> <br>
-		<span>Name</span> <input type="text" name="name"> <br>
-		<span>Description</span> <input type="text" name="description"> <br>
-		<span>Image source</span> <input type="text" name="img_src"> <br>
+	<h1>... room settings</h1>
+	<p>Here you can modify displayed user details, add new users, or delete existing ones. <br> Drag and drop users to rearrange them.</p>
 	</section>
-	<section>
-		<span>User ID</span> <input type="text" name="name"> <br>
-		<span>Name</span> <input type="text" name="name"> <br>
-		<span>Description</span> <input type="text" name="description"> <br>
-		<span>Image source</span> <input type="text" name="img_src"> <br>
-	</section>
-</div>
+
+	<div id='sortable'>
+	</div>
+
+	<footer>
+		<button id='save_settings' class='EMERALD'>save changes</button>
+		<button id='add_user' class='PETER-RIVER'>add user</button>
+	</footer>
+
 </body>
 </html

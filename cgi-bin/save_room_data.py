@@ -6,23 +6,11 @@ import os
 
 from utils import simple_success_response_JSON
 
-args =      cgi.FieldStorage()
-# json_data = args['json_data'].value
-# r_id =      args['r_id'].value
+args =        cgi.FieldStorage()
+json_string = args['json_data'].value
+r_id =        args['r_id'].value
 
-r_id = 'r_SS22';
-json_data = {};
-users = [];
-
-user_erroll = {};
-user_erroll['u_id'] = 'u_ls426'
-user_erroll['name'] = 'Lech Swirski'
-user_erroll['description'] = 'PhD student, tracks gaze'
-user_erroll['img_src'] = 'https://avatars3.githubusercontent.com/u/593597?s=460.jpg'
-
-users.append(user_erroll)
-
-json_data['users'] = users;
+json_data = json.loads(json_string)
 
 ### Write out the room's data
 ### -------------------------------------------------------------

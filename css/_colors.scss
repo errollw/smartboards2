@@ -35,10 +35,10 @@ $CONCRETE:          #95A5A6;
 
 $stripe-colors: #FFFFFF 0px, #3498db 18px, #000000 30px, #FFFFFF 42px, #2ecc71 52px, #3498db 64px, #e74c3c 82px, #3498db 97px, #000000 108px, #3498db 120px, #e74c3c 131px, #FFFFFF 145px, #000000 158px, #3498db 173px, #FFFFFF 187px, #3498db 198px, #2ecc71 216px, #000000 232px, #e74c3c 250px, #000000 262px;
 
-.green  { background-color: $EMERALD;     &:hover{background-color: lighten($EMERALD, 5%)} }
-.orange { background-color: $CARROT;      &:hover{background-color: lighten($CARROT, 5%)} }
-.red    { background-color: $ALIZARIN;    &:hover{background-color: lighten($ALIZARIN, 5%)} }
-.blue   { background-color: $PETER-RIVER; &:hover{background-color: lighten($PETER-RIVER, 5%)} }
-.teal   { background-color: $TURQUOISE;   &:hover{background-color: lighten($TURQUOISE, 5%)} }
-.purple { background-color: $AMETHYST;    &:hover{background-color: lighten($AMETHYST, 5%)} }
-.yellow { background-color: $SUN-FLOWER;  &:hover{background-color: lighten($SUN-FLOWER, 5%)} }
+.EMERALD     { background-color: $EMERALD;     &:hover{background-color: lighten($EMERALD, 10%)} }
+.CARROT      { background-color: $CARROT;      &:hover{background-color: lighten($CARROT, 10%)} }
+.ALIZARIN    { background-color: $ALIZARIN;    &:hover{background-color: lighten($ALIZARIN, 10%)} }
+.PETER-RIVER { background-color: $PETER-RIVER; &:hover{background-color: lighten($PETER-RIVER, 10%)} }
+.TURQUOISE   { background-color: $TURQUOISE;   &:hover{background-color: lighten($TURQUOISE, 10%)} }
+.AMETHYST    { background-color: $AMETHYST;    &:hover{background-color: lighten($AMETHYST, 10%)} }
+.SUN-FLOWER  { background-color: $SUN-FLOWER;  &:hover{background-color: lighten($SUN-FLOWER, 10%)} }

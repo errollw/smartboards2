@@ -1,6 +1,7 @@
 {
     "users": [
         {
+            "status": "",
             "u_id": "u_ls426",
             "name": "Lech Swirski",
             "img_src": "https://avatars3.githubusercontent.com/u/593597?s=460.jpg",

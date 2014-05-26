@@ -1,39 +1,85 @@
 
+@import "bourbon/bourbon";
+@import "grid-settings";
+@import "neat/neat";
+
 @import "colors";
 
 $font: 'Source Sans Pro', sans-serif;
-
 body, html {
-	width: 100%;
-	height: 100%;
 	font-family: $font;
 }
 
-h1 {
-	padding: 16px;
-	margin: 0px;
+section, footer {
+	@include outer-container;
+	margin-bottom: 2em;
 }
 
-section {
+section.user {
+	
+	border-bottom: 1px solid #DDD;
+	padding-bottom: golden-ratio(1em, 1);
 
-	margin: 16px;
-	padding: 20px;
+	&.ui-sortable-helper {
+		margin-left: auto;
+	}
+}
 
-	font-size: 18px;
+img {
+	@include span-columns(2);
+	border-radius: 3px;
+}
 
-	background-color: #EEE;
+div.form {
+	@include span-columns(10);
 
-	width: 490px;
+	button {
+		float: right;
+	}
+}
+
+aside {
+	@include span-columns(2 of 10);
+
+	font-size: 16px;
+	color: #555;
+	line-height: 1.3em;
+	padding: 0 golden-ratio(0.3em, 1);
 
 	span {
-		display: inline-block;
-		width: 150px;
+		font-style:italic;
+		color: #888;
 	}
+}
 
-	input {
-		width: 300px;
-		padding: 4px;
-		border: none;
-		margin: 4px;
+
+input {
+	@include span-columns(8 of 10);
+	@include omega;
+
+	height: golden-ratio(1.5em, 1);
+	padding: 0 golden-ratio(0.3em, 1);
+	margin-bottom: golden-ratio(0.5em, 1);
+
+	border-radius: 2px;
+	border: 1px solid #DDD;
+
+	&:active, &:focus {
+		outline:none;
+		box-shadow:none;
+		border: 1px solid $PETER-RIVER;
 	}
+}
+
+button {
+	height: golden-ratio(1.5em, 1);
+	padding: 0 golden-ratio(0.6em, 1);
+	margin-right: golden-ratio(0.5em, 1);
+
+	border: none;
+	border-radius: 3px;
+
+	color: white;
+
+	&:last-child {margin-right:0};
 }

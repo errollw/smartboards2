@@ -3,6 +3,8 @@ var urlParams;
 // Default to loading room SS20
 var r_id = "r_SS20";
 
+// pic that gets loaded if no profile pic is present
+var no_pic_url = 'assets/no_profile_pic.png';
 
 function initializeUrlParams() {
 	var match,
@@ -19,30 +21,71 @@ function initializeUrlParams() {
 
 $(document).ready(function(){
 
-    $( "#sortable" ).sortable();
-    $( "#sortable" ).disableSelection();
+    initializeUrlParams();
+    if (urlParams['r_id']) r_id = urlParams['r_id'];
 
-    // initializeUrlParams();
-    // if (urlParams['r_id']) r_id = urlParams['r_id'];
+    stripped_r_id = (r_id.lastIndexOf('r_id', 0) === 0 ?
+        r_id : r_id.substring(2, r_id.length)).toUpperCase();
 
-    // $.getJSON("content/room_data_"+r_id+".json", function(json_data){
+    $('h1').text(stripped_r_id + ' room settings')
 
-    // 	var gap_between_users = 1980 / json_data.users.length;
-    // 	for (var i=0; i<json_data.users.length; i++){
-    // 		add_user(json_data.users[i], i*gap_between_users)
-    // 	}
-    // });
+    $("#sortable").sortable();
+    $("#sortable").disableSelection();
+
+    $('#save_settings').click(save_settings)
+    $('#add_user').click(add_user)
+
+    $.getJSON("content/room_data_"+r_id+".json", function(json_data){
+        _(json_data.users).each(add_user);
+    });
     
 });
 
 
-function add_user(user, y_pos){
+function add_user(user){
 
-	var usr_sec = $('<section/>').css('top', y_pos + 'px');
-	var img = $('<img/>').attr('src', user.img_src);
-	var p_name = $('<p/>').addClass('title').text(user.name);
-	var p_desc = $('<p/>').addClass('subtitle').text(user.description);
+	var usr_sec = $('<section/>').addClass('user');
 
-	usr_sec.append(img).append(p_name).append(p_desc)
-	$('body').append(usr_sec);
+	var img = $('<img/>').attr('src', user.img_src ? user.img_src : no_pic_url);
+    img.attr('onerror', "this.src='" + no_pic_url + "';");
+
+    var form_div = $('<div/>').addClass('form');
+
+    var text_id = $('<aside/>').text('User ID'),
+        input_id = $('<input/>').attr('name', 'input_id').val(user.u_id);
+
+    var text_name = $('<aside/>').text('Name'),
+        input_name = $('<input/>').attr('name', 'input_name').val(user.name);
+
+    var text_description = $('<aside/>').text('Description'),
+        input_description = $('<input/>').attr('name', 'input_description').val(user.description);
+
+    var text_imageUrl = $('<aside/>').text('Image URL'),
+        input_imageUrl = $('<input/>').attr('name', 'input_imageUrl').val(user.img_src);
+
+    var text_status = $('<aside/>').html('Status <br> <span>optional</span>'),
+        input_status = $('<input/>').attr('name', 'input_status').val(user.status);
+
+    var text_webpageUrl = $('<aside/>').html('Webpage URL <br> <span>optional</span>'),
+        input_webpageUrl = $('<input/>').attr('name', 'input_webpageUrl').val(user.webpage_src);
+
+    var delete_button = $('<button/>').text('delete user').addClass('ALIZARIN');
+
+    // update the preview of the profile picture
+    input_imageUrl.on('input', function(evt) {
+        img.attr('src', input_imageUrl.val());
+    });
+
+    delete_button.click(function(){usr_sec.remove()});
+
+    form_div.append(text_id).append(input_id);
+    form_div.append(text_name).append(input_name);
+    form_div.append(text_description).append(input_description);
+    form_div.append(text_imageUrl).append(input_imageUrl);
+    form_div.append(text_status).append(input_status);
+    form_div.append(text_webpageUrl).append(input_webpageUrl);
+    form_div.append(delete_button);
+	usr_sec.append(img).append(form_div);
+
+	$('#sortable').append(usr_sec);
 }

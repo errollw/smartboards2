@@ -1,0 +1,34 @@
+.EMERALD {
+  background-color: #2ecc71; }
+  .EMERALD:hover {
+    background-color: #54d98c; }
+
+.CARROT {
+  background-color: #e67e22; }
+  .CARROT:hover {
+    background-color: #eb9950; }
+
+.ALIZARIN {
+  background-color: #e74c3c; }
+  .ALIZARIN:hover {
+    background-color: #ed7669; }
+
+.PETER-RIVER {
+  background-color: #3498db; }
+  .PETER-RIVER:hover {
+    background-color: #5faee3; }
+
+.TURQUOISE {
+  background-color: #1abc9c; }
+  .TURQUOISE:hover {
+    background-color: #28e1bd; }
+
+.AMETHYST {
+  background-color: #9b59b6; }
+  .AMETHYST:hover {
+    background-color: #b07cc6; }
+
+.SUN-FLOWER {
+  background-color: #f1c40f; }
+  .SUN-FLOWER:hover {
+    background-color: #f4d03f; }
