@@ -5,9 +5,13 @@
 
 @import "colors";
 
-$font: 'Source Sans Pro', sans-serif;
+$font: 'Open Sans', sans-serif;
 body, html {
 	font-family: $font;
+}
+
+h1 {
+	font-weight: normal;
 }
 
 section, footer {
@@ -39,7 +43,7 @@ div.form {
 }
 
 aside {
-	@include span-columns(2 of 10);
+	@include span-columns(3 of 10);
 
 	font-size: 16px;
 	color: #555;
@@ -48,13 +52,13 @@ aside {
 
 	span {
 		font-style:italic;
-		color: #888;
+		color: #BBB;
 	}
 }
 
 
 input {
-	@include span-columns(8 of 10);
+	@include span-columns(7 of 10);
 	@include omega;
 
 	height: golden-ratio(1.5em, 1);

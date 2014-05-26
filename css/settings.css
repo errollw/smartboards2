@@ -39,7 +39,10 @@
     background-color: #f4d03f; }
 
 body, html {
-  font-family: "Source Sans Pro", sans-serif; }
+  font-family: "Open Sans", sans-serif; }
+
+h1 {
+  font-weight: normal; }
 
 section, footer {
   max-width: 50em;
@@ -80,7 +83,7 @@ aside {
   float: left;
   display: block;
   margin-right: 2.84259%;
-  width: 17.72593%;
+  width: 28.01019%;
   font-size: 16px;
   color: #555;
   line-height: 1.3em;
@@ -89,13 +92,13 @@ aside {
     margin-right: 0; }
   aside span {
     font-style: italic;
-    color: #888; }
+    color: #BBB; }
 
 input {
   float: left;
   display: block;
   margin-right: 2.84259%;
-  width: 79.43148%;
+  width: 69.14722%;
   margin-right: 0;
   height: 2.427em;
   padding: 0 0.4854em;
