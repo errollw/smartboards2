@@ -1,17 +1,42 @@
+@import "bourbon/bourbon";
 
 @import "colors";
 @import "floatie";
 
-$font: 'Source Sans Pro', sans-serif;
+$font: 'Open Sans', sans-serif;
 
 body, html {
 	width: 100%;
 	height: 100%;
 	background-color: #CCC;
+	@include user-select(none);
 }
 
 canvas {
+	position: absolute; top: 0px; left: 0px;
+	background-color: transparent;
+}
+
+#canvas-background {
+	position: absolute; top: 0px; left: 0px;
+	@include size(1080px 1920px);
 	background-color: white;
+}
+
+iframe {
+	position: absolute;
+	width: 1080px;
+	height: 1920px;
+	left: 0;
+	top: 0;
+	border: none;
+}
+
+div.header_bg {
+	@include size(1080px 10em);
+  	background: linear-gradient(to bottom, rgba(255,255,255,1), rgba(255,255,255,0));
+  	@include position(absolute, 0px 0px 0px 0px);
+  	pointer-events: none;
 }
 
 header {
@@ -23,6 +48,8 @@ header {
 	padding: 24px;
 
 	font-family: $font;
+
+	pointer-events: none;
 
 	section, img {
 		display: inline-block;
@@ -99,12 +126,15 @@ aside {
 }
 
 p.title {
-	font-size: 24px;
+	font-size: 1.5em;
+	line-height: 100%;
+	margin-bottom: 0.7em;
 }
 
 p.subtitle {
-	font-size: 18px;
-	color: #999999;
+	font-size: 1.2em;
+	line-height: 100%;
+	color: #666;
 }
 
 #color_picker {

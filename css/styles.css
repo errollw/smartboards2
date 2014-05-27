@@ -1,37 +1,37 @@
-.green {
+.EMERALD {
   background-color: #2ecc71; }
-  .green:hover {
-    background-color: #40d47e; }
+  .EMERALD:hover {
+    background-color: #54d98c; }
 
-.orange {
+.CARROT {
   background-color: #e67e22; }
-  .orange:hover {
-    background-color: #e98b39; }
+  .CARROT:hover {
+    background-color: #eb9950; }
 
-.red {
+.ALIZARIN {
   background-color: #e74c3c; }
-  .red:hover {
-    background-color: #ea6153; }
+  .ALIZARIN:hover {
+    background-color: #ed7669; }
 
-.blue {
+.PETER-RIVER {
   background-color: #3498db; }
-  .blue:hover {
-    background-color: #4aa3df; }
+  .PETER-RIVER:hover {
+    background-color: #5faee3; }
 
-.teal {
+.TURQUOISE {
   background-color: #1abc9c; }
-  .teal:hover {
-    background-color: #1dd2af; }
+  .TURQUOISE:hover {
+    background-color: #28e1bd; }
 
-.purple {
+.AMETHYST {
   background-color: #9b59b6; }
-  .purple:hover {
-    background-color: #a66bbe; }
+  .AMETHYST:hover {
+    background-color: #b07cc6; }
 
-.yellow {
+.SUN-FLOWER {
   background-color: #f1c40f; }
-  .yellow:hover {
-    background-color: #f2ca27; }
+  .SUN-FLOWER:hover {
+    background-color: #f4d03f; }
 
 #floatie {
   user-select: none;
@@ -75,17 +75,52 @@
 body, html {
   width: 100%;
   height: 100%;
-  background-color: #CCC; }
+  background-color: #CCC;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
 
 canvas {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  background-color: transparent; }
+
+#canvas-background {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 1920px;
+  width: 1080px;
   background-color: white; }
+
+iframe {
+  position: absolute;
+  width: 1080px;
+  height: 1920px;
+  left: 0;
+  top: 0;
+  border: none; }
+
+div.header_bg {
+  height: 10em;
+  width: 1080px;
+  background: linear-gradient(to bottom, white, rgba(255, 255, 255, 0));
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  pointer-events: none; }
 
 header {
   position: absolute;
   left: 0;
   top: 0;
   padding: 24px;
-  font-family: "Source Sans Pro", sans-serif; }
+  font-family: "Open Sans", sans-serif;
+  pointer-events: none; }
   header section, header img {
     display: inline-block;
     vertical-align: middle;
@@ -135,11 +170,14 @@ aside {
       background-image: url("../assets/icon_eraser.svg"); }
 
 p.title {
-  font-size: 24px; }
+  font-size: 1.5em;
+  line-height: 100%;
+  margin-bottom: 0.7em; }
 
 p.subtitle {
-  font-size: 18px;
-  color: #999999; }
+  font-size: 1.2em;
+  line-height: 100%;
+  color: #666; }
 
 #color_picker {
   -webkit-transition: all 0.2s ease-in-out; }

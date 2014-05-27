@@ -1,10 +1,12 @@
 {
     "users": [
         {
-            "u_id": "u_eww23",
+            "status": "",
             "name": "Erroll Wood",
+            "description": "PhD student, master of netboards",
             "img_src": "http://eww23.user.srcf.net/img/profile_1x1_512.jpg",
-            "description": "PhD student, master of netboards"
+            "u_id": "u_eww23",
+            "webpage_src": "http://www.polygon.com/"
         }
     ]
 }
