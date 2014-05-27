@@ -27,19 +27,18 @@ var pen_color = color_MIDNIGHT_BLUE;
 var is_color_picker_open = false;
 
 function build_color_picker(){
-	var content = "<table>"
+	var content = "<div id='color_picker_table'>"
 
 	for(var i=0; i<color_picker_rows; i++){
-		content += '<tr>';
 
 		for(var j=0; j<color_picker_cols; j++){
 			var cell_color = color_arrangement[i][j];
-			content += '<td style="background-color:'+cell_color+'"></td>';
+			content += '<span style="background-color:'+cell_color+'"></span>';
 		}
 
-	    content += '</tr>';
+	    // content += '<br>';
 	}
-	content += "</table>"
+	content += "</div>"
 
 	$('#color_picker').append(content);
 

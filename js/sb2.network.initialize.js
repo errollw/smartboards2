@@ -47,7 +47,7 @@ function add_user(user, y_pos){
     // then add them
     header.append(img).append(sec_details)
     sec_details.append(p_name).append(p_desc)
-    $('body').append(header);
+    $('aside').before(header);
 
     // if user has a webpage...
     if (user.webpage_src) {

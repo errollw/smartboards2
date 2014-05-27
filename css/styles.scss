@@ -21,6 +21,7 @@ canvas {
 	position: absolute; top: 0px; left: 0px;
 	@include size(1080px 1920px);
 	background-color: white;
+	pointer-events: none;
 }
 
 iframe {
@@ -33,7 +34,7 @@ iframe {
 }
 
 div.header_bg {
-	@include size(1080px 10em);
+	@include size(1080px 8.5em);
   	background: linear-gradient(to bottom, rgba(255,255,255,1), rgba(255,255,255,0));
   	@include position(absolute, 0px 0px 0px 0px);
   	pointer-events: none;
@@ -141,12 +142,24 @@ p.subtitle {
 
 	-webkit-transition: all 0.2s ease-in-out;
 
+	span {
+		display: inline-block;
+		-webkit-transition: all 0.2s linear;
+		width: 20%;
+		height: 25%;
+		margin: 0;
+	}
+
 	&.closed{
 		width:  80px;
 		height: 80px;
 
-		td:last-child {
-			width:0;
+		span {
+			width: 25%;
+		}
+
+		span:nth-child(5n) {
+			width: 0;
 		}
 	}
 
@@ -155,17 +168,13 @@ p.subtitle {
 		height: 240px;
 	}
 
-	table {
+	#color_picker_table {
 		width: 100%;
 		height: 100%;
+		line-height: 0;
 	}
 
 	tr {
-		height: 20%;
-	}
-
-	td {
-		-webkit-transition: all 0.2s linear;
-		width: 20%;
+		// height: 80px/4;
 	}
 }

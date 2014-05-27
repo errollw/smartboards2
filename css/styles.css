@@ -93,7 +93,8 @@ canvas {
   left: 0px;
   height: 1920px;
   width: 1080px;
-  background-color: white; }
+  background-color: white;
+  pointer-events: none; }
 
 iframe {
   position: absolute;
@@ -104,7 +105,7 @@ iframe {
   border: none; }
 
 div.header_bg {
-  height: 10em;
+  height: 8.5em;
   width: 1080px;
   background: linear-gradient(to bottom, white, rgba(255, 255, 255, 0));
   position: absolute;
@@ -181,19 +182,23 @@ p.subtitle {
 
 #color_picker {
   -webkit-transition: all 0.2s ease-in-out; }
+  #color_picker span {
+    display: inline-block;
+    -webkit-transition: all 0.2s linear;
+    width: 20%;
+    height: 25%;
+    margin: 0; }
   #color_picker.closed {
     width: 80px;
     height: 80px; }
-    #color_picker.closed td:last-child {
+    #color_picker.closed span {
+      width: 25%; }
+    #color_picker.closed span:nth-child(5n) {
       width: 0; }
   #color_picker.open {
     width: 300px;
     height: 240px; }
-  #color_picker table {
+  #color_picker #color_picker_table {
     width: 100%;
-    height: 100%; }
-  #color_picker tr {
-    height: 20%; }
-  #color_picker td {
-    -webkit-transition: all 0.2s linear;
-    width: 20%; }
+    height: 100%;
+    line-height: 0; }
