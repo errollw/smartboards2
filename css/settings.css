@@ -44,6 +44,9 @@ body, html {
 h1 {
   font-weight: normal; }
 
+p {
+  line-height: 1.6em; }
+
 section, footer {
   max-width: 50em;
   margin-left: auto;
@@ -86,7 +89,6 @@ aside {
   width: 28.01019%;
   font-size: 16px;
   color: #555;
-  line-height: 1.3em;
   padding: 0 0.4854em; }
   aside:last-child {
     margin-right: 0; }
@@ -121,3 +123,14 @@ button {
   color: white; }
   button:last-child {
     margin-right: 0; }
+
+section.deleted_user {
+  height: 2.427em;
+  padding: 0 0.9708em;
+  line-height: 2.427em;
+  background-color: rgba(231, 76, 60, 0.2);
+  border-radius: 3px;
+  color: #c0392b; }
+  section.deleted_user span {
+    font-weight: 600;
+    cursor: pointer; }

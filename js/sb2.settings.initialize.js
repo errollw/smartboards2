@@ -76,7 +76,7 @@ function add_user(user){
         img.attr('src', input_imageUrl.val());
     });
 
-    delete_button.click(function(){usr_sec.remove()});
+    delete_button.click(function(){delete_user(user, usr_sec)});
 
     form_div.append(text_id).append(input_id);
     form_div.append(text_name).append(input_name);
@@ -88,4 +88,18 @@ function add_user(user){
 	usr_sec.append(img).append(form_div);
 
 	$('#sortable').append(usr_sec);
+}
+
+function delete_user(user, usr_sec){
+
+    var deleted_usr_sec = $('<section/>').addClass('deleted_user');
+    deleted_usr_sec.html('User deleted (' + user.name + '). <span>Undo?</span>')
+
+    deleted_usr_sec.children('span').click(function(){
+        deleted_usr_sec.remove();
+        add_user(user)
+    });
+
+    usr_sec.before(deleted_usr_sec);
+    usr_sec.remove();
 }
