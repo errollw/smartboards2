@@ -42,7 +42,6 @@ function handle_mouse_move_pen(evt) {
 
     // get thickness to draw at that point
     var d_time = currentMouse.timestamp - previousMouse.timestamp
-    console.log(delta.length, d_time)
     var thickness = speed_to_thickness(delta.length / d_time, 0);
 
     // make orthogonal vector to simulate brush thickness

@@ -35,8 +35,6 @@ function build_color_picker(){
 			var cell_color = color_arrangement[i][j];
 			content += '<span style="background-color:'+cell_color+'"></span>';
 		}
-
-	    // content += '<br>';
 	}
 	content += "</div>"
 
@@ -65,6 +63,10 @@ function set_pen_icon_color(){
 	$('#pen>svg').attr('width', $('#pen').width()+'px');
 	$('#pen>svg').attr('height', $('#pen').height()+'px');
 	$('#pen path').attr('fill', pen_color);
+
+	$('#pen_thin_container   .pen_thin'  ).css('background-color',get_pen_color());
+	$('#pen_medium_container .pen_medium').css('background-color',get_pen_color());
+	$('#pen_thick_container  .pen_thick' ).css('background-color',get_pen_color());
 }
 
 function get_pen_color(){

@@ -5,7 +5,7 @@ var speed_min = 0, speed_max = 10;
 var thick_min = 2, thick_max = 8;
 
 var speed_histories = [],       // mouse speed at previous frames
-    speed_history_length = 20;  // number of speeds to keep in buffer
+    speed_history_length = 10;  // number of speeds to keep in buffer
 
 var dot_area_thresh = 150;      // minimum stroke bounds area before conversion to dot
 
@@ -13,9 +13,10 @@ var dot_area_thresh = 150;      // minimum stroke bounds area before conversion 
 // chooses a pen thickness based on speed (how far mouse has moved)
 function speed_to_thickness(speed, touch_id){
 
+    // if speed NaN, default to thin
     if (speed != speed) return thick_min;
 
-    console.log(speed)
+    // clamp speed
     speed = Math.min(speed_max, Math.max(speed_min, speed));
 
     // choose correct buffer depending on which finger is being used
@@ -23,7 +24,6 @@ function speed_to_thickness(speed, touch_id){
 
     // if no buffer exists for that stroke, create one
     if (!speed_history){
-        console.log("making history")
         speed_history = speed_histories[touch_id] = [];
         for(var i = 0; i < speed_history_length; i++)
             speed_history[i] = 0;
@@ -41,7 +41,9 @@ function speed_to_thickness(speed, touch_id){
     thickness = (8-(sum/speed_history.length)*4)
     thickness = Math.min(thick_max, Math.max(thick_min, thickness));
 
-    return thickness;
+    if (get_pen_thickness() == "THIN") return thick_min;
+
+    return thickness * get_thickness_multiplier();
 }
 
 
@@ -54,7 +56,7 @@ function draw_dot(point){
     
     for (var i = 0; i < 6; i++) {
         var delta = new Point({
-            length: (10 * 0.7) + (Math.random() * 10 * 0.3),
+            length: ((10 * 0.7) + (Math.random() * 10 * 0.3)) * get_thickness_multiplier(),
             angle: (360 / 6) * i
         });
         dot_path.add(point.add(delta));
