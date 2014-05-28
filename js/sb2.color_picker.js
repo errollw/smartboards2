@@ -58,11 +58,14 @@ function build_color_picker(){
 
 $(document).ready(function(){
 	build_color_picker();
-
-	// $('#pen').load('assets/icon_pen.svg')
-	
-
+	$('#pen').load('assets/icon_pen.svg', set_pen_icon_color)
 });
+
+function set_pen_icon_color(){
+	$('#pen>svg').attr('width', $('#pen').width()+'px');
+	$('#pen>svg').attr('height', $('#pen').height()+'px');
+	$('#pen path').attr('fill', pen_color);
+}
 
 function get_pen_color(){
 	return pen_color;
@@ -70,8 +73,7 @@ function get_pen_color(){
 
 function set_pen_color(new_color){
 	pen_color = new_color;
-	// console.log($('#pen>svg'))
-	$('div#pen').css('backgroundColor', pen_color);
+	set_pen_icon_color();
 }
 
 function toggle_color_picker(){

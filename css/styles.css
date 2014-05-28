@@ -163,10 +163,6 @@ aside {
       background-color: #DDD; }
     aside div#cursor {
       background-image: url("../assets/icon_cursor.svg"); }
-    aside div#pen {
-      background-image: url("../assets/icon_pen.svg"); }
-      aside div#pen.selected {
-        background-image: url("../assets/icon_pen_selected.svg"); }
     aside div#eraser {
       background-image: url("../assets/icon_eraser.svg"); }
 

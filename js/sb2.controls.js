@@ -73,12 +73,6 @@ function set_edit_mode(new_edit_mode){
         remove_selection_rects();
     }
 
-    if (edit_mode != "DRAWING"){
-        $('div#pen').css('backgroundColor', "#EEEEEE");
-    } else {
-        set_pen_color(pen_color);
-    }
-
     $('#controls div').removeClass('selected');
     $('#controls #pen').toggleClass('selected', edit_mode == "DRAWING");
     $('#controls #eraser').toggleClass('selected', edit_mode == "ERASING");
