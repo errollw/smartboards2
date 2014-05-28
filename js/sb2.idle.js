@@ -7,6 +7,7 @@ var idle_throttle = moment.duration(1, 'seconds');
 var idle_timeout = moment.duration(10, 'seconds');
 
 function set_busy(){
+    show_controls();
     is_idle = false;
 }
 
@@ -15,6 +16,8 @@ function set_idle(){
     // can only be idle if no mouse or touches are active
     if ((getNumberOfTouches() == 0) && !isMouseDown){
         is_idle = true;
+        set_edit_mode(default_edit_mode);
+        hide_controls();
     }
 }
 
@@ -35,4 +38,6 @@ $(document).ready(function(){
     canvas.addEventListener("mouseout",   debounced_set_idle);
     canvas.addEventListener("touchend",   debounced_set_idle);
     canvas.addEventListener("touchleave", debounced_set_idle);
+    canvas.addEventListener("touchmove",  debounced_set_idle);
+    canvas.addEventListener("mousemove",  debounced_set_idle);
 });

@@ -20,7 +20,6 @@ $(document).ready(function() {
 });
 
 function handle_mouse_down(evt) {
-    console.log("MOUSE DOWN")
     currentMouse = mouseToPoint(evt);
     previousMouse = mouseToPoint(evt);
     isMouseDown = true;

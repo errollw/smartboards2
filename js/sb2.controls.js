@@ -1,5 +1,6 @@
 // Possible edit modes: DRAWING, ERASING, SELECTING, TRANSFORMING
 edit_mode = "DRAWING";
+default_edit_mode = "SELECTING";
 
 $(document).on("keydown", function (evt) {
 
@@ -44,7 +45,19 @@ $(document).ready(function() {
     $('#controls #pen').click(function(){set_edit_mode("DRAWING")});
     $('#controls #eraser').click(function(){set_edit_mode("ERASING")});
     $('#controls #cursor').click(function(){set_edit_mode("SELECTING")});
+
+    set_edit_mode(default_edit_mode);
 });
+
+
+function hide_controls(){
+    $('#controls').addClass('hidden');
+}
+
+
+function show_controls(){
+    $('#controls').removeClass('hidden');
+}
 
 
 function imageUrlPrompt(){
@@ -78,5 +91,5 @@ function set_edit_mode(new_edit_mode){
     $('#controls #eraser').toggleClass('selected', edit_mode == "ERASING");
     $('#controls #cursor').toggleClass('selected', edit_mode == "SELECTING");
 
-    view.update();
+    //view.update();
 }

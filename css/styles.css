@@ -135,19 +135,22 @@ header {
   header img {
     width: 80px;
     height: 80px;
-    border-radius: 8px; }
+    border-radius: 5px; }
 
 .icon-button {
   background-size: cover; }
 
 aside {
+  -webkit-transition: right 1s ease-in-out;
   position: absolute;
   right: 0;
   top: 0;
   margin: 24px; }
+  aside.hidden {
+    right: -140px; }
   aside section {
     background-color: #EEE;
-    border-radius: 8px;
+    border-radius: 5px;
     margin-bottom: 24px;
     overflow: hidden;
     display: block; }

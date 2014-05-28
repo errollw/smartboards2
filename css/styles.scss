@@ -68,7 +68,7 @@ header {
 	img {
 		width: 80px;
 		height: 80px;
-		border-radius: 8px;
+		border-radius: 5px;
 	}
 }
 
@@ -79,6 +79,12 @@ header {
 
 aside {
 
+	-webkit-transition: right 0.8s ease-in-out;
+
+	&.hidden {
+		right: -140px;
+	}
+
 	position: absolute;
 	right: 0;
 	top: 0;
@@ -88,7 +94,7 @@ aside {
 	section {
 
 		background-color: #EEE;
-		border-radius: 8px;
+		border-radius: 5px;
 		margin-bottom: 24px;
 		overflow: hidden;
 
