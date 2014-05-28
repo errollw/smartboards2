@@ -20,6 +20,7 @@
 <!-- SB2: keyboard & UI controls -->
 <script type="text/javascript" src="js/sb2.controls.js"></script>
 <script type="text/javascript" src="js/sb2.color_picker.js"></script>
+<script type="text/javascript" src="js/sb2.pen_thickness.js"></script>
 <script type="text/javascript" src="js/sb2.floatie.js"></script>
 
 <!-- SB2: general utils -->
@@ -67,11 +68,30 @@
 <canvas id='myCanvas' width='1080' height='1920'></canvas>
 
 <aside id='controls'>
-	<section class="main-controls">
-		<div id='cursor'></div>
-		<div id='pen'></div>
-		<div id='eraser'></div>
-	</section>
+	<section>
+		<div class='button' id='cursor'></div>
+		<div class='button' id='pen'></div>
+		<div class='button' id='eraser'></div>
+	</section><br>
+	<section id='pen_thickness_controls'>
+		<div id='pen_thin_container' class='pen_thickness_container'>
+			<div class='pen_thin'></div>
+			<div class='pen_medium'></div>
+			<div class='pen_thick'></div>
+		</div>
+		<div class='spacer'></div>
+		<div id='pen_medium_container' class='pen_thickness_container'>
+			<div class='pen_thin'></div>
+			<div class='pen_medium'></div>
+			<div class='pen_thick'></div>
+		</div>
+		<div class='spacer'></div>
+		<div id='pen_thick_container' class='pen_thickness_container'>
+			<div class='pen_thin'></div>
+			<div class='pen_medium'></div>
+			<div class='pen_thick'></div>
+		</div>
+	</section><br>
 	<section>
 		<div id='color_picker'></div>
 	</section>

@@ -4,7 +4,7 @@ paper.install(window);
 var is_idle = true;
 
 var idle_throttle = moment.duration(1, 'seconds');
-var idle_timeout = moment.duration(10, 'seconds');
+var idle_timeout = moment.duration(20, 'seconds');
 
 function set_busy(){
     show_controls();

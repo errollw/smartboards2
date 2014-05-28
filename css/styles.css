@@ -140,33 +140,33 @@ header {
 .icon-button {
   background-size: cover; }
 
-aside {
-  -webkit-transition: right 1s ease-in-out;
+#controls {
+  -webkit-transition: right 0.8s ease-in-out;
   position: absolute;
   right: 0;
   top: 0;
   margin: 24px; }
-  aside.hidden {
+  #controls.hidden {
     right: -140px; }
-  aside section {
+  #controls section {
+    display: inline-block;
+    margin-left: auto;
+    clear: both;
+    float: right;
     background-color: #EEE;
     border-radius: 5px;
     margin-bottom: 24px;
-    overflow: hidden;
-    display: block; }
-    aside section.main-controls {
-      margin-left: auto;
-      width: 80px; }
-  aside div {
+    overflow: hidden; }
+  #controls div.button {
     background-size: cover;
     -webkit-transition: background-color 0.2s ease-in-out;
     width: 80px;
     height: 80px; }
-    aside div.selected {
+    #controls div.button.selected {
       background-color: #DDD; }
-    aside div#cursor {
+    #controls div.button#cursor {
       background-image: url("../assets/icon_cursor.svg"); }
-    aside div#eraser {
+    #controls div.button#eraser {
       background-image: url("../assets/icon_eraser.svg"); }
 
 p.title {
@@ -180,6 +180,8 @@ p.subtitle {
   color: #666; }
 
 #color_picker {
+  width: 80px;
+  height: 80px;
   -webkit-transition: all 0.2s ease-in-out; }
   #color_picker span {
     display: inline-block;
@@ -201,3 +203,39 @@ p.subtitle {
     width: 100%;
     height: 100%;
     line-height: 0; }
+
+#pen_thickness_controls {
+  box-sizing: border-box;
+  padding: 20px;
+  height: 80px;
+  font-size: 0; }
+
+.pen_thickness_container {
+  -webkit-transition: all 0.2s ease-in-out;
+  overflow: hidden;
+  box-sizing: border-box;
+  display: inline-block;
+  box-sizing: border-box;
+  width: 40px; }
+  .pen_thickness_container.closed {
+    width: 0px; }
+  .pen_thickness_container .pen_thin, .pen_thickness_container .pen_medium, .pen_thickness_container .pen_thick {
+    background-color: #CCC;
+    width: 100%;
+    margin-bottom: 5px; }
+    .pen_thickness_container .pen_thin:last-child, .pen_thickness_container .pen_medium:last-child, .pen_thickness_container .pen_thick:last-child {
+      margin-bottom: 0; }
+  .pen_thickness_container .pen_thin {
+    height: 4px; }
+  .pen_thickness_container .pen_medium {
+    height: 8px; }
+  .pen_thickness_container .pen_thick {
+    height: 16px; }
+
+.spacer {
+  background-color: black;
+  display: inline-block;
+  -webkit-transition: all 0.2s ease-in-out;
+  width: 20px; }
+  .spacer.closed {
+    width: 0px; }
