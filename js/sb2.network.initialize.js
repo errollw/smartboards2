@@ -67,6 +67,8 @@ function add_user(user, y_pos){
         var status_msg = $('<p/>').addClass('status_msg').text(user.status);
         var status_time = $('<p/>').addClass('status_time').text('updated ' + moment(user.status_last_mod).fromNow());
 
+        console.log(user.status_last_mod);
+
         status.append(status_msg).append(status_time);
         $(header).after(status);
     }

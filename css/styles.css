@@ -102,7 +102,7 @@
   margin-left: -13px; }
 
 .status_msg {
-  margin: 0 0 0.5em 0;
+  margin: 0 0 0.4em 0;
   line-height: 100%;
   font-size: 1.7em;
   color: #614f06; }
@@ -111,7 +111,7 @@
   margin: 0;
   font-size: 1.2em;
   font-style: italic;
-  color: #aa8a0a; }
+  color: #c29d0b; }
 
 #floatie {
   user-select: none;
@@ -156,6 +156,7 @@ body, html {
   width: 100%;
   height: 100%;
   background-color: #CCC;
+  font-family: "Open Sans", sans-serif;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;

@@ -37,11 +37,12 @@
   position: absolute;
   left: 0;
   top: 116px;
-  background-color: #fbedb8;
   margin: 0px 24px;
-  padding: 1.7em;
+  padding: 2em;
   border-radius: 5px;
-  border: 1px solid #f1c40f; }
+  background-color: #fbedb8;
+  border: 1px solid #f1c40f;
+  pointer-events: none; }
 
 .status:after, .status:before {
   bottom: 100%;
@@ -73,6 +74,6 @@
 
 .status_time {
   margin: 0;
-  font-size: 1.3em;
+  font-size: 1.2em;
   font-style: italic;
   color: #aa8a0a; }

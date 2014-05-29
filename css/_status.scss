@@ -7,7 +7,7 @@ $status-bg: lighten($SUN-FLOWER, 35%);
 $status-border: $SUN-FLOWER;
 
 $status-text-color-1: darken($SUN-FLOWER, 30%);
-$status-text-color-2: darken($SUN-FLOWER, 15%);
+$status-text-color-2: darken($SUN-FLOWER, 10%);
 
 .status {
 	position: absolute;
@@ -50,7 +50,7 @@ $status-text-color-2: darken($SUN-FLOWER, 15%);
 }
 
 .status_msg {
-	margin: 0 0 0.5em 0;
+	margin: 0 0 0.4em 0;
 
 	line-height: 100%;
 	font-size: 1.7em;
