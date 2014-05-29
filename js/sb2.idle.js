@@ -3,12 +3,13 @@ paper.install(window);
 
 var is_idle = true;
 
-var idle_throttle = moment.duration(1, 'seconds');
 var idle_timeout = moment.duration(20, 'seconds');
 
 function set_busy(){
-    show_controls();
-    is_idle = false;
+    if(is_idle){
+        show_controls();
+        is_idle = false;
+    }
 }
 
 function set_idle(){
@@ -26,12 +27,13 @@ $(document).ready(function(){
 
     var canvas = document.getElementById('myCanvas');
 
-    var throttled_set_busy = _.throttle(set_busy, idle_throttle.asMilliseconds());
     var debounced_set_idle = _.debounce(set_idle, idle_timeout.asMilliseconds());
 
     // set busy on any activity (moving mouse)
-    canvas.addEventListener("touchmove",  throttled_set_busy);
-    canvas.addEventListener("mousemove",  throttled_set_busy);
+    canvas.addEventListener("touchmove",  set_busy);
+    canvas.addEventListener("mousemove",  set_busy);
+    canvas.addEventListener("touchstart", set_busy);
+    canvas.addEventListener("mousedown",  set_busy);
 
     // after a time has passed with no movement
     canvas.addEventListener("mouseup",    debounced_set_idle);
