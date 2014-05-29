@@ -1,0 +1,67 @@
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
+
+.EMERALD {
+  background-color: #2ecc71; }
+  .EMERALD:hover {
+    background-color: #54d98c; }
+
+.CARROT {
+  background-color: #e67e22; }
+  .CARROT:hover {
+    background-color: #eb9950; }
+
+.ALIZARIN {
+  background-color: #e74c3c; }
+  .ALIZARIN:hover {
+    background-color: #ed7669; }
+
+.PETER-RIVER {
+  background-color: #3498db; }
+  .PETER-RIVER:hover {
+    background-color: #5faee3; }
+
+.TURQUOISE {
+  background-color: #1abc9c; }
+  .TURQUOISE:hover {
+    background-color: #28e1bd; }
+
+.AMETHYST {
+  background-color: #9b59b6; }
+  .AMETHYST:hover {
+    background-color: #b07cc6; }
+
+.SUN-FLOWER {
+  background-color: #f1c40f; }
+  .SUN-FLOWER:hover {
+    background-color: #f4d03f; }
+
+body, html {
+  font-family: "Open Sans", sans-serif; }
+
+h1 {
+  font-weight: normal; }
+
+section, footer {
+  max-width: 50em;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 2em;
+  padding: 0 1em; }
+  section:after, footer:after {
+    content: "";
+    display: table;
+    clear: both; }
+
+#board-container {
+  width: 100%;
+  border: 1px solid #DDD;
+  padding: 7%; }
+
+#board-inner {
+  border: 1px solid #DDD;
+  background-color: white;
+  background-size: cover;
+  background-image: url(../content/r_ss20.png); }

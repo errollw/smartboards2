@@ -1,0 +1,35 @@
+@import "bourbon/bourbon";
+@import "grid-settings";
+@import "neat/neat";
+
+@import "colors";
+
+$font: 'Open Sans', sans-serif;
+
+body, html {
+	font-family: $font;
+}
+
+h1 {
+	font-weight: normal;
+}
+
+section, footer {
+	@include outer-container;
+	margin-bottom: 2em;
+	padding: 0 1em;
+}
+
+#board-container {
+	width: 100%;
+	border: 1px solid #DDD;
+
+	padding: 7%;
+}
+
+#board-inner {
+	border: 1px solid #DDD;
+	background-color: white;
+	background-size: cover;
+	background-image: url(../content/r_ss20.png);
+}

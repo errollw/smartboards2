@@ -24,7 +24,7 @@ $(document).on("keydown", function (evt) {
     } else if (key == 't') {
 
         set_edit_mode("TRANSFORMING");
-    } else if (key == 'i') {p
+    } else if (key == 'i') {
 
         imageUrlPrompt();
 
@@ -68,8 +68,9 @@ function imageUrlPrompt(){
     var url = prompt("Please enter image url", "image url");
 
     if (url != null) {
-        var transform_item = new Raster(url);
-        transform_item.position = view.center;
+        var new_img = new Raster(url);
+        new_img.crossOrigin = "Anonymous";
+        new_img.position = view.center;
     }
 }
 
