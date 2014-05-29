@@ -6,7 +6,7 @@ $(document).ready(function() {
 
     $('#floatie #send_to_back').click(send_selected_items_to_back);
 
-    $('#floatie #send_to_front').click(flatten_project);
+    $('#floatie #send_to_front').click(send_selected_items_to_back);
 
     $('#floatie').click(hide_floatie);
 
