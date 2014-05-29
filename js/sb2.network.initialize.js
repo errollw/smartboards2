@@ -6,6 +6,9 @@ var r_id = "r_SS20";
 // distance in pixels between users
 var gap_between_users;
 
+// time between whole page refreshes
+var refresh_timeout_dur = moment.duration(5, 'minutes');
+
 function initializeUrlParams() {
 	var match,
         pl     = /\+/g,  // Regex for replacing addition symbol with a space
@@ -24,6 +27,9 @@ $(document).ready(function(){
     initializeUrlParams();
     if (urlParams['r_id']) r_id = urlParams['r_id'];
 
+    // avoid caching .json files
+    $.ajaxSetup({ cache: false });
+
     $.getJSON("content/room_data_"+r_id+".json", function(json_data){
 
     	gap_between_users = 1980 / json_data.users.length;
@@ -31,6 +37,9 @@ $(document).ready(function(){
     		add_user(json_data.users[i], i*gap_between_users)
     	}
     });
+
+    // refresh the whole page (no cache) every 2 minutes
+    window.setTimeout(refresh_page, refresh_timeout_dur.asMilliseconds());
     
 });
 
@@ -67,10 +76,14 @@ function add_user(user, y_pos){
         var status_msg = $('<p/>').addClass('status_msg').text(user.status);
         var status_time = $('<p/>').addClass('status_time').text('updated ' + moment(user.status_last_mod).fromNow());
 
-        console.log(user.status_last_mod);
-
         status.append(status_msg).append(status_time);
         $(header).after(status);
+
+        // refresh status time every minute
+        var status_refresh_interval_dur = moment.duration(1, 'minutes');
+        window.setInterval(function(){
+            status_time.text('updated ' + moment(user.status_last_mod).fromNow())
+        }, status_refresh_interval_dur.asMilliseconds());
     }
 
 }

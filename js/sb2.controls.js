@@ -33,6 +33,10 @@ $(document).on("keydown", function (evt) {
         project.clear();
         view.update();
 
+    } else if (key == 'o') {
+
+        upload_canvas();
+
     } else {
 
         console.log(evt.keyCode)

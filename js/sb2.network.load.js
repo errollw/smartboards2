@@ -1,6 +1,9 @@
 // make the paper scope global, by injecting it into window:
 paper.install(window);
 
+// how often to refresh the loaded paperjs json
+var autoload_interval_dur = moment.duration(5, 'seconds');
+
 function load(){
 
 	$.getJSON("content/"+r_id+".json", function(json_data){
@@ -45,9 +48,6 @@ function refresh_page(){
 }
 
 
-var refresh_timeout_dur = moment.duration(2, 'minutes');
-var autoload_interval_dur = moment.duration(5, 'seconds');
-
 $(document).ready(function(){
 
     // avoid caching .json files
@@ -56,8 +56,5 @@ $(document).ready(function(){
     // load, and prepare to automatically re-load data
     load();
     window.setInterval(load_if_out_of_date, autoload_interval_dur.asMilliseconds());
-
-    // refresh the whole page (no cache) every 2 minutes
-    window.setTimeout(refresh_page, refresh_timeout_dur.asMilliseconds());
     
 });
