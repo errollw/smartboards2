@@ -1,6 +1,7 @@
 @import "bourbon/bourbon";
 
 @import "colors";
+@import "status";
 @import "floatie";
 
 $font: 'Open Sans', sans-serif;
@@ -230,7 +231,6 @@ p.subtitle {
 }
 
 .spacer {
-	background-color: black;
 	display: inline-block;
 	-webkit-transition: all 0.2s ease-in-out;
 	width:  20px;

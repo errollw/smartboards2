@@ -60,4 +60,15 @@ function add_user(user, y_pos){
         $(header).before(header_bg);
     }
 
+    // if user has a status...
+    if (user.status) {
+        
+        var status = $('<div/>').addClass('status');
+        var status_msg = $('<p/>').addClass('status_msg').text(user.status);
+        var status_time = $('<p/>').addClass('status_time').text('updated ' + moment(user.status_last_mod).fromNow());
+
+        status.append(status_msg).append(status_time);
+        $(header).after(status);
+    }
+
 }

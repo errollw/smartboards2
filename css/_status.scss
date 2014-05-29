@@ -1,0 +1,66 @@
+@import "colors";
+
+$header-height: 128px-24px;
+$triangle-size: 12px;
+
+$status-bg: lighten($SUN-FLOWER, 35%);
+$status-border: $SUN-FLOWER;
+
+$status-text-color-1: darken($SUN-FLOWER, 30%);
+$status-text-color-2: darken($SUN-FLOWER, 15%);
+
+.status {
+	position: absolute;
+	left: 0;
+	top: $header-height+$triangle-size;
+
+	margin: 0px 24px;
+	padding: 2em;
+	border-radius: 5px;
+
+	background-color: $status-bg;
+	border: 1px solid $status-border;
+
+	pointer-events: none;
+}
+
+.status:after, .status:before {
+	bottom: 100%;
+	left: 40px; // half the profile pic width
+
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.status:after {
+	border-color: rgba(239, 239, 239, 0);
+	border-bottom-color: $status-bg;
+	border-width: $triangle-size;
+	margin-left: -$triangle-size;
+}
+.status:before {
+	border-color: rgba(170, 170, 170, 0);
+	border-bottom-color: $status-border;
+	border-width: ($triangle-size + 1px);
+	margin-left: -($triangle-size + 1px);
+}
+
+.status_msg {
+	margin: 0 0 0.5em 0;
+
+	line-height: 100%;
+	font-size: 1.7em;
+	color: $status-text-color-1;
+}
+
+.status_time {
+	margin: 0;
+
+	font-size: 1.2em;
+	font-style:italic;
+	color: $status-text-color-2;
+}

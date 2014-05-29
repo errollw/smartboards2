@@ -1,0 +1,78 @@
+.EMERALD {
+  background-color: #2ecc71; }
+  .EMERALD:hover {
+    background-color: #54d98c; }
+
+.CARROT {
+  background-color: #e67e22; }
+  .CARROT:hover {
+    background-color: #eb9950; }
+
+.ALIZARIN {
+  background-color: #e74c3c; }
+  .ALIZARIN:hover {
+    background-color: #ed7669; }
+
+.PETER-RIVER {
+  background-color: #3498db; }
+  .PETER-RIVER:hover {
+    background-color: #5faee3; }
+
+.TURQUOISE {
+  background-color: #1abc9c; }
+  .TURQUOISE:hover {
+    background-color: #28e1bd; }
+
+.AMETHYST {
+  background-color: #9b59b6; }
+  .AMETHYST:hover {
+    background-color: #b07cc6; }
+
+.SUN-FLOWER {
+  background-color: #f1c40f; }
+  .SUN-FLOWER:hover {
+    background-color: #f4d03f; }
+
+.status {
+  position: absolute;
+  left: 0;
+  top: 116px;
+  background-color: #fbedb8;
+  margin: 0px 24px;
+  padding: 1.7em;
+  border-radius: 5px;
+  border: 1px solid #f1c40f; }
+
+.status:after, .status:before {
+  bottom: 100%;
+  left: 40px;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none; }
+
+.status:after {
+  border-color: rgba(239, 239, 239, 0);
+  border-bottom-color: #fbedb8;
+  border-width: 12px;
+  margin-left: -12px; }
+
+.status:before {
+  border-color: rgba(170, 170, 170, 0);
+  border-bottom-color: #f1c40f;
+  border-width: 13px;
+  margin-left: -13px; }
+
+.status_msg {
+  margin: 0 0 0.5em 0;
+  line-height: 100%;
+  font-size: 1.7em;
+  color: #614f06; }
+
+.status_time {
+  margin: 0;
+  font-size: 1.3em;
+  font-style: italic;
+  color: #aa8a0a; }
