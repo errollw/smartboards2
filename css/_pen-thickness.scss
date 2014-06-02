@@ -1,0 +1,55 @@
+
+// defaults to OPEN
+#pen_thickness_controls {
+	box-sizing: border-box;
+	//padding: 20px;
+	height: 80px;
+	font-size: 0;	//removes spaces between inline blocks
+}
+
+.pen_thickness_container {
+
+	-webkit-transition: all 0.2s ease-in-out;
+
+	overflow: hidden;
+	display: inline-block;
+
+	width:  40px;
+	padding: 20px 0;
+
+	// only used when expanded controls
+	&:first-child{  padding-left: 20px; padding-right: 10px; }
+	&:nth-child(2){ padding-left: 10px; padding-right: 10px; }
+	&:last-child{   padding-left: 10px; padding-right: 20px; }
+
+	&.closed{
+		padding-left: 0;
+		padding-right: 0;
+		width:  0px;
+	}
+
+	// only one chosen - pad all around
+	&.chosen{
+		width: 40px;
+		padding: 20px;
+	}
+
+	// Below are the actual rectangles for thickness
+	.pen_thin, .pen_medium, .pen_thick {
+
+		background-color: #CCC;
+		width:  100%;
+		margin-bottom: 5px;
+		&:last-child{ margin-bottom:0; } 
+	}
+	.pen_thin { height: 4px; }
+	.pen_medium { height: 8px; }
+	.pen_thick { height: 16px; }
+}
+
+.spacer {
+	display: inline-block;
+	-webkit-transition: all 0.2s ease-in-out;
+	width:  20px;
+	&.closed{ width:  0px; }
+}

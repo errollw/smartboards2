@@ -3,6 +3,8 @@
 @import "colors";
 @import "status";
 @import "floatie";
+@import "color-picker";
+@import "pen-thickness";
 
 $font: 'Open Sans', sans-serif;
 
@@ -142,98 +144,4 @@ p.subtitle {
 	font-size: 1.2em;
 	line-height: 100%;
 	color: #666;
-}
-
-
-#color_picker {
-	
-	width:  80px;
-	height: 80px;
-
-	-webkit-transition: all 0.2s ease-in-out;
-
-	span {
-		display: inline-block;
-		-webkit-transition: all 0.2s linear;
-		width: 20%;
-		height: 25%;
-		margin: 0;
-	}
-
-	&.closed{
-		width:  80px;
-		height: 80px;
-
-		span {
-			width: 25%;
-		}
-
-		span:nth-child(5n) {
-			width: 0;
-		}
-	}
-
-	&.open{
-		width:  300px;
-		height: 240px;
-	}
-
-	#color_picker_table {
-		width: 100%;
-		height: 100%;
-		line-height: 0;
-	}
-}
-
-#pen_thickness_controls {
-	box-sizing: border-box;
-	padding: 20px;
-	height: 80px;
-	font-size: 0;	//removes spaces between inline blocks
-}
-
-.pen_thickness_container {
-
-	-webkit-transition: all 0.2s ease-in-out;
-
-	overflow: hidden;
-
-	box-sizing: border-box;
-
-	display: inline-block;
-
-	box-sizing: border-box;
-
-	width:  40px;
-	&.closed{
-		width:  0px;
-	}
-
-	.pen_thin, .pen_medium, .pen_thick {
-
-		background-color: #CCC;
-		width:  100%;
-		margin-bottom: 5px;
-
-		&:last-child{
-			margin-bottom:0;
-		} 
-	}
-
-	.pen_thin {
-		height: 4px;
-	}
-	.pen_medium {
-		height: 8px;
-	}
-	.pen_thick {
-		height: 16px;
-	}
-}
-
-.spacer {
-	display: inline-block;
-	-webkit-transition: all 0.2s ease-in-out;
-	width:  20px;
-	&.closed{ width:  0px; }
 }

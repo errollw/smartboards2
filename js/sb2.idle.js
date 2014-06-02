@@ -3,14 +3,7 @@ paper.install(window);
 
 var is_idle = true;
 
-var idle_timeout = moment.duration(20, 'seconds');
-
-function set_busy(){
-    if(is_idle){
-        show_controls();
-        is_idle = false;
-    }
-}
+var idle_timeout = moment.duration(30, 'seconds');
 
 function set_idle(){
 
@@ -22,24 +15,30 @@ function set_idle(){
     }
 }
 
+var debounced_set_idle = _.debounce(set_idle, idle_timeout.asMilliseconds());
+
+function set_busy(){
+    if(is_idle){
+        show_controls();
+        is_idle = false;
+    }
+
+    // after a time has passed with no movement, set idle
+    debounced_set_idle();
+}
 
 $(document).ready(function(){
 
     var canvas = document.getElementById('myCanvas');
+    var controls = document.getElementById('controls');
 
-    var debounced_set_idle = _.debounce(set_idle, idle_timeout.asMilliseconds());
-
-    // set busy on any activity (moving mouse)
+    // set busy on any activity (moving mouse or using controls)
     canvas.addEventListener("touchmove",  set_busy);
     canvas.addEventListener("mousemove",  set_busy);
     canvas.addEventListener("touchstart", set_busy);
     canvas.addEventListener("mousedown",  set_busy);
-
-    // after a time has passed with no movement
-    canvas.addEventListener("mouseup",    debounced_set_idle);
-    canvas.addEventListener("mouseout",   debounced_set_idle);
-    canvas.addEventListener("touchend",   debounced_set_idle);
-    canvas.addEventListener("touchleave", debounced_set_idle);
-    canvas.addEventListener("touchmove",  debounced_set_idle);
-    canvas.addEventListener("mousemove",  debounced_set_idle);
+    controls.addEventListener("touchmove",  set_busy);
+    controls.addEventListener("mousemove",  set_busy);
+    controls.addEventListener("touchstart", set_busy);
+    controls.addEventListener("mousedown",  set_busy);
 });

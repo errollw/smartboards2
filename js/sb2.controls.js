@@ -56,6 +56,8 @@ $(document).ready(function() {
 
 function hide_controls(){
     $('#controls').addClass('hidden');
+    close_pen_thickness_controls();
+    close_color_picker_controls();
 }
 
 

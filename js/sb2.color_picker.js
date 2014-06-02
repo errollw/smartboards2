@@ -54,16 +54,15 @@ function build_color_picker(){
 	});
 }
 
-$(document).ready(function(){
-	build_color_picker();
-	$('#pen').load('assets/icon_pen.svg', set_pen_icon_color)
-});
 
 function set_pen_icon_color(){
+
+	// change color of icon in main controls
 	$('#pen>svg').attr('width', $('#pen').width()+'px');
 	$('#pen>svg').attr('height', $('#pen').height()+'px');
 	$('#pen path').attr('fill', pen_color);
 
+	// change color of thickness selector icon
 	$('#pen_thin_container   .pen_thin'  ).css('background-color',get_pen_color());
 	$('#pen_medium_container .pen_medium').css('background-color',get_pen_color());
 	$('#pen_thick_container  .pen_thick' ).css('background-color',get_pen_color());
@@ -81,10 +80,19 @@ function set_pen_color(new_color){
 function toggle_color_picker(){
 	if (!is_color_picker_open){
 		$('#color_picker').removeClass('closed');
-		$('#color_picker').addClass('open');
 	} else {
 		$('#color_picker').addClass('closed');
-		$('#color_picker').removeClass('open');
 	}
 	is_color_picker_open = !is_color_picker_open;
 }
+
+function close_color_picker_controls(){
+	$('#color_picker').addClass('closed');
+	is_color_picker_open = false;
+}
+
+
+$(document).ready(function(){
+	build_color_picker();
+	$('#pen').load('assets/icon_pen.svg', set_pen_icon_color);
+});

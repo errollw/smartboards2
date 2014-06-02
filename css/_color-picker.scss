@@ -1,0 +1,33 @@
+
+// defaults to OPEN
+#color_picker {
+	
+	// size when open
+	width:  300px;
+	height: 240px;
+
+	-webkit-transition: all 0.2s ease-in-out;
+
+	span {
+		display: inline-block;
+		-webkit-transition: all 0.2s linear;
+		width: 20%;
+		height: 25%;
+		margin: 0;
+	}
+
+	&.closed{
+		width:  80px;
+		height: 80px;
+
+		// four color boxes in a row, hide the 5th
+		span { width: 25%; }
+		span:nth-child(5n) { width: 0; }
+	}
+
+	#color_picker_table {
+		width: 100%;
+		height: 100%;
+		line-height: 0; //removes gaps between divs
+	}
+}

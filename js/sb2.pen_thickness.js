@@ -6,6 +6,7 @@ var pen_thickness_choices = {
 	"pen_medium_container" : "MEDIUM",
 	"pen_thick_container"  : "THICK"
 }
+var default_pen_thickness = 'MEDIUM';
 
 var pen_thickness_multipliers = {
 	"THIN"   : 0.5,
@@ -13,7 +14,8 @@ var pen_thickness_multipliers = {
 	"THICK"  : 3
 }
 
-var is_pen_thickness_open = false;
+var is_pen_thickness_open = false,
+	clicked_id = 'pen_medium_container';
 
 
 $(document).ready(function(){
@@ -22,9 +24,7 @@ $(document).ready(function(){
 
 	$('.pen_thickness_container').click(toggle_pen_thickness);
 
-	// $('#pen_thin_container   .pen_thin'  ).css('background-color',get_pen_color());
-	// $('#pen_medium_container .pen_medium').css('background-color',get_pen_color());
-	// $('#pen_thick_container  .pen_thick' ).css('background-color',get_pen_color());
+	close_pen_thickness_controls();
 });
 
 
@@ -40,12 +40,10 @@ function build_pen_thickness_controls(){
 		container.append($("<div/>").addClass('pen_thick'));
 	});
 
-	$('#pen_thickness_controls').append(pen_thin).append($("<div/>").addClass('spacer'));
-	$('#pen_thickness_controls').append(pen_medium).append($("<div/>").addClass('spacer'));
-	$('#pen_thickness_controls').append(pen_thick);
+	// add controls to container
+	$('#pen_thickness_controls').append(pen_thin).append(pen_medium).append(pen_thick);
 
 	// close all except for medium - the default
-	$('#pen_thickness_controls .spacer').addClass('closed');
 	$('.pen_thickness_container').addClass('closed');
 	pen_medium.removeClass('closed');
 }
@@ -55,28 +53,37 @@ function toggle_pen_thickness(evt){
 
 	if (is_pen_thickness_open) {
 
-		// close all thickness controls
-		$('#pen_thickness_controls .spacer').addClass('closed');
-		$('.pen_thickness_container').addClass('closed');
-
-		// re-open clicked thickness icon
-		$(evt.currentTarget).removeClass('closed');
-
 		// set pen_thickness according to clicked icon
 		var clicked_id = $(evt.currentTarget).attr('id');
-		pen_thickness = pen_thickness_choices[clicked_id];
+		set_pen_thicknes(pen_thickness_choices[clicked_id]);
 
-		is_pen_thickness_open = false;
-
+		// start drawing once thickness is clicked
 		set_edit_mode("DRAWING");
 
 	} else {
 
 		// open the whole pen thickness controls
-		$('#pen_thickness_controls .spacer').removeClass('closed')
-		$('.pen_thickness_container').removeClass('closed')
+		$('.pen_thickness_container').removeClass('closed').removeClass('chosen');
 		is_pen_thickness_open = true;
 	}
+}
+
+function set_pen_thicknes(new_pen_thickness){
+	pen_thickness = new_pen_thickness;
+
+	// close all thickness controls
+	$('.pen_thickness_container').removeClass('chosen');
+	$('.pen_thickness_container').addClass('closed');
+
+	// re-open clicked thickness icon
+	$('#pen_'+new_pen_thickness.toLowerCase()+'_container').removeClass('closed');
+	$('#pen_'+new_pen_thickness.toLowerCase()+'_container').addClass('chosen');
+
+	is_pen_thickness_open = false;
+}
+
+function close_pen_thickness_controls(){
+	set_pen_thicknes(default_pen_thickness);
 }
 
 function get_thickness_multiplier(){

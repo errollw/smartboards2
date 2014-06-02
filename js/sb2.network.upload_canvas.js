@@ -24,6 +24,6 @@ function refresh_page(){
 $(document).ready(function(){
 
     // prepare to automatically upload canvas as image
-    window.setInterval(upload_canvas, auto_upload_canvas_interval_dur.asMilliseconds());
+    // window.setInterval(upload_canvas, auto_upload_canvas_interval_dur.asMilliseconds());
     
 });
