@@ -10,6 +10,7 @@ function set_idle(){
     // can only be idle if no mouse or touches are active
     if ((getNumberOfTouches() == 0) && !isMouseDown){
         is_idle = true;
+        deselect_all();
         set_edit_mode(default_edit_mode);
         hide_controls();
     }
