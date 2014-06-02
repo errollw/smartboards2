@@ -13,12 +13,13 @@ def render_room_if_stale(r_id):
     file_age = time.time() - os.stat(old_file)[stat.ST_MTIME]
 
     if (file_age > file_age_thresh): render_room(r_id)
-    else print 'file too recent, not rendering'
+    else: print 'file too recent, not rendering'
 
 
 # renders a single room
 def render_room(r_id):
-    subprocess.call("phantomjs render_netboard.js " + r_id, shell=True)
+    subprocess.call([os.path.join(os.getcwd(), "phantomjs"),
+        "render_netboard.js", r_id], shell=(os.name == "nt"))
     move_pngs()
 
 
@@ -45,12 +46,11 @@ if __name__ == "__main__":
     # extract room_ids
     pattern = 'room_data_(.+)\.json'
     room_ids = [re.search(pattern, f).group(1).lower() for f in fs]
-    room_ids_str = " ".join(room_ids)
 
     # call phantomjs
-    subprocess_str = "phantomjs render_netboard.js " + " ".join(room_ids)
-    print "Starting subprocess: " +subprocess_str
-    subprocess.call(subprocess_str, shell=True)
+    subprocess_arr = [os.path.join(os.getcwd(), "phantomjs"), "render_netboard.js"] + room_ids
+    print "Starting subprocess: " + " ".join(subprocess_arr)
+    subprocess.call(subprocess_arr, shell=(os.name == "nt"))
 
     # finally move pngs back to 'content' directory
     move_pngs()
