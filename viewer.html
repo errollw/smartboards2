@@ -12,11 +12,13 @@
 	<link rel="stylesheet" href="css/viewer.css">
 
 	<!-- load libraries -->
+	<script type="text/javascript" src="js/lib/paper.js"></script>
 	<script type="text/javascript" src="js/lib/jquery.js"></script>
 	<script type="text/javascript" src="js/lib/moment.min.js"></script>
 	<script type="text/javascript" src="js/lib/lodash.js"></script>
 
 	<script type="text/javascript" src="js/viewer/sb2.viewer.initialize.js"></script>
+	<script type="text/javascript" src="js/viewer/sb2.viewer.load_room_canvas.js"></script>
 
 </head>
 
@@ -24,11 +26,12 @@
 
 	<section>
 	<h1>... NetBoard</h1>
+	<p id='room-last-mod'>updated ...</p>
 	</section>
 
 	<section>
 		<div id='board-container' class='board-item'>
-			<div id='board-inner' class='board-item'>
+			<canvas id='room-canvas' width='1080' height='1920'></canvas>
 		</div>
 	</section>
 	

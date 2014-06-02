@@ -13,7 +13,7 @@ function save(){
         return;
     }
 
-    // simplify the project before exporting
+    // simplify the project before exporting - TODO: STOP THIS
     flatten_project();
 	json_string = project.exportJSON({asString:true});
 

@@ -26,7 +26,7 @@ function save_settings(){
 function extract_user_details(user_section){
 	var user = {};
 
-	user.u_id = $(user_section).find('input[name="input_id"]').val();
+	user.u_id = $(user_section).find('input[name="input_id"]').val().toLowerCase();;
 	user.name = $(user_section).find('input[name="input_name"]').val();
 	user.description = $(user_section).find('input[name="input_description"]').val();
 	user.status = $(user_section).find('input[name="input_status"]').val();

@@ -1,7 +1,7 @@
 var urlParams;
 
-// Default to loading room SS20
-var r_id = "r_SS20";
+// Default to loading room ss20
+var r_id = "r_ss20";
 
 // pic that gets loaded if no profile pic is present
 var no_pic_url = 'assets/no_profile_pic.png';

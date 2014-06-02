@@ -1,5 +1,8 @@
 var urlParams;
 
+// make the paper scope global, by injecting it into window:
+paper.install(window);
+
 // Default to loading room SS20
 var r_id = "r_SS20";
 
@@ -24,15 +27,32 @@ $(document).ready(function(){
     initializeUrlParams();
     if (urlParams['r_id']) r_id = urlParams['r_id'];
 
+    // strip room ID to get room name
     stripped_r_id = (r_id.lastIndexOf('r_id', 0) === 0 ?
         r_id : r_id.substring(2, r_id.length)).toUpperCase();
 
+    // set title of page
     $('h1').text(stripped_r_id + ' NetBoard');
 
-    // $.getJSON("content/room_data_"+r_id+".json", function(json_data){
-    //     _(json_data.users).each(add_user);
-    // });
+    // show the last time the server json file was modified
+    $.get( "cgi-bin/get_last_mod.py", {'r_id': r_id}, function(resp){
+        // resp.lastmod is Epoch TIMESTAMP (in seconds, not ms)
+        $('#room-last-mod').text('Last updated ' + moment.unix(resp.lastmod).fromNow() +'.')
+    });
 
+    $.getJSON("content/room_data_"+r_id+".json", function(json_data){
+
+        gap_between_users = 1980 / json_data.users.length;
+        for (var i=0; i<json_data.users.length; i++){
+            add_user(json_data.users[i], i*gap_between_users)
+        }
+    });
+
+    // load the room's canvas
+    load_room_canvas();
+    
+    // resize canvas elements
+    $(window).on('resize', _.throttle(resize, 1000)); 
     resize();
     
 });
@@ -40,10 +60,15 @@ $(document).ready(function(){
 
 function resize(){
     var board_outer = $('#board-container');
-    var board_inner = $('#board-inner');
+    var board_inner = $('#room-canvas');
+
     board_outer.height(board_outer.width()*16/9);
-    board_inner.height(board_inner.width()*16/9);
     board_outer.css('border-radius', board_outer.width()*0.03);
+
+    board_inner.css({
+        width: board_outer.width(),
+        height: board_outer.width()*16/9
+    });
 }
 
 function add_user(user){

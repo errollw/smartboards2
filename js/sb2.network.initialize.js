@@ -1,7 +1,7 @@
 var urlParams;
 
 // Default to loading room SS20
-var r_id = "r_SS20";
+var r_id = "r_ss20";
 
 // distance in pixels between users
 var gap_between_users;

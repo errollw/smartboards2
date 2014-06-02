@@ -71,7 +71,6 @@ function imageUrlPrompt(){
 
     if (url != null) {
         var new_img = new Raster(url);
-        new_img.crossOrigin = "Anonymous";
         new_img.position = view.center;
     }
 }
