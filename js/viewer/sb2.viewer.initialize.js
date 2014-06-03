@@ -25,7 +25,7 @@ function initializeUrlParams() {
 $(document).ready(function(){
 
     initializeUrlParams();
-    if (urlParams['r_id']) r_id = urlParams['r_id'];
+    if (urlParams['r_id']) r_id = urlParams['r_id'].toLowerCase();
 
     // set image url
     $("#room-img").attr('src','content/'+r_id+'.png')
@@ -43,29 +43,10 @@ $(document).ready(function(){
         $('#room-last-mod').text('Last updated ' + moment.unix(resp.lastmod).fromNow() +'.')
     });
 
-    // $.getJSON("content/room_data_"+r_id+".json", function(json_data){
-
-    //     gap_between_users = 1980 / json_data.users.length;
-    //     for (var i=0; i<json_data.users.length; i++){
-    //         add_user(json_data.users[i], i*gap_between_users)
-    //     }
-    // });
-    
-    // resize canvas elements
-    $(window).on('resize', _.throttle(resize, 1000)); 
-    resize();
+    $('#open_editor').click(function(){
+        var url = window.location.href;
+        url = url.substring(0, url.lastIndexOf("/") + 1) + '?r_id=' + r_id;
+        window.open(url,'_blank');
+    });
     
 });
-
-
-function resize(){
-    var board_outer = $('#board-container');
-    // var board_inner = $('#room-canvas');
-
-    board_outer.height(board_outer.width()*16/9);
-    board_outer.css('border-radius', board_outer.width()*0.03);
-}
-
-function add_user(user){
-
-}

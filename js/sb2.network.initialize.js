@@ -28,7 +28,7 @@ function initializeUrlParams() {
 $(document).ready(function(){
 
     initializeUrlParams();
-    if (urlParams['r_id']) r_id = urlParams['r_id'];
+    if (urlParams['r_id']) r_id = urlParams['r_id'].toLowerCase();
 
     // avoid caching .json files
     $.ajaxSetup({ cache: false });

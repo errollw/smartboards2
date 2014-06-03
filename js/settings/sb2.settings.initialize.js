@@ -22,7 +22,7 @@ function initializeUrlParams() {
 $(document).ready(function(){
 
     initializeUrlParams();
-    if (urlParams['r_id']) r_id = urlParams['r_id'];
+    if (urlParams['r_id']) r_id = urlParams['r_id'].toLowerCase();
 
     stripped_r_id = (r_id.lastIndexOf('r_id', 0) === 0 ?
         r_id : r_id.substring(2, r_id.length)).toUpperCase();
