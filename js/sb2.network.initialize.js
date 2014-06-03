@@ -66,6 +66,7 @@ function add_user(user, y_pos){
     if (user.webpage_src) {
         
         var iframe = $('<iframe/>', {scrolling: "no", 'src': user.webpage_src});
+        iframe[0].src = iframe[0].src; //attempt to stop caching TODO: fix this hack
         iframe.css('top', y_pos + 'px').height(gap_between_users);
         var header_bg = $('<div/>').addClass('header_bg').css('top', y_pos + 'px');
 
