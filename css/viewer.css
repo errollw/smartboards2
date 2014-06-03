@@ -60,9 +60,6 @@ section, footer {
   border: 1px solid #DDD;
   padding: 7%; }
 
-#room-canvas {
-  border: 1px solid #DDD;
-  background-color: white;
-  overflow: hidden;
-  background-size: cover;
-  background-image: url(../content/r_ss20.png); }
+#room-img {
+  width: 100%;
+  border: 1px solid #DDD; }

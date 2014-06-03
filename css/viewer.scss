@@ -28,12 +28,14 @@ section, footer {
 	padding: 7%;
 }
 
-#room-canvas {
+#room-img {
+
+	width: 100%;
 
 	border: 1px solid #DDD;
 
-	background-color: white;
-	overflow: hidden;
-	background-size: cover;
-	background-image: url(../content/r_ss20.png);
+	// background-color: white;
+	// overflow: hidden;
+	// background-size: cover;
+	// background-image: url(../content/r_ss20.png);
 }

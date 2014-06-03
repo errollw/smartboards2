@@ -27,6 +27,9 @@ $(document).ready(function(){
     initializeUrlParams();
     if (urlParams['r_id']) r_id = urlParams['r_id'];
 
+    // set image url
+    $("#room-img").attr('src','content/'+r_id+'.png')
+
     // strip room ID to get room name
     stripped_r_id = (r_id.lastIndexOf('r_id', 0) === 0 ?
         r_id : r_id.substring(2, r_id.length)).toUpperCase();
@@ -40,16 +43,16 @@ $(document).ready(function(){
         $('#room-last-mod').text('Last updated ' + moment.unix(resp.lastmod).fromNow() +'.')
     });
 
-    $.getJSON("content/room_data_"+r_id+".json", function(json_data){
+    // $.getJSON("content/room_data_"+r_id+".json", function(json_data){
 
-        gap_between_users = 1980 / json_data.users.length;
-        for (var i=0; i<json_data.users.length; i++){
-            add_user(json_data.users[i], i*gap_between_users)
-        }
-    });
+    //     gap_between_users = 1980 / json_data.users.length;
+    //     for (var i=0; i<json_data.users.length; i++){
+    //         add_user(json_data.users[i], i*gap_between_users)
+    //     }
+    // });
 
     // load the room's canvas
-    load_room_canvas();
+    // load_room_canvas();
     
     // resize canvas elements
     $(window).on('resize', _.throttle(resize, 1000)); 
@@ -60,15 +63,15 @@ $(document).ready(function(){
 
 function resize(){
     var board_outer = $('#board-container');
-    var board_inner = $('#room-canvas');
+    // var board_inner = $('#room-canvas');
 
     board_outer.height(board_outer.width()*16/9);
     board_outer.css('border-radius', board_outer.width()*0.03);
 
-    board_inner.css({
-        width: board_outer.width(),
-        height: board_outer.width()*16/9
-    });
+    // board_inner.css({
+    //     width: board_outer.width(),
+    //     height: board_outer.width()*16/9
+    // });
 }
 
 function add_user(user){
