@@ -10,10 +10,12 @@ file_age_thresh = 5*60
 
 def render_room_if_stale(r_id):
     old_file = os.path.join(content_dir, r_id + '.png');
-    file_age = time.time() - os.stat(old_file)[stat.ST_MTIME]
 
-    if (file_age > file_age_thresh): render_room(r_id)
-    else: print 'file too recent, not rendering'
+    try:
+        file_age = time.time() - os.stat(old_file)[stat.ST_MTIME]
+        if (file_age > file_age_thresh): render_room(r_id)
+    except OSError:
+        render_room(r_id)
 
 
 # renders a single room
@@ -26,7 +28,6 @@ def render_room(r_id):
 # moves pngs from current directory into content directory
 def move_pngs():
     pngs = [f for f in os.listdir('.') if (f.endswith('.png'))]
-    print pngs
     for png in pngs:
 
         # remove old png if it exists

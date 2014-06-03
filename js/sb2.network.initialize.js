@@ -3,6 +3,9 @@ var urlParams;
 // Default to loading room SS20
 var r_id = "r_ss20";
 
+// pic that gets loaded if no profile pic is present
+var no_pic_url = 'assets/no_profile_pic.png';
+
 // distance in pixels between users
 var gap_between_users;
 
@@ -49,6 +52,7 @@ function add_user(user, y_pos){
     // fist create the basic user components
 	var header = $('<header/>').css('top', y_pos + 'px');
 	var img = $('<img/>').attr('src', user.img_src);
+    img.attr('onerror', "this.src='" + no_pic_url + "';");
 	var sec_details = $('<section/>');
 	var p_name = $('<p/>').addClass('title').text(user.name);
     var p_desc = $('<p/>').addClass('subtitle').text(user.description);
@@ -72,7 +76,7 @@ function add_user(user, y_pos){
     // if user has a status...
     if (user.status) {
         
-        var status = $('<div/>').addClass('status');
+        var status = $('<div/>').addClass('status').css('top', y_pos + 'px');
         var status_msg = $('<p/>').addClass('status_msg').text(user.status);
         var status_time = $('<p/>').addClass('status_time').text('updated ' + moment(user.status_last_mod).fromNow());
 

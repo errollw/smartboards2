@@ -12,9 +12,10 @@ $status-text-color-2: darken($SUN-FLOWER, 10%);
 .status {
 	position: absolute;
 	left: 0;
-	top: $header-height+$triangle-size;
+	
 
 	margin: 0px 24px;
+	margin-top: $header-height+$triangle-size;
 	padding: 2em;
 	border-radius: 5px;
 

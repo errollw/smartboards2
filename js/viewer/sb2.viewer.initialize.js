@@ -50,9 +50,6 @@ $(document).ready(function(){
     //         add_user(json_data.users[i], i*gap_between_users)
     //     }
     // });
-
-    // load the room's canvas
-    // load_room_canvas();
     
     // resize canvas elements
     $(window).on('resize', _.throttle(resize, 1000)); 
@@ -67,11 +64,6 @@ function resize(){
 
     board_outer.height(board_outer.width()*16/9);
     board_outer.css('border-radius', board_outer.width()*0.03);
-
-    // board_inner.css({
-    //     width: board_outer.width(),
-    //     height: board_outer.width()*16/9
-    // });
 }
 
 function add_user(user){

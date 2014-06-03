@@ -1,0 +1,22 @@
+{
+    "users": [
+        {
+            "status": "test status vaiva",
+            "name": "Vaiva Imbrasait\u0117",
+            "status_last_mod": 1401794853612,
+            "webpage_src": "",
+            "img_src": "",
+            "u_id": "u_vi206",
+            "description": "PhD student"
+        },
+        {
+            "status": "test status marwa",
+            "name": "Marwa Mahmoud",
+            "status_last_mod": 1401794853612,
+            "webpage_src": "",
+            "img_src": "",
+            "u_id": "u_mmam3",
+            "description": "PhD student"
+        }
+    ]
+}
