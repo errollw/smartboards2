@@ -22,7 +22,8 @@ var color_arrangement = [
 	[color_ORANGE,     color_PUMPKIN,   color_POMEGRANATE, color_SILVER,   color_ASBESTOS]
 ];
 
-var pen_color = color_MIDNIGHT_BLUE;
+var default_pen_color = color_MIDNIGHT_BLUE;
+var pen_color = default_pen_color;
 
 var is_color_picker_open = false;
 
@@ -88,6 +89,7 @@ function toggle_color_picker(){
 
 function close_color_picker_controls(){
 	$('#color_picker').addClass('closed');
+	set_pen_color(default_pen_color);
 	is_color_picker_open = false;
 }
 
