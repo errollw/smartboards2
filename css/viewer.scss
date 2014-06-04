@@ -11,31 +11,64 @@ body, html {
 }
 
 h1 {
+	font-size: 2em;
 	font-weight: normal;
+
+	@include media($mobile) {
+		font-size: 1.6em;
+		margin-bottom: 0.1em;
+	}
+}
+
+#room-last-mod {
+	margin: 0;
+	color: #555;
+	@include media($mobile) {
+		font-size: 0.9em;
+	}
 }
 
 section, footer {
 	@include outer-container;
 	margin-bottom: 2em;
 	padding: 0 1em;
+
+	@include media($mobile) {
+		margin-bottom: 1em;
+		&:last-child {margin-bottom: 2em;}
+	}
 }
 
 #board-container {
-	// box-shadow: 0 2px 8px #999;
 	width: 100%;
 	border: 1px solid #DDD;
-
 	padding: 7%;
+	border-radius: 4.5%/2.5%;
+
+	@include media($mobile) {
+		border: 0;
+		padding: 0;
+	}
 }
 
 #room-img {
-
 	width: 100%;
-
 	border: 1px solid #DDD;
 
-	// background-color: white;
-	// overflow: hidden;
-	// background-size: cover;
-	// background-image: url(../content/r_ss20.png);
+	@include media($mobile) {
+		border-radius: 3px;
+	}
+}
+
+button {
+	height: golden-ratio(1.5em, 1);
+	padding: 0 golden-ratio(0.6em, 1);
+	margin-right: golden-ratio(0.5em, 1);
+
+	border: none;
+	border-radius: 3px;
+
+	color: white;
+
+	&:last-child {margin-right:0};
 }

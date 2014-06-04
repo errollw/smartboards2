@@ -42,7 +42,19 @@ body, html {
   font-family: "Open Sans", sans-serif; }
 
 h1 {
+  font-size: 2em;
   font-weight: normal; }
+  @media screen and (max-width: 480px) {
+    h1 {
+      font-size: 1.6em;
+      margin-bottom: 0.1em; } }
+
+#room-last-mod {
+  margin: 0;
+  color: #555; }
+  @media screen and (max-width: 480px) {
+    #room-last-mod {
+      font-size: 0.9em; } }
 
 section, footer {
   max-width: 50em;
@@ -54,12 +66,35 @@ section, footer {
     content: "";
     display: table;
     clear: both; }
+  @media screen and (max-width: 480px) {
+    section, footer {
+      margin-bottom: 1em; }
+      section:last-child, footer:last-child {
+        margin-bottom: 2em; } }
 
 #board-container {
   width: 100%;
   border: 1px solid #DDD;
-  padding: 7%; }
+  padding: 7%;
+  border-radius: 4.5%/2.5%; }
+  @media screen and (max-width: 480px) {
+    #board-container {
+      border: 0;
+      padding: 0; } }
 
 #room-img {
   width: 100%;
   border: 1px solid #DDD; }
+  @media screen and (max-width: 480px) {
+    #room-img {
+      border-radius: 3px; } }
+
+button {
+  height: 2.427em;
+  padding: 0 0.9708em;
+  margin-right: 0.809em;
+  border: none;
+  border-radius: 3px;
+  color: white; }
+  button:last-child {
+    margin-right: 0; }

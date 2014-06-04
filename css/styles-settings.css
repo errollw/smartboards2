@@ -41,27 +41,55 @@
 body, html {
   font-family: "Open Sans", sans-serif; }
 
-h1 {
-  font-weight: normal; }
+@media screen and (max-width: 480px) {
+  .desktop-only {
+    display: none; } }
 
-p {
-  line-height: 1.6em; }
+.mobile-only {
+  display: none; }
+  @media screen and (max-width: 480px) {
+    .mobile-only {
+      display: inherit; } }
+
+h1 {
+  font-size: 2em;
+  font-weight: normal; }
+  @media screen and (max-width: 480px) {
+    h1 {
+      font-size: 1.6em;
+      margin-bottom: 0.1em; } }
+
+.hint {
+  margin: 0 0 0.2em 0;
+  color: #555; }
+  @media screen and (max-width: 480px) {
+    .hint {
+      font-size: 0.9em; } }
 
 section, footer {
   max-width: 50em;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 2em; }
+  margin-bottom: 2em;
+  padding: 0 1em; }
   section:after, footer:after {
     content: "";
     display: table;
     clear: both; }
+  @media screen and (max-width: 480px) {
+    section, footer {
+      margin-bottom: 1.5em; }
+      section:last-child, footer:last-child {
+        margin-bottom: 2em; } }
 
-section.user {
-  border-bottom: 1px solid #DDD;
-  padding-bottom: 1.618em; }
-  section.user.ui-sortable-helper {
-    margin-left: auto; }
+section.user.ui-sortable-helper {
+  margin-left: auto; }
+
+section.user:after {
+  content: " ";
+  width: 100%;
+  padding-top: 1.5em;
+  border-bottom: 1px solid #DDD; }
 
 img {
   float: left;
@@ -71,6 +99,15 @@ img {
   border-radius: 3px; }
   img:last-child {
     margin-right: 0; }
+  @media screen and (max-width: 480px) {
+    img {
+      float: left;
+      display: block;
+      margin-right: 7.42297%;
+      width: 19.43277%;
+      margin-bottom: 1.5rem; }
+      img:last-child {
+        margin-right: 0; } }
 
 div.form {
   float: left;
@@ -81,20 +118,39 @@ div.form {
     margin-right: 0; }
   div.form button {
     float: right; }
+  @media screen and (max-width: 480px) {
+    div.form {
+      float: left;
+      display: block;
+      margin-right: 7.42297%;
+      width: 100%; }
+      div.form:last-child {
+        margin-right: 0; } }
 
 aside {
   float: left;
   display: block;
   margin-right: 2.84259%;
   width: 28.01019%;
-  font-size: 16px;
-  color: #555;
-  padding: 0 0.4854em; }
+  font-size: 1rem;
+  color: #555; }
   aside:last-child {
     margin-right: 0; }
+  @media screen and (max-width: 480px) {
+    aside {
+      float: left;
+      display: block;
+      margin-right: 7.42297%;
+      width: 19.43277%;
+      font-size: 0.9rem; }
+      aside:last-child {
+        margin-right: 0; } }
   aside span {
     font-style: italic;
     color: #BBB; }
+    @media screen and (max-width: 480px) {
+      aside span {
+        display: none; } }
 
 input {
   float: left;
@@ -109,6 +165,15 @@ input {
   border: 1px solid #DDD; }
   input:last-child {
     margin-right: 0; }
+  @media screen and (max-width: 480px) {
+    input {
+      float: left;
+      display: block;
+      margin-right: 7.42297%;
+      width: 73.14426%;
+      margin-right: 0; }
+      input:last-child {
+        margin-right: 0; } }
   input:active, input:focus {
     outline: none;
     box-shadow: none;
@@ -124,13 +189,13 @@ button {
   button:last-child {
     margin-right: 0; }
 
-section.deleted_user {
+div.deleted_user {
   height: 2.427em;
   padding: 0 0.9708em;
   line-height: 2.427em;
   background-color: rgba(231, 76, 60, 0.2);
   border-radius: 3px;
   color: #c0392b; }
-  section.deleted_user span {
+  div.deleted_user span {
     font-weight: 600;
     cursor: pointer; }

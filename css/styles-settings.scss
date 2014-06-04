@@ -10,31 +10,70 @@ body, html {
 	font-family: $font;
 }
 
-h1 {
-	font-weight: normal;
+.desktop-only {
+	@include media($mobile) {
+		display: none;
+	}
 }
 
-p {
-	line-height: 1.6em;
+.mobile-only {
+	display: none;
+	@include media($mobile) {
+		display: inherit;
+	}
+}
+
+h1 {
+	font-size: 2em;
+	font-weight: normal;
+
+	@include media($mobile) {
+		font-size: 1.6em;
+		margin-bottom: 0.1em;
+	}
+}
+
+.hint {
+	margin: 0 0 0.2em 0;
+	color: #555;
+	@include media($mobile) {
+		font-size: 0.9em;
+	}
 }
 
 section, footer {
 	@include outer-container;
 	margin-bottom: 2em;
+	padding: 0 1em;
+
+	@include media($mobile) {
+		margin-bottom: 1.5em;
+		&:last-child {margin-bottom: 2em;}
+	}
 }
 
 section.user {
-	border-bottom: 1px solid #DDD;
-	padding-bottom: golden-ratio(1em, 1);
 
 	&.ui-sortable-helper {
 		margin-left: auto;
 	}
 }
 
+section.user:after {
+	content:" ";
+	width: 100%;
+	padding-top: 1.5em;
+	border-bottom: 1px solid #DDD;
+}
+
 img {
 	@include span-columns(2);
 	border-radius: 3px;
+
+	@include media($mobile) {
+		@include span-columns(1);
+		margin-bottom: 1.5rem;
+	}
 }
 
 div.form {
@@ -43,18 +82,30 @@ div.form {
 	button {
 		float: right;
 	}
+
+	@include media($mobile) {
+		@include span-columns(4);
+	}
 }
 
 aside {
 	@include span-columns(3 of 10);
+	@include media($mobile) {
+		@include span-columns(1);
+		font-size: 0.9rem;
+	}
 
-	font-size: 16px;
+	font-size: 1rem;
 	color: #555;
-	padding: 0 golden-ratio(0.3em, 1);
+	// padding: 0 golden-ratio(0.3em, 1);
 
 	span {
 		font-style:italic;
 		color: #BBB;
+
+		@include media($mobile) {
+			display:none;
+		}
 	}
 }
 
@@ -62,6 +113,11 @@ aside {
 input {
 	@include span-columns(7 of 10);
 	@include omega;
+	@include media($mobile) {
+		@include span-columns(3);
+		@include omega;
+	}
+	
 
 	height: golden-ratio(1.5em, 1);
 	padding: 0 golden-ratio(0.3em, 1);
@@ -91,7 +147,7 @@ button {
 }
 
 
-section.deleted_user {
+div.deleted_user {
 	height: golden-ratio(1.5em, 1);
 	padding: 0 golden-ratio(0.6em, 1);
 	line-height: golden-ratio(1.5em, 1);

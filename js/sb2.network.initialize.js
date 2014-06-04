@@ -79,7 +79,7 @@ function add_user(user, y_pos){
         
         var status = $('<div/>').addClass('status').css('top', y_pos + 'px');
         var status_msg = $('<p/>').addClass('status_msg').text(user.status);
-        var status_time = $('<p/>').addClass('status_time').text('updated ' + moment(user.status_last_mod).fromNow());
+        var status_time = $('<p/>').addClass('status_time').text('updated ' + moment.unix(user.status_last_mod).fromNow());
 
         status.append(status_msg).append(status_time);
         $(header).after(status);
@@ -87,7 +87,7 @@ function add_user(user, y_pos){
         // refresh status time every minute
         var status_refresh_interval_dur = moment.duration(1, 'minutes');
         window.setInterval(function(){
-            status_time.text('updated ' + moment(user.status_last_mod).fromNow())
+            status_time.text('updated ' + moment.unix(user.status_last_mod).fromNow())
         }, status_refresh_interval_dur.asMilliseconds());
     }
 

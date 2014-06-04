@@ -92,10 +92,12 @@ function add_user(user){
 
 function delete_user(user, usr_sec){
 
-    var deleted_usr_sec = $('<section/>').addClass('deleted_user');
-    deleted_usr_sec.html('User deleted (' + user.name + '). <span>Undo?</span>')
+    var deleted_usr_sec = $('<section/>'),
+        deleted_usr_div = $('<div/>').addClass('deleted_user');
+    deleted_usr_div.html('User deleted (' + user.name + '). <span>Undo?</span>')
 
-    deleted_usr_sec.children('span').click(function(){
+    deleted_usr_sec.append(deleted_usr_div);
+    deleted_usr_div.children('span').click(function(){
         deleted_usr_sec.remove();
         add_user(user)
     });
