@@ -17,11 +17,11 @@ $(document).ready(function() {
 
     // bind touch handlers for multi-touch transforms
     // see: https://developer.mozilla.org/en-US/docs/Web/Guide/Events/Touch_events
-    canvas.addEventListener("touchstart",  handle_touch_start_transform,  false);
-    canvas.addEventListener("touchend",    handle_touch_end_transform,    false);
-    canvas.addEventListener("touchcancel", handle_touch_end_transform, false);
-    canvas.addEventListener("touchleave",  handle_touch_end_transform,    false);
-    canvas.addEventListener("touchmove",   handle_touch_move_transform,   false);
+    canvas.addEventListener("touchstart",  handle_touch_start_transform, false);
+    canvas.addEventListener("touchend",    handle_touch_end_transform,   false);
+    canvas.addEventListener("touchcancel", handle_touch_end_transform,   false);
+    canvas.addEventListener("touchleave",  handle_touch_end_transform,   false);
+    canvas.addEventListener("touchmove",   handle_touch_move_transform,  false);
 });
 
 
@@ -38,10 +38,11 @@ function handle_touch_start_transform(evt) {
         vec_mt_start_pts = mt_start_pts[0].subtract(mt_start_pts[1]);
         midpt_mt_start_pts = mt_start_pts[0].add(mt_start_pts[1]).divide(2);
 
-        selected_group.mt_start_position = selected_group.position;
-        selected_group.m_rotation = 0;
-        selected_group.m_scaling = 1;
-        selected_group.mt_start_scaling  = new Point(selected_group.scaling);
+        _.forEach(project.selectedItems, function(sel_item){
+            sel_item.mt_start_pos = sel_item.position;
+            sel_item.mt_start_rot = sel_item.rotation;
+            sel_item.mt_start_scaling = sel_item.scaling;
+        });
     }
 }
 
@@ -52,30 +53,56 @@ function handle_touch_move_transform(evt) {
 
     // if just one touch, move the selected_group
     if (getNumberOfTouches() == 1) {
-        selected_group.position = selected_group.grab_pt.add(getOnlyTouch())
+
+        // update position of each selected item based on touch delta
+        var t_idx = getOnlyTouchIdx();
+        var d_pos = currentTouches[t_idx].subtract(previousTouches[t_idx]);
+        _.forEach(project.selectedItems, function(sel_item){
+            sel_item.position = sel_item.position.add(d_pos);
+        });
     }
 
     // TODO: WORK OUT TRANSFORMS BETWEEN POINTS AS 4x3 MATRIX
     // more complex transform operations for two touch points
-    if (getNumberOfTouches() == 2) {
+    if (getNumberOfTouches() >= 2) {
 
-        var vec_touch = currentTouches[0].subtract(currentTouches[1]);    
+        var vec_touch = currentTouches[0].subtract(currentTouches[1]);
         var midpt_touch = currentTouches[0].add(currentTouches[1]).divide(2);
 
-        // rotate the selected_group
+        // see http://stackoverflow.com/questions/563198/
+        var t = ((mt_start_pts[0].subtract(currentTouches[0])).cross(vec_mt_start_pts)) /
+            (vec_touch.cross(vec_mt_start_pts))
+        var intersect = currentTouches[0].add(vec_touch.multiply(t))
+
+        // calculate transform deltas from start of multitouch
         var d_rot = vec_touch.angle - vec_mt_start_pts.angle;
-        selected_group.rotate(d_rot-selected_group.m_rotation, midpt_touch);
-        selected_group.m_rotation = d_rot;
+        var rotated_st_pt = midpt_mt_start_pts.rotate(d_rot, intersect)
+        var d_pos = midpt_touch.subtract(rotated_st_pt)
+        var d_scale = vec_touch.length/vec_mt_start_pts.length;
 
-        // scale the selected_group
-        var d_scale = vec_touch.length / vec_mt_start_pts.length;
-        selected_group.scale(d_scale/selected_group.m_scaling, midpt_touch)
-        selected_group.m_scaling = d_scale;
+        // create transform matrix
+        m = new Matrix();
+        m.reset();
+        m.translate(d_pos)
+        m.rotate(d_rot, intersect)
 
-        // move the selected_group
-        var diff = midpt_touch.subtract(midpt_mt_start_pts)
-        selected_group.position = selected_group.mt_start_position
-        selected_group.translate(diff)
+        _.forEach(project.selectedItems, function(sel_item){
+
+            // reset transform properties of all items
+            sel_item.transformContent = false;
+            sel_item.rotation = sel_item.mt_start_rot;
+            sel_item.position = sel_item.mt_start_pos;
+
+            // transform each item with multitouch
+            sel_item.transform(m);
+        });
+
+        // handle scaling afterwards separately
+        _.forEach(project.selectedItems, function(sel_item){
+            sel_item.scaling = sel_item.mt_start_scaling;
+            sel_item.scale(d_scale, selected_items_rect.position)
+        });
+
     }
 
 }
@@ -85,18 +112,13 @@ function handle_touch_end_transform(evt) {
     evt.preventDefault();
     if (edit_mode != "TRANSFORMING" || !is_transforming_with_multitouch) return;
 
-    selected_group.grab_pt = selected_group.position.subtract(currentMouse);
-
-
     if (getNumberOfTouches() == 1){
-
-        selected_group.grab_pt = selected_group.position.subtract(getOnlyTouch());
 
     } else if (getNumberOfTouches() == 0){
 
         edit_mode = "SELECTING";
         is_transforming_with_multitouch = false;
-        show_floatie(selected_group.position);
+        show_floatie(selected_items_rect.position);
 
     }
 }

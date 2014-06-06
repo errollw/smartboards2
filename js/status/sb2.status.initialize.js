@@ -29,8 +29,6 @@ $(document).ready(function(){
 
     $('h1').text(stripped_r_id + ' NetBoard statuses')
 
-    $('#save_settings').click(save_statuses)
-
     $.getJSON("content/room_data_"+r_id+".json", function(json_data){
         _(json_data.users).each(add_user);
     });
@@ -49,10 +47,10 @@ function add_user(user){
 
     var form_div = $('<div/>').addClass('form');
 
-    var text_name = $('<p/>').addClass('user-name').text(user.name)
+    var text_name = $('<p/>').addClass('user-name mobile-only').text(user.name)
 
     var text_status = $('<aside/>').html('Status'),
-        input_status = $('<input/>').attr('name', 'input_status').val(user.status);
+        input_status = $('<input placeholder="write status here"/>').attr('name', 'input_status').val(user.status);
 
     var text_duration = $('<aside/>').html('Duration'),
     	duration_holder = $('<div/>').addClass('duration-holder'),
@@ -71,5 +69,17 @@ function add_user(user){
         $(this).addClass('selected');
     });
 
-	$('#sortable').append(usr_sec);
+    // make and add button elements
+    var clear_status_button = $('<button/>').text('clear status').addClass('ALIZARIN');
+    var save_status_button = $('<button/>').text('save status').addClass('EMERALD');
+    form_div.append(save_status_button).append(clear_status_button);
+
+    // handle button clicks
+    save_status_button.click(function(){save_status(usr_sec)});
+    clear_status_button.click(function(){
+        input_status.val("");
+        save_status(usr_sec);
+    });
+
+	$('#users').append(usr_sec);
 }

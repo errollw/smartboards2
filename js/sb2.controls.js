@@ -83,8 +83,7 @@ function set_edit_mode(new_edit_mode){
     edit_mode = new_edit_mode;
 
     // adjust touch & mouse sensitivity
-    min_delta_touch = (edit_mode == "DRAWING") ? 4 : 1;
-    min_delta_mouse = (edit_mode == "DRAWING") ? 4 : 1;
+    // min_delta_touch = (edit_mode == "DRAWING") ? 4 : 1;
 
     // potentially cancel all selection procedures
     if (edit_mode == "DRAWING" || edit_mode == "ERASING"){

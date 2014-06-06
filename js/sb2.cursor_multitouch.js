@@ -26,6 +26,7 @@ function handle_touch_start_cursor(evt) {
 
     var hitTest_result = project.hitTest(currentTouches[0]);
 
+    // have not touched anything
     if (!hitTest_result){
 
         project.deselectAll();
@@ -33,22 +34,22 @@ function handle_touch_start_cursor(evt) {
         selection_start_pt = currentTouches[0];
         is_selecting_with_multitouch = true;
 
+    // have touched a selected item
     } else if (hitTest_result.item.selected) {
 
         set_edit_mode("TRANSFORMING");
         is_transforming_with_multitouch = true;
-        selected_group.grab_pt = selected_group.position.subtract(currentTouches[0]);
 
+    // have touched a non-selected item
     } else if (hitTest_result.item) {
 
         project.deselectAll(); 
         hitTest_result.item.selected = true;
         remove_selection_rects();         
-        make_selection_group();
+        make_selection_rect();
 
         set_edit_mode("TRANSFORMING");
         is_transforming_with_multitouch = true;
-        selected_group.grab_pt = selected_group.position.subtract(currentTouches[0]);
 
     }
 }
@@ -58,8 +59,8 @@ function handle_touch_move_cursor(evt) {
 
     if (edit_mode != "SELECTING" || !is_selecting_with_multitouch) return;
 
+    // redraw the rectangle for selection in progress
     draw_selection_in_progress_rect(selection_start_pt, currentTouches[0]);
-
     items =  select_items_in_rect();
 
     project.deselectAll();
@@ -77,8 +78,8 @@ function handle_touch_end_cursor(evt) {
     remove_selection_rects();
 
     if (project.selectedItems.length>0){
-        make_selection_group();
-        show_floatie(selected_group.position);
+        make_selection_rect();
+        show_floatie(selected_items_rect.position);
     }
 
     is_selecting_with_multitouch = (currentTouches[0]!=null);

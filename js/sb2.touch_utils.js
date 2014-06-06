@@ -3,7 +3,7 @@
 var currentTouches = {};  // touches currently active on this frame
 var previousTouches = {}; // touches that registered last frame
 
-min_delta_touch = 4;
+min_delta_touch = 1;
 
 // Only executed our code once the DOM is ready.
 $(document).ready(function() {
@@ -41,11 +41,13 @@ function handle_touch_move(evt) {
         var id = ts[i].identifier;
         var new_pt = touchToPoint(ts[i]);
 
-        if ((new_pt).subtract(currentTouches[id]).length < min_delta_touch)
-            continue;
+        if (new_pt.subtract(currentTouches[id]).length > min_delta_touch){
+            previousTouches[id] = currentTouches[id];
+            currentTouches[id] = new_pt;
+        } else {
+            evt.stopPropagation();
+        }
 
-		previousTouches[id] = currentTouches[id];
-        currentTouches[id] = new_pt;
     }
 }
 
@@ -79,8 +81,12 @@ function getNumberOfTouches(){
     return Object.keys(currentTouches).length;
 }
 
-// gets the 
 function getOnlyTouch(){
     keys = Object.keys(currentTouches);
     return currentTouches[keys[0]]; 
+}
+
+function getOnlyTouchIdx(){
+    keys = Object.keys(currentTouches);
+    return keys[0]; 
 }

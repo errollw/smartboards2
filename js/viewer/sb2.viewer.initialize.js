@@ -4,7 +4,7 @@ var urlParams;
 paper.install(window);
 
 // Default to loading room SS20
-var r_id = "r_SS20";
+var r_id = "r_ss20";
 
 // pic that gets loaded if no profile pic is present
 var no_pic_url = 'assets/no_profile_pic.png';
@@ -46,6 +46,12 @@ $(document).ready(function(){
     $('#open_editor').click(function(){
         var url = window.location.href;
         url = url.substring(0, url.lastIndexOf("/") + 1) + '?r_id=' + r_id;
+        window.open(url,'_blank');
+    });
+
+    $('#set_status').click(function(){
+        var url = window.location.href;
+        url = url.substring(0, url.lastIndexOf("/") + 1) + 'set_status?r_id=' + r_id;
         window.open(url,'_blank');
     });
     

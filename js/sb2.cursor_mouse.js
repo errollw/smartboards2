@@ -1,13 +1,6 @@
 // make the paper scope global, by injecting it into window:
 paper.install(window);
 
-var selection_start_pt;
-
-var selection_in_progress_rect = null;
-
-var selected_group,             // group of selected objects
-    selected_group_rect;        // rectangle to mark out selection bounds
-
 var is_selecting_with_mouse = false;
 
 // Only executed our code once the DOM is ready.
@@ -32,29 +25,32 @@ function handle_mouse_down_cursor(evt) {
 
     var hitTest_result = project.hitTest(currentMouse);
 
+    // have not clicked anything
     if (!hitTest_result){
 
         project.deselectAll();
-        remove_selection_rects();   
+        remove_selection_rects();
         selection_start_pt = currentMouse;
         is_selecting_with_mouse = true;
 
+    // have clicked a selected item
+    } else if (hitTest_result.item.counter_pt) {
+        console.log("hit control pt")
     } else if (hitTest_result.item.selected) {
 
         set_edit_mode("TRANSFORMING");
         is_transforming_with_mouse = true;
-        selected_group.grab_pt = selected_group.position.subtract(currentMouse);
 
+    // have clicked a non-selected item
     } else {
 
         project.deselectAll(); 
         hitTest_result.item.selected = true;
         remove_selection_rects();         
-        make_selection_group();
+        make_selection_rect();
 
         set_edit_mode("TRANSFORMING");
         is_transforming_with_mouse = true;
-        selected_group.grab_pt = selected_group.position.subtract(currentMouse);
 
     }
 }
@@ -78,9 +74,9 @@ function handle_mouse_up_cursor(evt){
 
     remove_selection_rects();
 
-    if (project.selectedItems.length>0) {
-        make_selection_group();
-        show_floatie(selected_group.position);
+    if (project.selectedItems.length>0){
+        make_selection_rect();
+        show_floatie(selected_items_rect.position);
     }
 
     is_selecting_with_mouse = false;

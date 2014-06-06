@@ -1,6 +1,7 @@
 var system = require('system');
 
-var base_url = 'http://eww23.user.srcf.net/smartboards2/?r_id='
+var base_url = 'http://eww23.user.srcf.net/smartboards2/?r_id=',
+	query_str_end = '&render=true'
 
 if (system.args.length === 1) {
     console.log('pass in room ids as arguments (e.g. r_ss20 r_ss22)');
@@ -25,7 +26,7 @@ function delayed_render(r_id){
 	var page = require('webpage').create();
 
 	// open the room, and render after a short timeout (for AJAX)
-	page.open(base_url + r_id, function() {
+	page.open(base_url + r_id + query_str_end, function() {
 		window.setTimeout(function () {
 	    	page.render(r_id+'.png');
 			console.log('rendered ' + r_id);

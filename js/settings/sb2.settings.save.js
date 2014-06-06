@@ -29,8 +29,11 @@ function extract_user_details(user_section){
 	user.u_id = $(user_section).find('input[name="input_id"]').val().toLowerCase();;
 	user.name = $(user_section).find('input[name="input_name"]').val();
 	user.description = $(user_section).find('input[name="input_description"]').val();
+
 	user.status = $(user_section).find('input[name="input_status"]').val();
 	user.status_last_mod = moment().unix();
+	user.status_expiry = moment().add('years', 1).unix();
+	
 	user.img_src = $(user_section).find('input[name="input_imageUrl"]').val();
 	user.webpage_src = $(user_section).find('input[name="input_webpageUrl"]').val();
 

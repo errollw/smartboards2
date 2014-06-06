@@ -3,6 +3,8 @@ paper.install(window);
 
 var is_transforming_with_mouse = false;
 
+var transform_start_mouse;
+
 // Only executed our code once the DOM is ready.
 $(document).ready(function() {
 
@@ -20,8 +22,10 @@ $(document).ready(function() {
 function handle_mouse_move_transform(evt) {
     if (edit_mode != "TRANSFORMING" || !is_transforming_with_mouse) return;
 
-    selected_group.position = selected_group.grab_pt.add(currentMouse)
-
+    // update position of each selected item based on mouse delta
+    _.forEach(project.selectedItems, function(sel_item){
+        sel_item.position = sel_item.position.add(currentMouse.subtract(previousMouse));
+    });
 }
 
 function handle_mouse_up_transform(evt){
@@ -30,5 +34,5 @@ function handle_mouse_up_transform(evt){
     is_transforming_with_mouse = false;
 
     edit_mode = "SELECTING";
-    show_floatie(selected_group.position);
+    show_floatie(selected_items_rect.position);
 }

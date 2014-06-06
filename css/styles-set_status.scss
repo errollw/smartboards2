@@ -12,6 +12,7 @@ $triangle-size: 12px;
 $status-bg: lighten($SUN-FLOWER, 35%);
 $status-border: $SUN-FLOWER;
 $status-text-color-1: darken($SUN-FLOWER, 30%);
+$status-text-color-2: darken($SUN-FLOWER, 10%);
 
 $duration-bg: white;
 $duration-selected-bg: $PETER-RIVER;
@@ -45,7 +46,7 @@ h1 {
 	}
 }
 
-.hint {
+#hint {
 	margin: 0 0 0.2em 0;
 	color: #555;
 	@include media($mobile) {
@@ -146,8 +147,9 @@ input, div.duration-holder {
 		border: 1px solid $PETER-RIVER;
 	}
 
-	&:last-child {
-		margin-bottom: 0;
+	@include placeholder {
+		font-style: italic;
+		color: $status-text-color-2;
 	}
 }
 
@@ -180,6 +182,7 @@ div.form:before {
 
 div.duration-holder, div.duration-holder:active {
 	@include user-select(none);
+	margin-bottom: 1.5rem;
 	border: none;
 	padding: 0;
 	background-color: $duration-bg;
@@ -233,6 +236,6 @@ button {
 
 	color: white;
 
-	&:last-child {margin-right:0};
+	&:first-of-type {margin-right:0};
 }
 

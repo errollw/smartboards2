@@ -6,7 +6,7 @@ $(document).ready(function() {
 
     $('#floatie #send_to_back').click(send_selected_items_to_back);
 
-    $('#floatie #send_to_front').click(send_selected_items_to_back);
+    $('#floatie #send_to_front').click(send_selected_items_to_front);
 
     $('#floatie').click(hide_floatie);
 
@@ -15,11 +15,22 @@ $(document).ready(function() {
 });
 
 function remove_selected_items(){
-	selected_group.remove();
+    _.forEach(project.selectedItems, function(sel_item){
+        sel_item.remove();
+    });
 }
 
 function send_selected_items_to_back(){
-	selected_group.sendToBack();
+	_.forEach(project.selectedItems, function(sel_item){
+        sel_item.sendToBack();
+    });
+	deselect_all();
+}
+
+function send_selected_items_to_front(){
+	_.forEach(project.selectedItems, function(sel_item){
+        sel_item.bringToFront();
+    });
 	deselect_all();
 }
 

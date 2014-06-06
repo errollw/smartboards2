@@ -4,8 +4,8 @@ import json
 import cgi
 import os
 
-args =      cgi.FieldStorage()
-r_id =      args['r_id'].value
+args = cgi.FieldStorage()
+r_id = args['r_id'].value
 
 
 ### Get last modified Epoch timestamp (s) for that room's json data
@@ -13,6 +13,7 @@ r_id =      args['r_id'].value
 
 json_path = os.path.join('..', 'content', r_id + '.json')
 lastmod = int(os.path.getmtime(json_path))
+
 
 ### Return the lastmod time to the client
 ### -------------------------------------------------------------

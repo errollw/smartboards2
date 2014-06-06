@@ -28,7 +28,13 @@ function initializeUrlParams() {
 $(document).ready(function(){
 
     initializeUrlParams();
+
     if (urlParams['r_id']) r_id = urlParams['r_id'].toLowerCase();
+
+    // page has been opened in render mode for server-side rendering
+    if (urlParams['render'] && urlParams['render'] !== 'false'){
+        $('#controls').hide();
+    }
 
     // avoid caching .json files
     $.ajaxSetup({ cache: false });
@@ -76,19 +82,25 @@ function add_user(user, y_pos){
 
     // if user has a status...
     if (user.status) {
-        
-        var status = $('<div/>').addClass('status').css('top', y_pos + 'px');
-        var status_msg = $('<p/>').addClass('status_msg').text(user.status);
-        var status_time = $('<p/>').addClass('status_time').text('updated ' + moment.unix(user.status_last_mod).fromNow());
 
-        status.append(status_msg).append(status_time);
-        $(header).after(status);
+        // dont show status if it's expired
+        if (user.status_expiry && moment.unix(user.status_expiry).isBefore(moment())){
+            console.log('Status too old, not showing');
+        } else {
 
-        // refresh status time every minute
-        var status_refresh_interval_dur = moment.duration(1, 'minutes');
-        window.setInterval(function(){
-            status_time.text('updated ' + moment.unix(user.status_last_mod).fromNow())
-        }, status_refresh_interval_dur.asMilliseconds());
+            var status = $('<div/>').addClass('status').css('top', y_pos + 'px');
+            var status_msg = $('<p/>').addClass('status_msg').text(user.status);
+            var status_time = $('<p/>').addClass('status_time').text('updated ' + moment.unix(user.status_last_mod).fromNow());
+
+            status.append(status_msg).append(status_time);
+            $(header).after(status);
+
+            // refresh status time every minute
+            var status_refresh_interval_dur = moment.duration(1, 'minutes');
+            window.setInterval(function(){
+                status_time.text('updated ' + moment.unix(user.status_last_mod).fromNow())
+            }, status_refresh_interval_dur.asMilliseconds());
+
+        }
     }
-
 }

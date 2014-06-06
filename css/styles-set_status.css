@@ -59,11 +59,11 @@ h1 {
       font-size: 1.6em;
       margin-bottom: 0.1em; } }
 
-.hint {
+#hint {
   margin: 0 0 0.2em 0;
   color: #555; }
   @media screen and (max-width: 480px) {
-    .hint {
+    #hint {
       font-size: 0.9em; } }
 
 section, footer {
@@ -185,8 +185,18 @@ input, div.duration-holder {
     outline: none;
     box-shadow: none;
     border: 1px solid #3498db; }
-  input:last-child, div.duration-holder:last-child {
-    margin-bottom: 0; }
+  input::-webkit-input-placeholder, div.duration-holder::-webkit-input-placeholder {
+    font-style: italic;
+    color: #c29d0b; }
+  input::-moz-placeholder, div.duration-holder::-moz-placeholder {
+    font-style: italic;
+    color: #c29d0b; }
+  input:-moz-placeholder, div.duration-holder:-moz-placeholder {
+    font-style: italic;
+    color: #c29d0b; }
+  input:-ms-input-placeholder, div.duration-holder:-ms-input-placeholder {
+    font-style: italic;
+    color: #c29d0b; }
 
 div.form:after, div.form:before {
   bottom: 100%;
@@ -217,6 +227,7 @@ div.duration-holder, div.duration-holder:active {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  margin-bottom: 1.5rem;
   border: none;
   padding: 0;
   background-color: white;
@@ -258,5 +269,5 @@ button {
   border: none;
   border-radius: 3px;
   color: white; }
-  button:last-child {
+  button:first-of-type {
     margin-right: 0; }
