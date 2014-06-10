@@ -27,6 +27,8 @@ function handle_mouse_down(evt) {
 
 function handle_mouse_move(evt) {
 
+    var canvas = document.getElementById('myCanvas');
+
     var new_pt = mouseToPoint(evt);   
 
     if ((new_pt).subtract(currentMouse).length < min_delta_mouse)

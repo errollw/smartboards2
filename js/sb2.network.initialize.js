@@ -12,6 +12,9 @@ var gap_between_users;
 // time between whole page refreshes
 var refresh_timeout_dur = moment.duration(5, 'minutes');
 
+// board version number
+var board_ver = 0;
+
 function initializeUrlParams() {
 	var match,
         pl     = /\+/g,  // Regex for replacing addition symbol with a space
@@ -38,7 +41,6 @@ $(document).ready(function(){
 
     // avoid caching .json files
     $.ajaxSetup({ cache: false });
-
     $.getJSON("content/room_data_"+r_id+".json", function(json_data){
 
     	gap_between_users = 1980 / json_data.users.length;
@@ -48,7 +50,7 @@ $(document).ready(function(){
     });
 
     // refresh the whole page (no cache) every 2 minutes
-    window.setTimeout(refresh_page, refresh_timeout_dur.asMilliseconds());
+    window.setInterval(refresh_page, refresh_timeout_dur.asMilliseconds());
     
 });
 

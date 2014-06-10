@@ -13,8 +13,6 @@ function save(){
         return;
     }
 
-    // simplify the project before exporting - TODO: STOP THIS
-    flatten_project();
 	json_string = project.exportJSON({asString:true});
 
     function resp_fn(r){
@@ -26,7 +24,15 @@ function save(){
         }
     }
 
-	$.post( "cgi-bin/upload_json.py", {'r_id': r_id, 'json_data': json_string }, resp_fn);
+    // update board version
+    board_ver = board_ver + 1;
+
+    // do the AJAX post to upload the data
+	$.post( "cgi-bin/upload_board_json.py", {
+        'r_id': r_id,
+        'json_data': json_string,
+        'ver': board_ver
+    }, resp_fn);
 }
 
 

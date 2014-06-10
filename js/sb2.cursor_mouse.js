@@ -33,9 +33,24 @@ function handle_mouse_down_cursor(evt) {
         selection_start_pt = currentMouse;
         is_selecting_with_mouse = true;
 
-    // have clicked a selected item
+    // 
     } else if (hitTest_result.item.counter_pt) {
-        console.log("hit control pt")
+
+        set_edit_mode("TRANSFORMING");
+        mouse_transform_mode = "RESIZE";
+        document.body.style.cursor = hitTest_result.item.cursor;
+        mouse_transform_anchor_pt = hitTest_result.item.counter_pt.position;
+        is_transforming_with_mouse = true;
+
+    //
+    } else if (hitTest_result.item.cp_rotate) {
+
+        set_edit_mode("TRANSFORMING");
+        mouse_transform_mode = "ROTATE";
+        document.body.style.cursor = hitTest_result.item.cursor;
+        is_transforming_with_mouse = true;
+
+    //
     } else if (hitTest_result.item.selected) {
 
         set_edit_mode("TRANSFORMING");
@@ -56,7 +71,16 @@ function handle_mouse_down_cursor(evt) {
 }
 
 function handle_mouse_move_cursor(evt) {
-    if (edit_mode != "SELECTING" || !is_selecting_with_mouse) return;
+    if (edit_mode != "SELECTING") return;
+
+    var hitTest_result = project.hitTest(currentMouse);
+    if (hitTest_result && hitTest_result.item.cursor) {
+        document.body.style.cursor = hitTest_result.item.cursor;
+    } else {
+        document.body.style.cursor = "auto";
+    }
+
+    if (!is_selecting_with_mouse) return;
 
     // redraw the rectangle for selection in progress
     draw_selection_in_progress_rect(selection_start_pt, currentMouse);

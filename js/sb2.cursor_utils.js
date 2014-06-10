@@ -4,14 +4,8 @@ var selection_in_progress_rect = null;
 
 var selected_items_rect;        // rectangle to mark out selection bounds
 
-// initialize control points
-var ctrl_pts_resize = [
-    new Shape.Circle(new Point(0, 0), 20), new Shape.Circle(new Point(0, 0), 20),
-    new Shape.Circle(new Point(0, 0), 20), new Shape.Circle(new Point(0, 0), 20)];
-ctrl_pts_resize[0].counter_pt = ctrl_pts_resize[3];
-ctrl_pts_resize[1].counter_pt = ctrl_pts_resize[2];
-ctrl_pts_resize[2].counter_pt = ctrl_pts_resize[1];
-ctrl_pts_resize[3].counter_pt = ctrl_pts_resize[0];
+var ctrl_pts_resize = [],
+    ctrl_pts_rotate = [];
 
 function select_items_in_rect(){
     var items_raster =  project.getItems({ position: pos_fn, class: Raster });
@@ -41,11 +35,6 @@ function draw_selection_in_progress_rect(pt1, pt2){
     selection_in_progress_rect.strokeColor = color_PETER_RIVER;
     selection_in_progress_rect.fillColor = color_PETER_RIVER;
     selection_in_progress_rect.fillColor.alpha = 0.05;
-
-    ctrl_pts_resize[0].position = selection_in_progress_rect.topLeft;
-    ctrl_pts_resize[1].position = selection_in_progress_rect.topRight;
-    ctrl_pts_resize[2].position = selection_in_progress_rect.bottomLeft;
-    ctrl_pts_resize[3].position = selection_in_progress_rect.bottomRight;
 }
 
 
@@ -59,6 +48,8 @@ function make_selection_rect(){
     selected_items_rect.fillColor = color_PETER_RIVER;
     selected_items_rect.fillColor.alpha = 0.05;
     selected_items_rect.selected = true;
+
+    initialize_ctrl_pts();
 }
 
 function deselect_all(){

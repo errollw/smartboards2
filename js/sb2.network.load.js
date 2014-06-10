@@ -6,7 +6,13 @@ var autoload_interval_dur = moment.duration(5, 'seconds');
 
 function load(){
 
+    $.ajaxSetup({ cache: false });
 	$.getJSON("content/"+r_id+".json", function(json_data){
+
+        // update board version number, it's the last element
+        if (json_data.length > 1){
+            board_ver = json_data[json_data.length-1]
+        }
 
         // clear all before importing data
         project.clear();
@@ -27,16 +33,16 @@ function load_if_out_of_date(){
     if (!is_idle) return;
 
     // GET the last time the server json file was modified
-    $.get( "cgi-bin/get_last_mod.py", {'r_id': r_id}, function(resp){
+    $.get( "cgi-bin/get_board_ver.py", {'r_id': r_id}, function(resp){
 
         // resp.lastmod is Epoch TIMESTAMP (in seconds, not ms)
-        var lastmod_server = moment.unix(resp.lastmod)
+        var board_ver_server = resp.ver
 
         // check if out of date by minute granularity to avoid global clock issues
-        if (lastmod_client.isBefore(lastmod_server, 'minute')){
+        if (board_ver_server > board_ver){
             console.log("Client out of date, "
-                + lastmod_client.format("HH:mm:ss") + " vs "
-                + lastmod_server.format("HH:mm:ss") + " loading...");
+                + board_ver_server  + " vs "
+                + board_ver + " loading...");
             load();
         }
     });
