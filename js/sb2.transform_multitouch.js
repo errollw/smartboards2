@@ -47,6 +47,7 @@ function handle_touch_start_transform(evt) {
 }
 
 function handle_touch_move_transform(evt) {
+
     evt.preventDefault();
 
     if (edit_mode != "TRANSFORMING" || !is_transforming_with_multitouch) return;
@@ -79,6 +80,9 @@ function handle_touch_move_transform(evt) {
         var rotated_st_pt = midpt_mt_start_pts.rotate(d_rot, intersect)
         var d_pos = midpt_touch.subtract(rotated_st_pt)
         var d_scale = vec_touch.length/vec_mt_start_pts.length;
+
+        // do not transform if not necessary, this avoids a weird bug I haven't worked out
+        if (d_rot == 0 && d_pos.length == 0) return;
 
         // create transform matrix
         m = new Matrix();

@@ -7,7 +7,7 @@ function initialize_ctrl_pts(){
 	var col = new Color(0, 0, 0, 0);
 
 	// do rotate cps first - they go on the bottom
-	var d = 20;
+	var d = 20; // size of cp
 	ctrl_pts_rotate = [
 	    new Shape.Rectangle(bds.topLeft, bds.topLeft.add([-d,-d])),
 	    	new Shape.Rectangle(bds.topRight, bds.topRight.add([d,-d])),
@@ -19,7 +19,7 @@ function initialize_ctrl_pts(){
 	_.forEach(ctrl_pts_rotate, function(cp){cp.cursor='url(assets/icon_rotate.svg) 10 10, auto'})
 
 	// do resize cps second, they go on top
-	var d = 10;
+	var d = 10; // size of cp
 	ctrl_pts_resize = [
 	    new Shape.Rectangle(bds.topLeft, bds.topLeft.add([-d,-d])),
 	    	new Shape.Rectangle(bds.topRight, bds.topRight.add([d,-d])),
@@ -31,10 +31,7 @@ function initialize_ctrl_pts(){
 	ctrl_pts_resize[2].counter_pt = ctrl_pts_resize[1];
 	ctrl_pts_resize[3].counter_pt = ctrl_pts_resize[0];
 
-	ctrl_pts_resize[0].fillColor = new Color(0, 0, 0, 0);
-	ctrl_pts_resize[1].fillColor = new Color(0, 0, 0, 0);
-	ctrl_pts_resize[2].fillColor = new Color(0, 0, 0, 0);
-	ctrl_pts_resize[3].fillColor = new Color(0, 0, 0, 0);
+	_.forEach(ctrl_pts_resize, function(cp){cp.fillColor=col})
 
 	ctrl_pts_resize[0].cursor = 'nw-resize';
 	ctrl_pts_resize[1].cursor = 'ne-resize';

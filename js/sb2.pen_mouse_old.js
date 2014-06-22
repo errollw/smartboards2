@@ -46,9 +46,34 @@ function handle_mouse_down_pen(evt) {
 function handle_mouse_move_pen(evt) {
 
     if (edit_mode != "DRAWING" || !is_drawing_with_mouse) return;
+    
+    var delta = previousMouse.subtract(currentMouse);
+    var delta_midpoint = currentMouse.add(previousMouse).divide(2);
+
+    // get thickness to draw at that point
+    // var d_time = currentMouse.timestamp - previousMouse.timestamp;
+    // var speed = clamp_speed(delta.length / d_time);
+    // var thickness = speed_to_thickness(delta.length / d_time, 0);
+
+    // make orthogonal vector to simulate brush thickness
+    // var step = delta.normalize(thickness);
+    // step.angle += 90;
+
+    // add two points to either side of the mouse point
+    // var top = delta_midpoint.add(step);
+    // var bottom = delta_midpoint.subtract(step);
+
+    //pen_mouse_stroke.add(top);
+    //pen_mouse_stroke.insert(0, bottom);
 
     has_pen_moved = true;
     pen_mouse_stroke.add(currentMouse);
+
+    // pen_speed_path.add([pen_mouse_stroke.length,speed*PEN_SPEED_PATH_HEIGHT])
+
+    // var bucket = Math.floor(pen_mouse_stroke.length/OFFSET_STEP);
+    // if (bucket+1 > speeds[0].length) speeds[0][bucket]=[];
+    // speeds[0][bucket].push(speed)
 }
 
 function handle_mouse_up_pen(evt) {
@@ -62,13 +87,16 @@ function handle_mouse_up_pen(evt) {
 
     } else {
         
-        pen_mouse_stroke = robust_simplify(pen_mouse_stroke)
+        pen_speed_path.smooth()
+        pen_mouse_stroke.simplify(10);
 
         offsetBezier(pen_mouse_stroke);
+
         pen_mouse_stroke.remove();
 
-        has_pen_moved = false;
+        speed_histories[0] = null;
     }
+
 
     is_drawing_with_mouse = false;
 }

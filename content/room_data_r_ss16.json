@@ -3,18 +3,20 @@
         {
             "status": "test status vaiva",
             "name": "Vaiva Imbrasait\u0117",
-            "status_last_mod": 1401794853612,
+            "status_last_mod": 1402404456,
+            "status_expiry": 1433940456,
             "webpage_src": "",
-            "img_src": "",
+            "img_src": "http://i.imgur.com/G5dankQ.jpg",
             "u_id": "u_vi206",
             "description": "PhD student"
         },
         {
             "status": "test status marwa",
             "name": "Marwa Mahmoud",
-            "status_last_mod": 1401794853612,
+            "status_last_mod": 1402404456,
+            "status_expiry": 1433940456,
             "webpage_src": "",
-            "img_src": "",
+            "img_src": "http://i.imgur.com/HJyb5UC.jpg",
             "u_id": "u_mmam3",
             "description": "PhD student"
         }

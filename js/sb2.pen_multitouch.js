@@ -3,6 +3,8 @@ paper.install(window);
 
 var pen_touch_strokes = {};
 
+var has_finger_moved = {};
+
 var is_drawing_with_multitouch = false;
 
 // Only executed our code once the DOM is ready.
@@ -31,7 +33,12 @@ function handle_touch_start_pen(evt) {
     for (var i=0; i < ts.length; i++) {
 
         var new_stroke = new Path();
-        new_stroke.fillColor = get_pen_color();
+
+        // new_stroke.fillColor = get_pen_color();
+        new_stroke.strokeColor = get_pen_color();
+        new_stroke.strokeWidth = get_thickness_as_width();
+        new_stroke.strokeJoin = 'round';
+
         touch_pt = currentTouches[ts[i].identifier];
         new_stroke.add(touch_pt);
         pen_touch_strokes[ts[i].identifier] = new_stroke;
@@ -49,22 +56,8 @@ function handle_touch_move_pen(evt) {
     for (var i=0; i < ts.length; i++) {
         var id = ts[i].identifier;
 
-        var delta = currentTouches[id].subtract(previousTouches[id]);
-        var delta_midpoint = previousTouches[id].add(currentTouches[id]).divide(2);
-
-        // get thickness to draw at that point
-        var d_time = currentTouches[id].timestamp - previousTouches[id].timestamp
-        var thickness = speed_to_thickness(delta.length / d_time, id);
-
-        // make orthogonal vector to simulate brush thickness
-        var step = delta.normalize(thickness);
-        step.angle += 90;
-
-        // add two points to either side of the drawn point
-        var top = delta_midpoint.add(step);
-        var bottom = delta_midpoint.subtract(step);
-        pen_touch_strokes[id].add(top);
-        pen_touch_strokes[id].insert(0, bottom);
+        has_finger_moved[id] = true;
+        pen_touch_strokes[id].add(currentTouches[id]);
     }
 }
 
@@ -77,23 +70,18 @@ function handle_touch_end_pen(evt) {
     for (var i=0; i < ts.length; i++) {
         var id = ts[i].identifier;
         
-        if (!speed_histories[id]) {
+        if (!has_finger_moved[id]) {
 
             // if not moved, draw a dot, otherwise finish stroke
             draw_dot(previousTouches[id]);
 
-        } else if (pen_touch_strokes[id].bounds.area < dot_area_thresh){
-
-            // if the path is too small, convert it to a dot
-            pen_touch_strokes[id].remove();
-            draw_dot(previousTouches[id]);
-
         } else {
 
-            // otherwise close and simplify path
             pen_touch_strokes[id].add(previousTouches[id]);
-            pen_touch_strokes[id].closed = true;
-            pen_touch_strokes[id].simplify(5);
+            pen_touch_strokes[id] = robust_simplify(pen_touch_strokes[id])
+
+            offsetBezier(pen_touch_strokes[id]);
+            pen_touch_strokes[id].remove();
 
         }
 
@@ -101,7 +89,7 @@ function handle_touch_end_pen(evt) {
 
         // delete items in array as they are no longer used
         delete pen_touch_strokes[id];
-        delete speed_histories[id];
+        delete has_finger_moved[id];
     }
 
     is_drawing_with_multitouch = !($.isEmptyObject(currentTouches));

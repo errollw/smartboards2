@@ -1,13 +1,16 @@
 // make the paper scope global, by injecting it into window:
 paper.install(window);
 
-var speed_min = 0, speed_max = 10;
+var speed_min = 0, speed_max = 2.5;
 var thick_min = 2, thick_max = 8;
 
 var speed_histories = [],       // mouse speed at previous frames
     speed_history_length = 10;  // number of speeds to keep in buffer
 
 var dot_area_thresh = 150;      // minimum stroke bounds area before conversion to dot
+
+
+var PEN_SPEED_PATH_HEIGHT = 32;
 
 
 // chooses a pen thickness based on speed (how far mouse has moved)
@@ -46,20 +49,35 @@ function speed_to_thickness(speed, touch_id){
     return thickness * get_thickness_multiplier();
 }
 
-
-// draws a slightly wobbly dot at a point
 function draw_dot(point){
 
     var dot_path = new Path();
     dot_path.fillColor = get_pen_color();
     dot_path.closed = true;
     
-    for (var i = 0; i < 6; i++) {
+    for (var i = 0; i < 4; i++) {
         var delta = new Point({
-            length: ((10 * 0.7) + (Math.random() * 10 * 0.3)) * get_thickness_multiplier(),
-            angle: (360 / 6) * i
+            length: (0.7 + (Math.random() * 0.3)) * get_thickness_as_width(),
+            angle: (360 / 4) * i
         });
         dot_path.add(point.add(delta));
     }
     dot_path.smooth();
+}
+
+function clamp_speed(speed){
+    if (isNaN(speed)) return 0;
+    return Math.min(Math.max(speed, 0), 2.5);
+}
+
+function lineIntersect(p1,p2,q1,q2) {
+
+    var x1 = p1.x, y1 = p1.y,
+        x2 = p2.x, y2 = p2.y,
+        x3 = q1.x, y3 = q1.y,
+        x4 = q2.x, y4 = q2.y;
+
+    var x=((x1*y2-y1*x2)*(x3-x4)-(x1-x2)*(x3*y4-y3*x4))/((x1-x2)*(y3-y4)-(y1-y2)*(x3-x4));
+    var y=((x1*y2-y1*x2)*(y3-y4)-(y1-y2)*(x3*y4-y3*x4))/((x1-x2)*(y3-y4)-(y1-y2)*(x3-x4));
+    return new Point(x,y);
 }

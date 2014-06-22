@@ -10,6 +10,7 @@ function save(){
     // don't save if you're currently selecting or transforming
     if (project.selectedItems.length > 0) {
         console.log("Not saving, selected items: " + project.selectedItems);
+        debounced_save();
         return;
     }
 
@@ -35,13 +36,14 @@ function save(){
     }, resp_fn);
 }
 
+var debounced_save;
 
 // Schedule a debounced save every time a user releases finger or mouse from canvas
 $(document).ready(function(){
 
     var canvas = document.getElementById('myCanvas');
 
-    var debounced_save = _.debounce(save, save_timeout.asMilliseconds());
+    debounced_save = _.debounce(save, save_timeout.asMilliseconds());
 
     canvas.addEventListener("mouseup", debounced_save);
     canvas.addEventListener("touchend", debounced_save);

@@ -43,7 +43,7 @@ $(document).ready(function(){
     $.ajaxSetup({ cache: false });
     $.getJSON("content/room_data_"+r_id+".json", function(json_data){
 
-    	gap_between_users = 1980 / json_data.users.length;
+    	gap_between_users = 1920 / json_data.users.length;
     	for (var i=0; i<json_data.users.length; i++){
     		add_user(json_data.users[i], i*gap_between_users)
     	}
@@ -51,7 +51,6 @@ $(document).ready(function(){
 
     // refresh the whole page (no cache) every 2 minutes
     window.setInterval(refresh_page, refresh_timeout_dur.asMilliseconds());
-    
 });
 
 

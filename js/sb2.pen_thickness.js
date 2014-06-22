@@ -14,6 +14,12 @@ var pen_thickness_multipliers = {
 	"THICK"  : 3
 }
 
+var pen_thickness_widths = {
+	"THIN"   : 4,
+	"MEDIUM" : 8,
+	"THICK"  : 20
+}
+
 var is_pen_thickness_open = false,
 	clicked_id = 'pen_medium_container';
 
@@ -88,6 +94,10 @@ function close_pen_thickness_controls(){
 
 function get_thickness_multiplier(){
 	return pen_thickness_multipliers[pen_thickness];
+}
+
+function get_thickness_as_width(){
+	return pen_thickness_widths[pen_thickness];
 }
 
 function get_pen_thickness(){
