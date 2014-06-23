@@ -15,16 +15,20 @@ $(function() {
 	$("html").on("drop", function(e) {
 		// Function to draw an image onto the page, and resize to fit
 		function drawImage(url) {
+			// Require a non-empty URL starting with http
+			if (url == "" || url.indexOf("http") != 0) {
+				alert("Invalid image url:\n" + url);
+			}
 			var margin = 200;
 			
 			var new_img = new Raster(url);
 			new_img.onLoad = function() {
 				new_img.position = view.center;
 				if (new_img.bounds.top < margin) {
-					new_img.scale( ($(window).height() - margin) / new_img.bounds.height);
+					new_img.scale( ($("#myCanvas").height() - margin) / new_img.bounds.height);
 				}
 				if (new_img.bounds.left < margin) {
-					new_img.scale( ($(window).width() - margin) / new_img.bounds.width);
+					new_img.scale( ($("#myCanvas").width() - margin) / new_img.bounds.width);
 				}
 			};
 			
