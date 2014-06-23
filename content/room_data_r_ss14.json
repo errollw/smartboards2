@@ -1,11 +1,12 @@
 {
     "users": [
         {
-            "status": "",
+            "status": "meetings in town all day",
             "name": "Peter Robinson",
-            "status_last_mod": 1401796786119,
+            "status_last_mod": 1403448601,
+            "status_expiry": 1434984601,
             "webpage_src": "http://www.cl.cam.ac.uk/~pr10/administration/calendar/screen.html",
-            "img_src": "http://eww23.user.srcf.net/whiteboards/images/profile-pic/u_pr10.jpg",
+            "img_src": "http://i.imgur.com/ZeDngIE.jpg",
             "u_id": "u_pr10",
             "description": "Professor of Computer Technology"
         }
