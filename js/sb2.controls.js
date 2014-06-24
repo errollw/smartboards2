@@ -37,7 +37,11 @@ $(document).on("keydown", function (evt) {
 
         upload_canvas();
 
-    } else {
+    } else if (evt.keyCode == 46) { // Delete key
+		remove_selected_items();
+		hide_floatie();
+		view.update();
+	} else {
 
         console.log(evt.keyCode)
         //return false;
