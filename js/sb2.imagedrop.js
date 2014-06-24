@@ -16,19 +16,18 @@ $(function() {
 		// Function to draw an image onto the page, and resize to fit
 		function drawImage(url) {
 			// Require a non-empty URL starting with http
-			if (url == "" || url.indexOf("http") != 0) {
-				alert("Invalid image url:\n" + url);
-			}
-			var margin = 200;
+			var margin = 100;
 			
 			var new_img = new Raster(url);
 			new_img.onLoad = function() {
-				new_img.position = view.center;
-				if (new_img.bounds.top < margin) {
-					new_img.scale( ($("#myCanvas").height() - margin) / new_img.bounds.height);
+				// Position the image where the mouse was when it was released
+				new_img.position = new Point(e.originalEvent.pageX, e.originalEvent.pageY);
+				
+				if (new_img.bounds.height > view.bounds.height - 2 * margin) {
+					new_img.scale( ($("#myCanvas").height() - 2 * margin) / new_img.bounds.height );
 				}
-				if (new_img.bounds.left < margin) {
-					new_img.scale( ($("#myCanvas").width() - margin) / new_img.bounds.width);
+				if (new_img.bounds.width > view.bounds.width - 2 * margin) {
+					new_img.scale( ($("#myCanvas").width() - 2 * margin) / new_img.bounds.width );
 				}
 			};
 			
@@ -41,7 +40,28 @@ $(function() {
 			// Image drop from browser
 			var url = dataTransfer.getData("Text");
 			if (url != "") {
-				drawImage(url);
+				// Test if the URL is of an image (http://stackoverflow.com/a/9714891)
+				var timedOut = false, timer;
+				var img = new Image();
+				img.onerror = function() {
+					if (!timedOut) {
+						clearTimeout(timer);
+						// callback - error
+						console.log("Could not load image: " + url);
+					}
+				};
+				img.onload = function() {
+					if (!timedOut) {
+						clearTimeout(timer);
+						// callback - success
+						drawImage(url);
+					}
+				};
+				img.src = url;
+				timer = setTimeout(function() {
+					timedOut = true;
+					console.log("Image timed out: " + url);
+				}, 1000);
 			}
 		}
 		if (dataTransfer.files.length > 0) {
