@@ -72,8 +72,8 @@ function handle_touch_move_transform(evt) {
 
         // see http://stackoverflow.com/questions/563198/
         var t = ((mt_start_pts[0].subtract(currentTouches[0])).cross(vec_mt_start_pts)) /
-            (vec_touch.cross(vec_mt_start_pts))
-        var intersect = currentTouches[0].add(vec_touch.multiply(t))
+            (vec_touch.cross(vec_mt_start_pts));
+        var intersect = currentTouches[0].add(vec_touch.multiply(t));
 
         // calculate transform deltas from start of multitouch
         var d_rot = vec_touch.angle - vec_mt_start_pts.angle;
@@ -87,8 +87,15 @@ function handle_touch_move_transform(evt) {
         // create transform matrix
         m = new Matrix();
         m.reset();
-        m.translate(d_pos)
-        m.rotate(d_rot, intersect)
+        m.translate(d_pos);
+        m.rotate(d_rot, intersect);
+		
+		/* Sometimes m.tx may become NaN
+		 * If the matrix were applied with NaN, the item will disappear from view
+		 * and many exceptions will be thrown.
+		 * Returning from this function prevents the matrix from being applied.
+		 */
+		if (isNaN(m.tx)) return false;
 
         _.forEach(project.selectedItems, function(sel_item){
 
@@ -96,6 +103,7 @@ function handle_touch_move_transform(evt) {
             sel_item.transformContent = false;
             sel_item.rotation = sel_item.mt_start_rot;
             sel_item.position = sel_item.mt_start_pos;
+			
 
             // transform each item with multitouch
             sel_item.transform(m);
