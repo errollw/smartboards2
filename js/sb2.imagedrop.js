@@ -87,6 +87,12 @@ $(function() {
 						dataType: 'json',
 						success: function(json, status, jqXHR) {
 							var url = json.data.link;
+							/* Take the "Huge" thumbnail - max 1024x1024 pixels
+							 * Reduces memory overhead and hopefully faster
+							 * Doesn't enlarge smaller images
+							 * https://api.imgur.com/models/image
+							 */
+							url = url.replace(/\.([^\.]*)$/, 'h.$1');
 							drawImage(url);
 						},
 						error: function(json) {
