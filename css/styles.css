@@ -272,8 +272,9 @@ header {
   padding: 24px;
   font-family: "Open Sans", sans-serif;
   pointer-events: none; }
-  header section, header img {
+  header section, header div.profile-pic {
     display: inline-block;
+    background-size: cover;
     vertical-align: middle;
     margin-right: 18px; }
   header p {
@@ -282,7 +283,7 @@ header {
       margin-top: 0; }
     header p:last-child {
       margin-bottom: 0; }
-  header img {
+  header div.profile-pic {
     width: 80px;
     height: 80px;
     border-radius: 5px; }

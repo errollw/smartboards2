@@ -58,8 +58,8 @@ function add_user(user, y_pos){
 
     // fist create the basic user components
 	var header = $('<header/>').css('top', y_pos + 'px');
-	var img = $('<img/>').attr('src', user.img_src);
-    img.attr('onerror', "this.src='" + no_pic_url + "';");
+	var img = $('<div/>').addClass('profile-pic');
+    img.css('background-image', "url('"+user.img_src+"'), url('"+no_pic_url+"')");
 	var sec_details = $('<section/>');
 	var p_name = $('<p/>').addClass('title').text(user.name);
     var p_desc = $('<p/>').addClass('subtitle').text(user.description);

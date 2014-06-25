@@ -56,8 +56,9 @@ header {
 
 	pointer-events: none;
 
-	section, img {
+	section, div.profile-pic {
 		display: inline-block;
+		background-size: cover;
 		vertical-align: middle;
 		margin-right: 18px;
 	}
@@ -69,7 +70,7 @@ header {
 		&:last-child {margin-bottom: 0}
 	}
 
-	img {
+	div.profile-pic {
 		width: 80px;
 		height: 80px;
 		border-radius: 5px;
