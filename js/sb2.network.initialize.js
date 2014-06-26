@@ -92,8 +92,33 @@ function add_user(user, y_pos){
             var status = $('<div/>').addClass('status').css('top', y_pos + 'px');
             var status_msg = $('<p/>').addClass('status_msg').text(user.status);
             var status_time = $('<p/>').addClass('status_time').text('updated ' + moment.unix(user.status_last_mod).fromNow());
+			var status_clear = $("<p/>").addClass('status_clear').text('X').click(function() {
+				var statusBox = $(this).closest(".status");
+				statusBox.fadeOut(function() {
+					$.ajax({
+						url: "cgi-bin/save_status.py",
+						type: "post",
+						data: {
+							'r_id': r_id,
+							'json_data': JSON.stringify({
+								users: [{
+									u_id: user.u_id,
+									status: "",
+									status_last_mod: moment().unix()
+								}]
+							})
+						},
+						success: function() {
+							statusBox.remove();
+						},
+						error: function() {
+							statusBox.fadeIn();
+						}
+					});
+				});
+			});
 
-            status.append(status_msg).append(status_time);
+            status.append(status_msg).append(status_time).append(status_clear);
             $(header).after(status);
 
             // refresh status time every minute
