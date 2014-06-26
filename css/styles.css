@@ -167,7 +167,7 @@
   z-index: 200;
   position: absolute;
   margin-top: 30px;
-  margin-left: -120px;
+  margin-left: -160px;
   background-color: #EEE;
   border-radius: 8px;
   overflow: hidden;
@@ -205,6 +205,10 @@
 
 #send_to_back {
   background-image: url("../assets/icon_send_to_back.svg");
+}
+
+#clone {
+  background-image: url("../assets/icon_clone.svg");
 }
 
 #color_picker {

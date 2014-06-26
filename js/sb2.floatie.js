@@ -7,8 +7,9 @@ $(document).ready(function() {
     $('#floatie #send_to_back').click(send_selected_items_to_back);
 
     $('#floatie #send_to_front').click(send_selected_items_to_front);
+	
+	$('#floatie #clone').click(clone_selected_items);
 
-    $('#floatie').click(hide_floatie);
 
     hide_floatie();
 
@@ -18,6 +19,7 @@ function remove_selected_items(){
     _.forEach(project.selectedItems, function(sel_item){
         sel_item.remove();
     });
+	hide_floatie();
 }
 
 function send_selected_items_to_back(){
@@ -25,6 +27,7 @@ function send_selected_items_to_back(){
         sel_item.sendToBack();
     });
 	deselect_all();
+	hide_floatie();
 }
 
 function send_selected_items_to_front(){
@@ -32,6 +35,25 @@ function send_selected_items_to_front(){
         sel_item.bringToFront();
     });
 	deselect_all();
+	hide_floatie();
+}
+
+function clone_selected_items() {
+	hide_floatie();
+	remove_selection_rects();
+	var clonedItems = [];
+	_.forEach(project.selectedItems, function(sel_item){
+		var clone = sel_item.clone();
+		clone.position = new Point(clone.position.x + 50, clone.position.y + 50);
+		clonedItems.push(clone);
+		sel_item.selected = false;
+	});
+	_.forEach(clonedItems, function(e) {
+		e.selected = true;
+	});
+	make_selection_rect();
+	show_floatie(selected_items_rect.position);
+	view.update();
 }
 
 function toggle_floatie(){
