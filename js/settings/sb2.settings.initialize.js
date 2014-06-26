@@ -30,16 +30,20 @@ $(document).ready(function(){
     $('h1').text(stripped_r_id + ' NetBoard settings');
 
     $('#save_settings').click(save_settings);
-    $('#add_user').click(add_user);
+    $('#add_user').click(function() {
+		add_user(new Object(), true);
+	});
 
     $.getJSON("content/room_data_"+r_id+".json", function(json_data){
-        _(json_data.users).each(add_user);
+        _(json_data.users).each(function(e) {
+			add_user(e, false);
+		});
     });
     
 });
 
 
-function add_user(user){
+function add_user(user, fromClick, insertLocation){
 
 	var usr_sec = $('<section/>').addClass('user');
 
@@ -72,6 +76,11 @@ function add_user(user){
     input_imageUrl.on('input', function(evt) {
         img.attr('src', input_imageUrl.val());
     });
+	
+	// update the user object in response to changes in the input values
+	form_div.on("input", "input", function() {
+		user = extract_user_details(usr_sec);
+	});
 
     delete_button.click(function(){delete_user(user, usr_sec)});
 
@@ -83,22 +92,35 @@ function add_user(user){
     form_div.append(text_webpageUrl).append(input_webpageUrl);
     form_div.append(delete_button);
 	usr_sec.append(img).append(form_div);
-
-	$('#sortable').append(usr_sec);
+	
+	if (fromClick == true) usr_sec.hide();
+	if (typeof insertLocation != 'undefined') {
+		console.log(usr_sec);
+		$(usr_sec).insertAfter(insertLocation);
+	} else {
+		$("#sortable").append(usr_sec);
+	}
+	if (fromClick == true) usr_sec.slideDown();
 }
 
 function delete_user(user, usr_sec){
 
     var deleted_usr_sec = $('<section/>'),
         deleted_usr_div = $('<div/>').addClass('deleted_user');
-    deleted_usr_div.html('User deleted (' + user.name + '). <span>Undo?</span>')
+    deleted_usr_div.html('User deleted (' + (typeof user.name != 'undefined' ? user.name : 'unnamed user') + '). <span>Undo?</span>')
 
     deleted_usr_sec.append(deleted_usr_div);
     deleted_usr_div.children('span').click(function(){
-        deleted_usr_sec.remove();
-        add_user(user)
+        deleted_usr_sec.slideUp(function() {
+			$(this).remove();
+		});
+        add_user(user, true, deleted_usr_sec)
     });
-
+	
+	deleted_usr_sec.hide();
     usr_sec.before(deleted_usr_sec);
-    usr_sec.remove();
+	deleted_usr_sec.slideDown();
+    usr_sec.slideUp(function() {
+		$(this).remove();
+	});
 }

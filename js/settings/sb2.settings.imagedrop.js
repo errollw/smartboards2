@@ -17,7 +17,7 @@ $(function() {
 		e.stopPropagation();
 		
 		// Display working message
-		$("#imageLoading").show();
+		$("#messageBox").fadeIn().find("div").text("Uploading image...");
 		
 		var dataTransfer = e.originalEvent.dataTransfer;
 		var theImage = this;
@@ -33,8 +33,8 @@ $(function() {
 					if (!timedOut) {
 						clearTimeout(timer);
 						// callback - error
-						console.log("Could not load image: " + url);
-						$("#imageLoading").hide();
+						$("#messageBox").find("div").text("Error while loading - is it an image?").parent().delay(2000).fadeOut();
+						$("#messageBox").fadeOut();
 					}
 				};
 				img.onload = function() {
@@ -42,14 +42,14 @@ $(function() {
 						clearTimeout(timer);
 						// callback - success
 						$(theImage).closest("section").find("input[name=input_imageUrl]").val(url).trigger("input");
-						$("#imageLoading").hide();
+						$("#messageBox").fadeOut();
 					}
 				};
 				img.src = url;
 				timer = setTimeout(function() {
 					timedOut = true;
 					console.log("Image timed out: " + url);
-					$("#imageLoading").hide();
+					$("#messageBox").find("div").text("Unable to load image").parent().delay(2000).fadeOut();
 				}, 1000);
 			}
 		}
@@ -84,13 +84,13 @@ $(function() {
 							var tmpImg = new Image();
 							tmpImg.onload = function() {
 								$(theImage).closest("section").find("input[name=input_imageUrl]").val(url).trigger("input");
-								$("#imageLoading").hide();
+								$("#messageBox").fadeOut();
 							};
 							tmpImg.src = url;
 						},
 						error: function(json) {
 							console.log(json);
-							$("#imageLoading").hide();
+							$("#messageBox").find("div").text("Error while uploading image to imgur").parent().delay(2000).fadeOut();
 						}
 					});
 					
