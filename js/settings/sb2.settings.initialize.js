@@ -27,13 +27,10 @@ $(document).ready(function(){
     stripped_r_id = (r_id.lastIndexOf('r_id', 0) === 0 ?
         r_id : r_id.substring(2, r_id.length)).toUpperCase();
 
-    $('h1').text(stripped_r_id + ' NetBoard settings')
+    $('h1').text(stripped_r_id + ' NetBoard settings');
 
-    $("#sortable").sortable();
-    $("#sortable").disableSelection();
-
-    $('#save_settings').click(save_settings)
-    $('#add_user').click(add_user)
+    $('#save_settings').click(save_settings);
+    $('#add_user').click(add_user);
 
     $.getJSON("content/room_data_"+r_id+".json", function(json_data){
         _(json_data.users).each(add_user);
