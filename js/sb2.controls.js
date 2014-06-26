@@ -93,6 +93,7 @@ function set_edit_mode(new_edit_mode){
     if (edit_mode == "DRAWING" || edit_mode == "ERASING"){
         project.deselectAll();
         remove_selection_rects();
+		view.update();
     }
 
     $('#controls div').removeClass('selected');
