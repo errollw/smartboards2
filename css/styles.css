@@ -417,6 +417,10 @@ header div.profile-pic {
 #controls div.button#eraser {
   background-image: url("../assets/icon_eraser.svg");
 }
+#controls div.button#undo {
+  background-image: url("../assets/icon_undo.svg");
+  display: none;
+}
 
 p.title {
   font-size: 1.5em;

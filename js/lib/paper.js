@@ -2646,7 +2646,7 @@ var Item = Base.extend(Callback, {
 			project = paper.project;
 		if (!internal)
 			this._id = Item._id = (Item._id || 0) + 1;
-		this._applyMatrix = this._canApplyMatrix && paper.settings.applyMatrix;
+		this._applyMatrix = this._canApplyMatrix && paper.settings.applyMatrix && (props && typeof props.applyMatrix != "undefined" ? props.applyMatrix : true);
 		if (point)
 			matrix.translate(point);
 		matrix._owner = this;

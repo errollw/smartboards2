@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 
 <!-- fonts -->
-<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,400,600,700' rel='stylesheet' type='text/css'>
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,400,600,700" rel="stylesheet" type="text/css">
 
 <!-- stylesheets -->
 <link rel="stylesheet" href="css/normalize.css">
@@ -16,6 +16,9 @@
 <script type="text/javascript" src="js/lib/jquery.js"></script>
 <script type="text/javascript" src="js/lib/moment.min.js"></script>
 <script type="text/javascript" src="js/lib/lodash.js"></script>
+
+<!-- SB2: undo -->
+<script type="text/javascript" src="js/sb2.undo.js"></script>
 
 <!-- SB2: keyboard & UI controls -->
 <script type="text/javascript" src="js/sb2.controls.js"></script>
@@ -61,25 +64,28 @@
 </head>
 <body style="overflow:hidden; margin:0;">
 
-<div id='canvas-background'></div>
-<canvas id='myCanvas' width='1080' height='1920'></canvas>
+<div id="canvas-background"></div>
+<canvas id="myCanvas" width="1080" height="1920"></canvas>
 
-<aside id='controls'>
+<aside id="controls">
 	<section>
-		<div class='button' id='cursor'></div>
-		<div class='button' id='pen'></div>
-		<div class='button' id='eraser'></div>
+		<div class="button" id="cursor"></div>
+		<div class="button" id="pen"></div>
+		<div class="button" id="eraser"></div>
 	</section><br>
-	<section id='pen_thickness_controls'></section><br>
-	<section><div id='color_picker'></div></section>
+	<section id="pen_thickness_controls"></section><br>
+	<section><div id="color_picker"></div></section>
+	<section>
+		<div class="button" id="undo"></div>
+	</section>
 </aside>
 
-<p id='floatie-triangle'></p>
-<div id='floatie'>
-	<div class='icon-button' id='trash'></div>
-	<div class='icon-button' id='send_to_front'></div>
-	<div class='icon-button' id='send_to_back'></div>
-	<div class='icon-button' id='clone'></div>
+<p id="floatie-triangle"></p>
+<div id="floatie">
+	<div class="icon-button" id="trash"></div>
+	<div class="icon-button" id="send_to_front"></div>
+	<div class="icon-button" id="send_to_back"></div>
+	<div class="icon-button" id="clone"></div>
 </div>
 
 </body>

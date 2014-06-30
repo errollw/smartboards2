@@ -125,6 +125,11 @@ header {
 		&#eraser {
 			background-image: url("../assets/icon_eraser.svg");
 		}
+		
+		&#undo {
+			background-image: url("../assets/icon_undo.svg");
+			display:none;
+		}
 
 		background-size: cover;
 
