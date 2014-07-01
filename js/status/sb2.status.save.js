@@ -3,22 +3,43 @@ var status_data = {};	// object for entire room settings
 var users = [];			// list of users in this room
 
 
-function resp_fn(resp){
-	// TODO: BETTER RESPONSE
-	console.log("saved maybe")
-}
+function saveSuccess() {
+	$.simpleMessage("flashMessage", "Saved successfully");
+};
+
+function saveFail() {
+	$.simpleMessage("flashMessage", "Save failed");
+};
 
 
 function save_status(user_section){
+	$.simpleMessage("show", "Saving message...");
+	
 	users = [];
-
 	extract_status(user_section);
-
 	status_data.users = users;
 
-	json_string = JSON.stringify(status_data)
-
-	$.post( "cgi-bin/save_status.py", {'r_id': r_id, 'json_data': json_string }, resp_fn);
+	json_string = JSON.stringify(status_data);
+	
+	$.ajax({
+		url: "cgi-bin/save_status.py",
+		type: 'post',
+		data: {
+			'r_id': r_id,
+			'json_data': json_string
+		},
+		success: function(json, status, jqXHR) {
+			if (json.success) {
+				saveSuccess();
+			} else {
+				saveFail();
+			}
+		},
+		error: function(json) {
+			saveFail();
+		}
+	});
+	
 }
 
 function extract_status(user_section){

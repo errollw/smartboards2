@@ -3,8 +3,7 @@ var room_settings = {};	// object for entire room settings
 var users = [];			// list of users in this room
 
 function save_settings(){
-	$("#messageBox").find("div").text("Saving changes...").parent().fadeIn();
-
+	$.simpleMessage("show", "Saving changes...");
 	users = [];
 
 	var user_sections = $('section.user');
@@ -18,10 +17,10 @@ function save_settings(){
 	
 	function saveSuccess() {
 		$(".deleted_user").closest("section").slideUp();
-		$("#messageBox").find("div").text("Saved successfully").parent().delay(2000).fadeOut();
+		$.simpleMessage("flashMessage", "Saved successfully");
 	};
 	function saveFail() {
-		$("#messageBox").find("div").text("Save failed").parent().delay(2000).fadeOut();
+		$.simpleMessage("flashMessage", "Save failed");
 	};
 	
 	$.ajax({
