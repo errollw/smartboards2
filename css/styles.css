@@ -418,8 +418,10 @@ header div.profile-pic {
   background-image: url("../assets/icon_eraser.svg");
 }
 #controls div.button#undo {
-  background-image: url("../assets/icon_undo.svg");
-  display: none;
+  background-image: url("../assets/icon_undo-disabled.svg");
+}
+#controls div.button#redo {
+  background-image: url("../assets/icon_redo-disabled.svg");
 }
 
 p.title {

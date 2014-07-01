@@ -127,8 +127,10 @@ header {
 		}
 		
 		&#undo {
-			background-image: url("../assets/icon_undo.svg");
-			display:none;
+			background-image: url("../assets/icon_undo-disabled.svg");
+		}
+		&#redo {
+			background-image: url("../assets/icon_redo-disabled.svg");
 		}
 
 		background-size: cover;
