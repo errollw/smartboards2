@@ -10,14 +10,14 @@ It is a project from The Computer Laboratory - University of Cambridge.
 All files should be placed on a webserver. Python files in the cgi-bin directory must be able to excecute, and the user that the webserver runs as must be able to read and write to the content directory.
 
 ## File Structure
-* _assets/_ images
-* _cgi-bin/_ back-end Python scripts
-* _css/_ CSS for front-end, including SASS code
-* _js/_ JavaScript scripts and libraries
-* _index.html_ interactive viewer/editor
-* _set_status.html_ page to set text status
-* _settings.html_ page to configure users for each room
-* _viewer.html_ static viewer
+* __assets/__ images
+* __cgi-bin/__ back-end Python scripts
+* __css/__ CSS for front-end, including SASS code
+* __js/__ JavaScript scripts and libraries
+* __index.html__ interactive viewer/editor
+* __set_status.html__ page to set text status
+* __settings.html__ page to configure users for each room
+* __viewer.html__ static viewer
 
 
 ## Example deployment
