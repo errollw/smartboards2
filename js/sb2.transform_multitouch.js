@@ -122,7 +122,7 @@ function handle_touch_move_transform(evt) {
 function handle_touch_end_transform(evt) {
 
     evt.preventDefault();
-    if (edit_mode != "TRANSFORMING" || !is_transforming_with_multitouch) return;
+    if (edit_mode != "TRANSFORMING" || !is_transforming_with_multitouch || !selected_items_rect) return;
 
     if (getNumberOfTouches() == 1){
 
