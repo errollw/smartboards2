@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import json
+import json, re
 
 def indent(elem, level=0):
     i = "\n" + level*"  "
@@ -24,3 +24,14 @@ def simple_success_response_JSON():
     print "Content-type: application/json"
     print
     print json.dumps(result,indent=1)
+
+def simple_failure_response_JSON():
+    result = {}
+    result['success'] = False
+
+    print "Content-type: application/json"
+    print
+    print json.dumps(result,indent=1)
+
+def test_if_room(room):
+	return re.match('^r_[gfs][neswc][0-9]{2}$',room);

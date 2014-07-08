@@ -4,10 +4,15 @@ import json
 import cgi
 import os
 
-from utils import simple_success_response_JSON
+from utils import simple_success_response_JSON, simple_failure_response_JSON, test_if_room
 
 args = cgi.FieldStorage()
 r_id = args['r_id'].value
+
+### Verify r_id is a valid room id
+if not test_if_room(r_id):
+	simple_failure_response_JSON()
+	exit(1)
 
 
 ### Get board conent version number

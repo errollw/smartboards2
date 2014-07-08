@@ -4,7 +4,7 @@ import json
 import cgi
 import os
 
-from utils import simple_success_response_JSON
+from utils import simple_success_response_JSON, simple_failure_response_JSON, test_if_room
 from render_rooms import render_room_if_stale
 
 args =        cgi.FieldStorage()
@@ -12,8 +12,12 @@ json_string = args['json_data'].value
 r_id =        args['r_id'].value
 ver = 		  int(args['ver'].value)
 
-# get data of uploaded json
 json_data = json.loads(json_string)
+
+### Verify r_id is a valid room id
+if not test_if_room(r_id):
+	simple_failure_response_JSON()
+	exit(1)
 
 # write in content json data version number
 json_data.append(ver)
