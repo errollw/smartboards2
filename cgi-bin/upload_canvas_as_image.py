@@ -20,7 +20,7 @@ if not test_if_room(r_id):
 ### -------------------------------------------------------------
 
 imgstr = re.search(r'base64,(.*)', img_data).group(1)
-s
+
 img_path = os.path.join('..', 'content', r_id + '.png')
 output = open(img_path, 'wb')
 output.write(imgstr.decode('base64'))
