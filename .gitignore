@@ -216,3 +216,4 @@ pip-log.txt
 
 # ignore content changes
 content/
+cgi-bin/log.csv
