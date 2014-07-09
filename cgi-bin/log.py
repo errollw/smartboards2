@@ -10,7 +10,7 @@ args = cgi.FieldStorage()
 valid = True
 
 ## Check all variables are here
-if "REMOTE_ADDR" not in os.environ or "HTTP_USER_AGENT" not in os.environ or "interaction" not in args:
+if "REMOTE_ADDR" not in os.environ or "HTTP_USER_AGENT" not in os.environ or "interaction" not in args or "r_id" not in args:
   valid = False
 ## Validate interaction
 if "interaction" in args and re.match("^[a-z]+$", args["interaction"].value):
@@ -25,6 +25,8 @@ if "data" in args:
     valid = False
 else:
   extraData = ""
+if "r_id" in args and not test_if_room(args["r_id"].value):
+  valid = False
 
 if valid != True:
   simple_failure_response_JSON()
@@ -34,6 +36,7 @@ if valid != True:
 formattedTime = time.strftime("%Y-%m-%d %H:%M:%S")
 ip =  os.environ["REMOTE_ADDR"]
 ua = os.environ["HTTP_USER_AGENT"]
+room = args["r_id"].value
 
 ## Make sure UA isn't too long and there are no special characters
 maxUAlen = 200
@@ -45,7 +48,7 @@ logfile = "log.csv"
 
 with open(logfile, "ab") as fp:
   a = csv.writer(fp, dialect="excel")
-  data = [ [formattedTime, ip, ua, interaction, extraData] ]
+  data = [ [formattedTime, ip, ua, room, interaction, extraData] ]
   a.writerows(data)
 
 simple_success_response_JSON()

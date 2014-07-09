@@ -20,6 +20,13 @@ function save(){
         if (r.success) {
         	lastmod_client = moment();
         	console.log("Saved at " + lastmod_client.format("HH:mm:ss"));
+			
+			var imageCount = _.reduce(_.map(project.layers[0].children, function(el) {
+				return (el instanceof Raster) ? 1 : 0;
+			}), function(sum, num) {
+				return sum + num;
+			});
+			logAction(r_id, "contentedit", "images=" + imageCount);
         } else {
         	console.log("Save FAILED at: " + lastmod_client.format("HH:mm:ss") + "!");
         }

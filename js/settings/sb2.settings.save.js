@@ -18,6 +18,9 @@ function save_settings(){
 	function saveSuccess() {
 		$(".deleted_user").closest("section").slideUp();
 		$.simpleMessage("flashMessage", "Saved successfully");
+		
+		// Log the fact that the status has been updated
+		logAction(r_id, "updatesettings");
 	};
 	function saveFail() {
 		$.simpleMessage("flashMessage", "Save failed");
