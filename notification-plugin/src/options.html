@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>NetBoards Notification Plugin Options</title>
+    <link href="styles/main.css" rel="stylesheet">
+	<script src="js/jquery-1.11.1.min.js"></script>
+	<script src="js/options.js"></script>
+</head>
+<body>
+    <h1>NetBoards Notification Plugin Options</h1>
+	<p>
+		This is a Chrome Plugin that displays a notification when your NetBoard is updated.
+	</p>
+	<table border="0">
+		<tr>
+			<td valign="top">
+				<label for="baseUrl">Base URL</label>
+			</td>
+			<td>
+				<input type="text" id="baseUrl" name="baseUrl" size="80" />
+				<br />
+				This is the URL of the NetBoards server, including http:// and a trailing forward slash.
+			</td>
+		</tr>
+		<tr>
+			<td valign="top">
+				<label for="room">Room</label>
+			</td>
+			<td>
+				<input type="text" id="room" name="room" size="80" />
+				<br />
+				This is the room for which you would like to be notified of changes. Example: r_ss20.
+			</td>
+		</tr>
+		<tr>
+			<td>
+				&nbsp;
+			</td>
+			<td>
+				<button id="saveButton">Save</button>
+			</td>
+		</tr>
+	</table>
+</body>
+</html>
