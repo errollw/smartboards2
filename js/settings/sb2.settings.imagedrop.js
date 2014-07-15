@@ -78,7 +78,7 @@ $(function() {
 							/* Use the big square thumbnail
 							 * https://api.imgur.com/models/image
 							 */
-							url = url.replace(/\.([^\.]*)$/, 'b.$1');
+							url = url.replace(/\.([^\.]*)$/, 'b.$1').replace("http://","https://");
 							
 							var tmpImg = new Image();
 							tmpImg.onload = function() {

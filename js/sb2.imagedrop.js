@@ -92,7 +92,7 @@ $(function() {
 							 * Doesn't enlarge smaller images
 							 * https://api.imgur.com/models/image
 							 */
-							url = url.replace(/\.([^\.]*)$/, 'h.$1');
+							url = url.replace(/\.([^\.]*)$/, 'b.$1').replace("http://","https://");
 							drawImage(url);
 						},
 						error: function(json) {
