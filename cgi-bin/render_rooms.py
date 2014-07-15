@@ -20,7 +20,7 @@ def render_room_if_stale(r_id):
 
 # renders a single room
 def render_room(r_id):
-    subprocess.call([os.path.join(os.getcwd(), "phantomjs"),
+    subprocess.call([os.path.join(os.getcwd(), "phantomjs.exe"),
         "render_netboard.js", r_id], shell=(os.name == "nt"))
     move_pngs()
 
