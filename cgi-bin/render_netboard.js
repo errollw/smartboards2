@@ -1,6 +1,6 @@
 var system = require('system');
 
-var base_url = 'http://netboards.cl.cam.ac.uk/secure/?r_id=',
+var base_url = 'http://netboards.cl.cam.ac.uk/secure/board.html?r_id=',
 	query_str_end = '&render=true'
 
 if (system.args.length === 1) {
