@@ -1,7 +1,7 @@
 // make the paper scope global, by injecting it into window:
 paper.install(window);
 
-var save_timeout = moment.duration(3, 'seconds');
+var save_timeout = moment.duration(15, 'seconds');
 
 var lastmod_client = moment();
 

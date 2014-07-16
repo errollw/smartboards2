@@ -2,7 +2,7 @@
 paper.install(window);
 
 // how often to refresh the loaded paperjs json
-var autoload_interval_dur = moment.duration(5, 'seconds');
+var autoload_interval_dur = moment.duration(10, 'seconds');
 
 function load(){
 
