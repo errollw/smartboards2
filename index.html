@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<!-- fonts -->
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,400,600,700' rel='stylesheet' type='text/css'>
+
+<!-- stylesheets -->
+<link rel="stylesheet" href="css/normalize.css">
+<link rel="stylesheet" href="css/styles-settings.css">
+
+<!-- load libraries -->
+<script type="text/javascript" src="js/lib/jquery.js"></script>
+<script type="text/javascript" src="js/lib/jquery.simplemessage.js"></script>
+<script type="text/javascript" src="js/lib/jquery.cookie.js"></script>
+<script type="text/javascript" src="js/lib/jquery-ui-1.10.4.js"></script>
+<script type="text/javascript" src="js/lib/lodash.js"></script>
+<script type="text/javascript" src="js/lib/moment.min.js"></script>
+
+<!-- load script -->
+<script type="text/javascript" src="js/index/sb2.index.js"></script>
+
+<style>
+button { margin-bottom:0.809em; }
+</style>
+
+</head>
+<body>
+	<section>
+		<h1>NetBoards</h1>
+		<p class='hint desktop-only'>View, update and configure your NetBoard.</p>
+		<p class='hint mobile-only'>Update your NetBoard</p>
+	</section>
+
+	<section>
+		Select your board:
+		<select id="board">
+			<option value=""></option>
+			<option value="r_ss04">SS04</option>
+			<option value="r_ss06">SS06</option>
+			<option value="r_ss08">SS08</option>
+			<option value="r_ss10">SS10</option>
+			<option value="r_ss12">SS12</option>
+			<option value="r_ss14">SS14</option>
+			<option value="r_ss16">SS16</option>
+			<option value="r_ss20">SS20</option>
+			<option value="r_ss22">SS22</option>
+		</select>
+	</section>
+	
+	<footer id="buttons">
+		<button id='btn_go_to_board' class='TURQUOISE'>go to board</button>
+		<button id='btn_set_status' class='CARROT'>set a status</button>
+		<button id='btn_configure_board' class='SUN-FLOWER'>configure board</button>
+		<button id='btn_static_viewer' class='PETER-RIVER'>static viewer</button>
+	</footer>
+
+</body>
+</html>
