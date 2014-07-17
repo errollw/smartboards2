@@ -7,6 +7,11 @@ import os
 from utils import simple_success_response_JSON, simple_failure_response_JSON, test_if_room
 
 args = cgi.FieldStorage()
+
+if not ("r_id" in args):
+	simple_failure_response_JSON()
+	exit(1)
+
 r_id = args['r_id'].value
 
 ### Verify r_id is a valid room id

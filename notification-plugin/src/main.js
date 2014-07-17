@@ -8,13 +8,14 @@ chrome.runtime.onStartup.addListener(function() {
 	var notificationsDisableTimer;
 	
 	// Create the timer
+	setInterval(function(){
 		// Retrieve the latest settings
 		chrome.storage.sync.get("NetBoardsNotificationPlugin", function(storedData) {
 			// Only check for updates if the URL has been set
-			if (storedData.NetBoardsNotificationPlugin.baseUrl) {
+			if (storedData.NetBoardsNotificationPlugin.boardVersionUrl) {
 				// Create and send the XMLHttpRequest
 				var xhr = new XMLHttpRequest();
-				xhr.open("GET", storedData.NetBoardsNotificationPlugin.baseUrl + "cgi-bin/get_board_ver.py?r_id=" + storedData.NetBoardsNotificationPlugin.room, true);
+				xhr.open("GET", storedData.NetBoardsNotificationPlugin.boardVersionUrl + "?r_id=" + storedData.NetBoardsNotificationPlugin.room, true);
 				xhr.onreadystatechange = function() {
 					if (xhr.readyState == 4) {
 						// Parse the response text
@@ -35,7 +36,7 @@ chrome.runtime.onStartup.addListener(function() {
 										// What to do when you click the notification
 										chrome.notifications.onClicked.addListener(function() {
 											// Open a window showing the NetBoard
-											window.open(storedData.NetBoardsNotificationPlugin.baseUrl + "?r_id=" + storedData.NetBoardsNotificationPlugin.room);
+											window.open(storedData.NetBoardsNotificationPlugin.boardUrl + "?r_id=" + storedData.NetBoardsNotificationPlugin.room);
 											// Disable notifications for five minutes
 											notificationsEnabled = false;
 											// Clear existing timer

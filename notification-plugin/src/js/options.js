@@ -5,7 +5,8 @@ $(function() {
 	
 	function save() {
 		var data = {
-			"baseUrl" : $("#baseUrl").val(),
+			"boardUrl" : $("#boardUrl").val(),
+			"boardVersionUrl" : $("#boardVersionUrl").val(),
 			"room" : $("#room").val().toLowerCase()
 		};
 		chrome.storage.sync.set({
@@ -15,13 +16,14 @@ $(function() {
 	
 	function load() {
 		chrome.storage.sync.get("NetBoardsNotificationPlugin", function(data) {
-			$("#baseUrl").val(data.NetBoardsNotificationPlugin.baseUrl);
+			$("#boardUrl").val(data.NetBoardsNotificationPlugin.boardUrl);
+			$("#boardVersionUrl").val(data.NetBoardsNotificationPlugin.boardVersionUrl);
 			$("#room").val(data.NetBoardsNotificationPlugin.room);
 		});
 	};
 	
 	function reset() {
-		chrome.storage.sync.remove("windowPositioner");
+		chrome.storage.sync.remove("NetBoardsNotificationPlugin");
 	};
 	
 	load();
