@@ -1,7 +1,5 @@
 // Implements the JS for index.html
-
 var urlParams;
-
 
 function initializeUrlParams() {
 	var match,
@@ -14,8 +12,6 @@ function initializeUrlParams() {
     while (match = search.exec(query))
        urlParams[decode(match[1])] = decode(match[2]);
 }
-
-
 
 $(function() {
 	initializeUrlParams();
@@ -30,9 +26,6 @@ $(function() {
 		});
 		return returnValue;
 	};
-	
-	// Hide the buttons
-	$("#buttons").hide();
 	
 	// Only display buttons when a room has been selected
 	$("#board").on("change", function() {
@@ -50,6 +43,9 @@ $(function() {
 		$("#board").val(urlParams['r_id']).trigger("change");
 	} else if (typeof $.cookie("r_id") !== "undefined" && isValidBoard($.cookie("r_id"))) {
 		$("#board").val($.cookie("r_id")).trigger("change");
+	} else {
+		// No room selected, so hide the buttons
+		$("#buttons").hide();
 	}
 	
 	// Event handlers for buttons
