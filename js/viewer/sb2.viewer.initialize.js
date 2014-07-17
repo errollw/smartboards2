@@ -45,13 +45,13 @@ $(document).ready(function(){
 
     $('#open_editor').click(function(){
         var url = window.location.href;
-        url = url.substring(0, url.lastIndexOf("/") + 1) + '?r_id=' + r_id;
+        url = url.substring(0, url.lastIndexOf("/") + 1) + 'board.html?r_id=' + r_id;
         window.open(url,'_blank');
     });
 
     $('#set_status').click(function(){
         var url = window.location.href;
-        url = url.substring(0, url.lastIndexOf("/") + 1) + 'set_status?r_id=' + r_id;
+        url = url.substring(0, url.lastIndexOf("/") + 1) + 'set_status.html?r_id=' + r_id;
         window.open(url,'_blank');
     });
     
