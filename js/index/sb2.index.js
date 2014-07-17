@@ -16,8 +16,14 @@ function initializeUrlParams() {
 $(function() {
 	initializeUrlParams();
 	
+	// Set cookie defaults
+	$.cookie.defaults = {
+		"expires": 14
+	};
+	
 	// Test whether a given r_id is valid, by looking in the drop-down list
 	var isValidBoard = function (aBoard) {
+		if (typeof aBoard === "undefined" || aBoard == "") return false;
 		var returnValue = false;
 		$.each($("#board option"), function(index, element) {
 			if ($(element).attr("value") == aBoard) {
@@ -31,7 +37,7 @@ $(function() {
 	$("#board").on("change", function() {
 		var r_id = $(this).val();
 		if (r_id != "") {
-			$.cookie("r_id", r_id, {expires:28});
+			$.cookie("r_id", r_id);
 			$("#buttons").slideDown();
 		} else {
 			$("#buttons").slideUp();
