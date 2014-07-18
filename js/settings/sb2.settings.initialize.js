@@ -71,6 +71,12 @@ function add_user(user, fromClick, insertLocation){
         input_webpageUrl = $('<input/>').attr('name', 'input_webpageUrl').val(user.webpage_src);
 
     var delete_button = $('<button/>').text('delete user').addClass('ALIZARIN');
+    var save_button = $('<button/>').text('save changes').addClass('EMERALD');
+	
+	var div_userbuttons = $("<div/>").addClass("userbuttons");
+	div_userbuttons.append(delete_button);
+	div_userbuttons.append(save_button);
+	
 
     // update the preview of the profile picture
     input_imageUrl.on('input', function(evt) {
@@ -83,6 +89,7 @@ function add_user(user, fromClick, insertLocation){
 	});
 
     delete_button.click(function(){delete_user(user, usr_sec)});
+	save_button.click(save_settings);
 
     form_div.append(text_id).append(input_id);
     form_div.append(text_name).append(input_name);
@@ -90,7 +97,7 @@ function add_user(user, fromClick, insertLocation){
     form_div.append(text_imageUrl).append(input_imageUrl);
     form_div.append(text_status).append(input_status);
     form_div.append(text_webpageUrl).append(input_webpageUrl);
-    form_div.append(delete_button);
+    form_div.append(div_userbuttons);
 	usr_sec.append(img).append(form_div);
 	
 	if (fromClick == true) usr_sec.hide();

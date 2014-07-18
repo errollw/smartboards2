@@ -157,9 +157,6 @@ div.form {
 div.form:last-child {
   margin-right: 0;
 }
-div.form button {
-  float: right;
-}
 @media screen and (max-width: 480px) {
   div.form {
     float: left;
@@ -261,4 +258,8 @@ div.deleted_user {
 div.deleted_user span {
   font-weight: 600;
   cursor: pointer;
+}
+
+div.userbuttons {
+  float: right;
 }

@@ -79,9 +79,6 @@ img {
 div.form {
 	@include span-columns(10);
 
-	button {
-		float: right;
-	}
 
 	@include media($mobile) {
 		@include span-columns(4);
@@ -162,4 +159,8 @@ div.deleted_user {
 		font-weight: 600;
 		cursor: pointer;
 	}
+}
+
+div.userbuttons {
+	float:right;
 }
