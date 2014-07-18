@@ -14,18 +14,21 @@ function save(callback){
         return;
     }
 
-	json_string = project.exportJSON({asString:true});
+	json_string = JSON.stringify(tidyJSONProject(project.exportJSON({asString:false})));
 
     function resp_fn(r){
         if (r.success) {
         	lastmod_client = moment();
         	console.log("Saved at " + lastmod_client.format("HH:mm:ss"));
 			
-			var imageCount = _.reduce(_.map(project.layers[0].children, function(el) {
-				return (el instanceof Raster) ? 1 : 0;
-			}), function(sum, num) {
-				return sum + num;
-			});
+			var imageCount = 0;
+			if (project.layers[0] && project.layers[0].children) {
+				var imageCount = _.reduce(_.map(project.layers[0].children, function(el) {
+					return (el instanceof Raster) ? 1 : 0;
+				}), function(sum, num) {
+					return sum + num;
+				});
+			}
 			logAction(r_id, "contentedit", "images=" + imageCount);
 			if (typeof(callback) === "function") callback();
         } else {
