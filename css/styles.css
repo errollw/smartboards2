@@ -423,6 +423,9 @@ header div.profile-pic {
 #controls div.button#redo {
   background-image: url("../assets/icon_redo-disabled.svg");
 }
+#controls div.button#information {
+  background-image: url("../assets/icon_i.svg");
+}
 
 p.title {
   font-size: 1.5em;

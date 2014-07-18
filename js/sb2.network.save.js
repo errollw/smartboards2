@@ -5,7 +5,7 @@ var save_timeout = moment.duration(15, 'seconds');
 
 var lastmod_client = moment();
 
-function save(){
+function save(callback){
 
     // don't save if you're currently selecting or transforming
     if (project.selectedItems.length > 0) {
@@ -27,6 +27,7 @@ function save(){
 				return sum + num;
 			});
 			logAction(r_id, "contentedit", "images=" + imageCount);
+			if (typeof(callback) === "function") callback();
         } else {
         	console.log("Save FAILED at: " + lastmod_client.format("HH:mm:ss") + "!");
         }
