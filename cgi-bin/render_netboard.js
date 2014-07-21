@@ -31,7 +31,7 @@ function delayed_render(r_id){
 	    	page.render(r_id+'.png');
 			console.log('rendered ' + r_id);
 			exit_when_complete();
-	    }, 2000);
+	    }, 5000);
 	});
 }
 
