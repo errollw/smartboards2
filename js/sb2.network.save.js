@@ -5,8 +5,11 @@ var save_timeout = moment.duration(15, 'seconds');
 
 var lastmod_client = moment();
 
-function save(callback){
+var debounced_save, waitingToSave = false, savingOnUnload = false;
 
+
+function save(callback){
+console.log("Saving...");
     // don't save if you're currently selecting or transforming
     if (project.selectedItems.length > 0) {
         console.log("Not saving, selected items: " + project.selectedItems);
@@ -30,6 +33,7 @@ function save(callback){
 				});
 			}
 			logAction(r_id, "contentedit", "images=" + imageCount);
+			waitingToSave = false;
 			if (typeof(callback) === "function") callback();
         } else {
         	console.log("Save FAILED at: " + lastmod_client.format("HH:mm:ss") + "!");
@@ -40,22 +44,40 @@ function save(callback){
     board_ver = board_ver + 1;
 
     // do the AJAX post to upload the data
-	$.post( "cgi-bin/upload_board_json.py", {
-        'r_id': r_id,
-        'json_data': json_string,
-        'ver': board_ver
-    }, resp_fn);
+	$.ajax({
+		"url": "cgi-bin/upload_board_json.py",
+		"type": "post",
+		"data": {
+			'r_id': r_id,
+			'json_data': json_string,
+			'ver': board_ver
+		},
+		"success":resp_fn,
+		"async": !savingOnUnload
+	});
 }
 
-var debounced_save;
 
 // Schedule a debounced save every time a user releases finger or mouse from canvas
 $(document).ready(function(){
 
     var canvas = document.getElementById('myCanvas');
+	
+	debounced_save = _.debounce(save, save_timeout.asMilliseconds());
+	
+    var debounced_save_wrapper = function() {
+		waitingToSave = true;
+		debounced_save();
+	};
 
-    debounced_save = _.debounce(save, save_timeout.asMilliseconds());
+    canvas.addEventListener("mouseup", debounced_save_wrapper);
+    canvas.addEventListener("touchend", debounced_save_wrapper);
+});
 
-    canvas.addEventListener("mouseup", debounced_save);
-    canvas.addEventListener("touchend", debounced_save);
+$(window).unload(function() {
+	if (waitingToSave) {
+		deselect_all();
+		savingOnUnload = true;
+		save();
+	}
 });
