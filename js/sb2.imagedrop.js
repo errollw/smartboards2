@@ -29,8 +29,8 @@ $(function() {
 				if (new_img.bounds.width > view.bounds.width - 2 * margin) {
 					new_img.scale( ($("#myCanvas").width() - 2 * margin) / new_img.bounds.width );
 				}
+				view.update();
 			};
-			
 		};
 		
 		e.preventDefault();
@@ -92,7 +92,7 @@ $(function() {
 							 * Doesn't enlarge smaller images
 							 * https://api.imgur.com/models/image
 							 */
-							url = url.replace(/\.([^\.]*)$/, 'b.$1').replace("http://","https://");
+							url = url.replace(/\.([^\.]*)$/, 'h.$1').replace("http://","https://");
 							drawImage(url);
 						},
 						error: function(json) {
