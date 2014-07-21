@@ -29,6 +29,16 @@ $(document).ready(function(){
 	build_pen_thickness_controls();
 
 	$('.pen_thickness_container').click(toggle_pen_thickness);
+	
+	// Load pen colour from cookie if set
+	var cookiePenThickness = $.cookie("penThickness");
+	
+	if (typeof cookiePenThickness != "undefined") {
+		default_pen_thickness = cookiePenThickness;
+		set_pen_thickness(cookiePenThickness);
+	}
+
+	
 
 	close_pen_thickness_controls();
 });
@@ -61,7 +71,7 @@ function toggle_pen_thickness(evt){
 
 		// set pen_thickness according to clicked icon
 		var clicked_id = $(evt.currentTarget).attr('id');
-		set_pen_thicknes(pen_thickness_choices[clicked_id]);
+		set_pen_thickness(pen_thickness_choices[clicked_id]);
 
 		// start drawing once thickness is clicked
 		set_edit_mode("DRAWING");
@@ -74,9 +84,12 @@ function toggle_pen_thickness(evt){
 	}
 }
 
-function set_pen_thicknes(new_pen_thickness){
+function set_pen_thickness(new_pen_thickness){
 	pen_thickness = new_pen_thickness;
-
+	
+	// Save in cookie
+	$.cookie("penThickness", new_pen_thickness, {expires:7});
+	
 	// close all thickness controls
 	$('.pen_thickness_container').removeClass('chosen');
 	$('.pen_thickness_container').addClass('closed');
@@ -89,7 +102,7 @@ function set_pen_thicknes(new_pen_thickness){
 }
 
 function close_pen_thickness_controls(){
-	set_pen_thicknes(default_pen_thickness);
+	set_pen_thickness(default_pen_thickness);
 }
 
 function get_thickness_multiplier(){

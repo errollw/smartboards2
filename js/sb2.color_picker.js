@@ -49,6 +49,7 @@ function build_color_picker(){
 
 	$('#color_picker span').click(function(){
 		if (is_color_picker_open){
+			$.cookie("penColour", $(this).css("backgroundColor"), {expires:7});
 			set_pen_color($(this).css('backgroundColor'));
 			set_edit_mode("DRAWING");
 		}
@@ -96,5 +97,15 @@ function close_color_picker_controls(){
 
 $(document).ready(function(){
 	build_color_picker();
-	$('#pen').load('assets/icon_pen.svg', set_pen_icon_color);
+	
+	// Load pen colour from cookie if set
+	var cookiePenColour = $.cookie("penColour");
+	
+	$('#pen').load('assets/icon_pen.svg', function() {
+		if (typeof cookiePenColour != "undefined") {
+			pen_color = cookiePenColour;
+		}
+		set_pen_icon_color();
+	});
+	
 });
