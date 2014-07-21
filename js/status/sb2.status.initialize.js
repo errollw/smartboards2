@@ -33,6 +33,9 @@ $(document).ready(function(){
         _(json_data.users).each(add_user);
     });
     
+	$("#btn_returntoindex").click(function() {
+		window.location.href = window.location.href.replace("set_status.html", "index.html");
+	});
 });
 
 

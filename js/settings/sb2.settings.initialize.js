@@ -39,6 +39,10 @@ $(document).ready(function(){
 			add_user(e, false);
 		});
     });
+	
+	$("#btn_returntoindex").click(function() {
+		window.location.href = window.location.href.replace("settings.html", "index.html");
+	});
     
 });
 

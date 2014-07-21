@@ -44,15 +44,14 @@ $(document).ready(function(){
     });
 
     $('#open_editor').click(function(){
-        var url = window.location.href;
-        url = url.substring(0, url.lastIndexOf("/") + 1) + 'board.html?r_id=' + r_id;
-        window.open(url,'_blank');
+		window.location.href = window.location.href.replace("viewer.html", "board.html");
     });
 
     $('#set_status').click(function(){
-        var url = window.location.href;
-        url = url.substring(0, url.lastIndexOf("/") + 1) + 'set_status.html?r_id=' + r_id;
-        window.open(url,'_blank');
+		window.location.href = window.location.href.replace("viewer.html", "set_status.html");
     });
     
+	$("#btn_returntoindex").click(function() {
+		window.location.href = window.location.href.replace("viewer.html", "index.html");
+	});
 });
