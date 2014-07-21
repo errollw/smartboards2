@@ -19,6 +19,7 @@ function remove_selected_items(){
     _.forEach(project.selectedItems, function(sel_item){
         sel_item.remove();
     });
+	view.update();
 	hide_floatie();
 }
 
@@ -27,6 +28,7 @@ function send_selected_items_to_back(){
         sel_item.sendToBack();
     });
 	deselect_all();
+	view.update();
 	hide_floatie();
 }
 
@@ -35,6 +37,7 @@ function send_selected_items_to_front(){
         sel_item.bringToFront();
     });
 	deselect_all();
+	view.update();
 	hide_floatie();
 }
 
