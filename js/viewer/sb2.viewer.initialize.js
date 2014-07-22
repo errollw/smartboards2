@@ -40,7 +40,7 @@ $(document).ready(function(){
     // show the last time the server json file was modified
     $.get( "cgi-bin/get_last_mod.py", {'r_id': r_id}, function(resp){
         // resp.lastmod is Epoch TIMESTAMP (in seconds, not ms)
-        $('#room-last-mod').text('Last updated ' + moment.unix(resp.lastmod).fromNow() +'.')
+        $('#room-last-mod').text('Content last updated ' + moment.unix(resp.lastmod).fromNow() +'. Rendered within the last 15 minutes.')
     });
 
     $('#open_editor').click(function(){
