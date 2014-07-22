@@ -110,6 +110,7 @@ function add_user(user, y_pos){
 						},
 						success: function() {
 							statusBox.remove();
+							logAction(r_id, "clearstatus", "user=" + user.u_id);
 						},
 						error: function() {
 							statusBox.fadeIn();
