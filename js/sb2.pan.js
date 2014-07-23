@@ -34,4 +34,8 @@ $(function() {
 		
 	});
 	
+	// Hide the pan tool for the NetBoards, as the board is designed for their resolution
+	if (navigator.userAgent.indexOf("NetBoards/") > -1) {
+		$("#pan").hide();
+	}
 });
