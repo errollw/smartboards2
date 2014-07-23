@@ -384,7 +384,7 @@ header div.profile-pic {
 
 #controls {
   -webkit-transition: right 0.8s ease-in-out;
-  position: absolute;
+  position: fixed;
   right: 0;
   top: 0;
   margin: 24px;
@@ -416,6 +416,9 @@ header div.profile-pic {
 }
 #controls div.button#eraser {
   background-image: url("../assets/icon_eraser.svg");
+}
+#controls div.button#pan {
+  background-image: url("../assets/icon_pan.svg");
 }
 #controls div.button#undo {
   background-image: url("../assets/icon_undo-disabled.svg");

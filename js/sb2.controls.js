@@ -53,6 +53,7 @@ $(document).ready(function() {
     $('#controls #pen').click(function(){set_edit_mode("DRAWING")});
     $('#controls #eraser').click(function(){set_edit_mode("ERASING")});
     $('#controls #cursor').click(function(){set_edit_mode("SELECTING")});
+    $('#controls #pan').click(function(){set_edit_mode("PANNING")});
 
     set_edit_mode(default_edit_mode);
 });
@@ -100,6 +101,7 @@ function set_edit_mode(new_edit_mode){
     $('#controls #pen').toggleClass('selected', edit_mode == "DRAWING");
     $('#controls #eraser').toggleClass('selected', edit_mode == "ERASING");
     $('#controls #cursor').toggleClass('selected', edit_mode == "SELECTING");
+    $('#controls #pan').toggleClass('selected', edit_mode == "PANNING");
 
     //view.update();
 }

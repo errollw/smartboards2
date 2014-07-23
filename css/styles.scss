@@ -90,7 +90,7 @@ header {
 		right: -140px;
 	}
 
-	position: absolute;
+	position: fixed;
 	right: 0;
 	top: 0;
 
@@ -124,6 +124,10 @@ header {
 		}
 		&#eraser {
 			background-image: url("../assets/icon_eraser.svg");
+		}
+		
+		&#pan {
+			background-image: url("../assets/icon_pan.svg");
 		}
 		
 		&#undo {
