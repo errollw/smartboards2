@@ -28,11 +28,18 @@ $(document).ready(function(){
         r_id : r_id.substring(2, r_id.length)).toUpperCase();
 
     $('h1').text(stripped_r_id + ' NetBoard statuses')
-
-    $.getJSON("content/room_data_"+r_id+".json", function(json_data){
-        _(json_data.users).each(add_user);
-    });
     
+	$.ajax({
+		dataType: "json",
+		url: "content/room_data_"+r_id+".json",
+		cache: false,
+		success: function(json_data){
+			_(json_data.users).each(function(e) {
+				add_user(e, false);
+			});
+		}
+	});
+	
 	$("#btn_returntoindex").click(function() {
 		window.location.href = window.location.href.replace("set_status.html", "index.html");
 	});

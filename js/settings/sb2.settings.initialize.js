@@ -33,12 +33,18 @@ $(document).ready(function(){
     $('#add_user').click(function() {
 		add_user(new Object(), true);
 	});
-
-    $.getJSON("content/room_data_"+r_id+".json", function(json_data){
-        _(json_data.users).each(function(e) {
-			add_user(e, false);
-		});
-    });
+	
+	$.ajax({
+		dataType: "json",
+		url: "content/room_data_"+r_id+".json",
+		cache: false,
+		success: function(json_data){
+			_(json_data.users).each(function(e) {
+				add_user(e, false);
+			});
+		}
+	});
+	
 	
 	$("#btn_returntoindex").click(function() {
 		window.location.href = window.location.href.replace("settings.html", "index.html");
