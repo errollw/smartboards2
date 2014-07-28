@@ -2624,6 +2624,7 @@ var Item = Base.extend(Callback, {
 	_selectChildren: false,
 	_serializeFields: {
 		name: null,
+		applyMatrix: null,
 		matrix: new Matrix(),
 		pivot: null,
 		locked: false,
@@ -2633,7 +2634,6 @@ var Item = Base.extend(Callback, {
 		guide: false,
 		selected: false,
 		clipMask: false,
-		applyMatrix: null,
 		data: {}
 	},
 
@@ -2646,7 +2646,7 @@ var Item = Base.extend(Callback, {
 			project = paper.project;
 		if (!internal)
 			this._id = Item._id = (Item._id || 0) + 1;
-		this._applyMatrix = this._canApplyMatrix && paper.settings.applyMatrix && (props && typeof props.applyMatrix != "undefined" ? props.applyMatrix : true);
+		this._applyMatrix = this._canApplyMatrix && paper.settings.applyMatrix;
 		if (point)
 			matrix.translate(point);
 		matrix._owner = this;
