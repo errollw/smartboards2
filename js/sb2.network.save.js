@@ -8,6 +8,47 @@ var lastmod_client = moment();
 var debounced_save, waitingToSave = false, savingOnUnload = false;
 
 
+// Function that returns whether an item should be removed (true) or not (false) because it is inaccessible
+function removeInaccessibleItemsHelper(item) {
+	if (!(view.bounds.intersects(item.strokeBounds))) {
+		// The bounds of the item do not intersect with the bounds of the view, so it is definitely not accessible
+		return true;
+	} else if (item instanceof Path) {
+		// The bounds do intersect, but a path could still be inaccessible
+		// An example would be a circular path, scaled to be too big to fit on the screen
+		for (var i = 0; i < item.segments.length; i++) {
+			if (view.bounds.contains(item.segments[i].point)) {
+				// At least one point still on screen, so it is accessible
+				return false;
+			}
+		}
+		// If we're still in here, then it means there were no points that were accessible
+		// Therefore, it is safe to remove the item
+		return true;
+	} else {
+		// It is still possible that the item is inaccessible, but we are not able to determine
+		// An example would be an image that is rotated by 45 degrees, and placed such that the
+		// image itself is not visible, but its bounding box overlaps the corner of the canvas.
+		return false;
+	}
+}
+
+function removeInaccessibleItems(){
+	// Function to remove items that the user can no longer reach
+	if (project.layers[0]) {
+		var items = project.getItems(function(){return true;});
+		for (var i = 0; i < items.length; i++) {
+			var item = items[i];
+			if (removeInaccessibleItemsHelper(item)) {
+				console.log("Removing item", item);
+				item.remove();
+			} else {
+			}
+		}
+	}
+}
+
+
 function save(callback){
 console.log("Saving...");
     // don't save if you're currently selecting or transforming
@@ -16,7 +57,11 @@ console.log("Saving...");
         debounced_save();
         return;
     }
-
+	
+	// Remove the inaccessible items from the canvas
+	removeInaccessibleItems();
+	
+	// Remove single item paths, shapes etc, and export to JSON string
 	json_string = JSON.stringify(tidyJSONProject(project.exportJSON({asString:false})));
 
     function resp_fn(r){
