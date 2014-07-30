@@ -20,7 +20,7 @@ def render_room_if_stale(r_id):
 
 # renders a single room
 def render_room(r_id):
-    subprocess.call([os.path.join(os.getcwd(), "phantomjs.exe"),
+    subprocess.call([os.path.join(os.getcwd(), "phantomjs.exe"), " --ignore-ssl-errors=true",
         "render_netboard.js", r_id], shell=(os.name == "nt"))
     move_pngs()
 
@@ -49,7 +49,7 @@ if __name__ == "__main__":
     room_ids = [re.search(pattern, f).group(1).lower() for f in fs]
 
     # call phantomjs
-    subprocess_arr = [os.path.join(os.getcwd(), "phantomjs"), "render_netboard.js"] + room_ids
+    subprocess_arr = [os.path.join(os.getcwd(), "phantomjs"), "--ignore-ssl-errors=true", "render_netboard.js"] + room_ids
     print "Starting subprocess: " + " ".join(subprocess_arr)
     subprocess.call(subprocess_arr, shell=(os.name == "nt"))
 
