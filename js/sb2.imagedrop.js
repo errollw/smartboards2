@@ -30,7 +30,18 @@ $(function() {
 					new_img.scale( ($("#myCanvas").width() - 2 * margin) / new_img.bounds.width );
 				}
 				view.update();
+				hideSpinner();
 			};
+		};
+		
+		function showSpinner() {
+			$("#uploadingmessage").show().animate({"left":50}, "slow");
+		};
+		
+		function hideSpinner() {
+			$("#uploadingmessage").animate({"left":-450}, "slow", function() {
+				$("#uploadingmessage").hide();
+			});
 		};
 		
 		e.preventDefault();
@@ -38,15 +49,26 @@ $(function() {
 		var dataTransfer = e.originalEvent.dataTransfer;
 		if (dataTransfer.types.length > 0) {
 			// Image drop from browser
+			showSpinner();
 			var url = dataTransfer.getData("Text");
 			if (url != "") {
 				// Test if the URL is of an image (http://stackoverflow.com/a/9714891)
+				
+				if (url.indexOf("https://") != 0) {
+					// Require image to be served over HTTPS (not HTTP or DATA)
+					alert("Images must be served over HTTPS.");
+					console.log("Images must be served over HTTPS.");
+					hideSpinner();
+					return;
+				}
+				
 				var timedOut = false, timer;
 				var img = new Image();
 				img.onerror = function() {
 					if (!timedOut) {
 						clearTimeout(timer);
 						// callback - error
+						hideSpinner();
 						console.log("Could not load image: " + url);
 					}
 				};
@@ -61,11 +83,13 @@ $(function() {
 				timer = setTimeout(function() {
 					timedOut = true;
 					console.log("Image timed out: " + url);
+					hideSpinner();
 				}, 1000);
 			}
 		}
 		if (dataTransfer.files.length > 0) {
 			// File drop from OS
+			showSpinner();
 			for (var i = 0; i < dataTransfer.files.length; i++) {
 				var file = dataTransfer.files[i];
 				var reader = new FileReader();
@@ -97,6 +121,7 @@ $(function() {
 						},
 						error: function(json) {
 							console.log(json);
+							hideSpinner();
 						}
 					});
 					
