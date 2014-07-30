@@ -35,7 +35,6 @@ $(function() {
 	
 	// Only display buttons when a room has been selected
 	$("#board").on("change", function() {
-		console.log("Doing stuff..");
 		var r_id = $(this).val();
 		if (r_id != "") {
 			$.cookie("r_id", r_id);
