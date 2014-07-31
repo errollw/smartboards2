@@ -85,7 +85,7 @@ $(function() {
 					timedOut = true;
 					console.log("Image timed out: " + url);
 					hideSpinner();
-				}, 1000);
+				}, 3000);
 			}
 		}
 		if (dataTransfer.files.length > 0) {
