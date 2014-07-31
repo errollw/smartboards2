@@ -42,14 +42,6 @@ $(document).ready(function(){
         // resp.lastmod is Epoch TIMESTAMP (in seconds, not ms)
         $('#room-last-mod').text('Content last updated ' + moment.unix(resp.lastmod).fromNow() +'. Rendered within the last 15 minutes.')
     });
-
-    $('#open_editor').click(function(){
-		window.location.href = window.location.href.replace("viewer.html", "board.html");
-    });
-
-    $('#set_status').click(function(){
-		window.location.href = window.location.href.replace("viewer.html", "set_status.html");
-    });
     
 	$("#btn_returntoindex").click(function() {
 		window.location.href = window.location.href.replace("viewer.html", "index.html");
