@@ -19,7 +19,7 @@ else:
   valid = False
 ## Validate data if provided, else set a default of empty string
 if "data" in args:
-  if re.match("^[\\w,=;]*$", args["data"].value):
+  if re.match("^[\\w,=; ]*$", args["data"].value):
     extraData = args["data"].value
   else:
     valid = False

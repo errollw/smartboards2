@@ -31,7 +31,7 @@ function save_status(user_section){
 		success: function(json, status, jqXHR) {
 			if (json.success) {
 				saveSuccess();
-				logAction(r_id, "setstatus", "user=" + users[0].u_id);
+				logAction(r_id, "setstatus", "user=" + users[0].u_id + ";status=" + users[0].status.replace(/[^\w\s]/gi, ''));
 			} else {
 				saveFail();
 			}
