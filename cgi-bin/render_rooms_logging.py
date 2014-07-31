@@ -32,7 +32,7 @@ if __name__ == "__main__":
     for png in pngs:
         img = Image.open(png)
         img.thumbnail(size, Image.ANTIALIAS)
-        img.save(os.path.join(archive_dir, dateTimeStr + png), "JPEG")
+        img.save(os.path.join(archive_dir, dateTimeStr + png.replace(".png", ".jpg")), "JPEG")
 		
         # remove old png if it exists
         os.remove(png)
