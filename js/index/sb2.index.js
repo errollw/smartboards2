@@ -70,4 +70,9 @@ $(function() {
 	$("#btn_static_viewer").on("click", function() {
 		window.location.href = "viewer.html?r_id=" + $("#board").val();
 	});
+	
+	// Hide the Chrome Notifications plugin ad for all browssers except Google Chrome
+	if (window.navigator.userAgent.indexOf("Chrome") == -1) {
+		$("#chromeapp").remove();
+	}
 });

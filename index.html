@@ -37,19 +37,21 @@ button { margin-bottom:0.809em; }
 	</section>
 
 	<section>
-		Select your board:
-		<select id="board">
-			<option value=""></option>
-			<option value="r_ss04">SS04</option>
-			<option value="r_ss06">SS06</option>
-			<option value="r_ss08">SS08</option>
-			<option value="r_ss10">SS10</option>
-			<option value="r_ss12">SS12</option>
-			<option value="r_ss14">SS14</option>
-			<option value="r_ss16">SS16</option>
-			<option value="r_ss20">SS20</option>
-			<option value="r_ss22">SS22</option>
-		</select>
+		<p>
+			Select your board:
+			<select id="board">
+				<option value=""></option>
+				<option value="r_ss04">SS04</option>
+				<option value="r_ss06">SS06</option>
+				<option value="r_ss08">SS08</option>
+				<option value="r_ss10">SS10</option>
+				<option value="r_ss12">SS12</option>
+				<option value="r_ss14">SS14</option>
+				<option value="r_ss16">SS16</option>
+				<option value="r_ss20">SS20</option>
+				<option value="r_ss22">SS22</option>
+			</select>
+		</p>
 	</section>
 	
 	<footer id="buttons">
@@ -58,6 +60,30 @@ button { margin-bottom:0.809em; }
 		<button id='btn_configure_board' class='SUN-FLOWER'>configure board</button>
 		<button id='btn_static_viewer' class='PETER-RIVER'>static viewer</button>
 	</footer>
+	
+	<section id="chromeapp" class="desktop-only" style="border:1px solid #999;border-radius:3px">
+		<h2>Google Chrome Notifications Plugin</h2>
+		<div>
+			<img src="assets/notification_screenshot.png" style="float:left; margin-right:15px;" />
+			<p>Get desktop notifications when your NetBoard is updated.</p>
+			<p>Download it from <a href="https://chrome.google.com/webstore/detail/netboards-notification-pl/fhjgngfnnopgjmaeipjpeejigpmbgkhl">the Chrome Web Store</a></p>
+		</div>
+		<div style="clear:both;width:100%;"></div>
+		<p>
+			<strong>Configuration</strong>
+			<br />
+			Once you've installed it, open the extension's options page and enter the following information:
+			<br />
+			<em>Board URL</em>
+			https://netboards.cl.cam.ac.uk/secure/board.html
+			<br />
+			<em>Board Version URL</em>
+			https://netboards.cl.cam.ac.uk/get_board_ver.py
+			<br />
+			<em>Room</em>
+			r_ssXX (replace XX with your room number)
+		</p>
+	</section>
 
 </body>
 </html>
