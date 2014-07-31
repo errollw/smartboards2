@@ -54,10 +54,11 @@ $(function() {
 			if (url != "") {
 				// Test if the URL is of an image (http://stackoverflow.com/a/9714891)
 				
-				if (url.indexOf("https://") != 0) {
+				if (!(/^https?:\/\//.test(url))) {
 					// Require image to be served over HTTPS (not HTTP or DATA)
-					alert("Images must be served over HTTPS.");
-					console.log("Images must be served over HTTPS.");
+					var message = "The image that you dropped is not served over HTTP or HTTPS.\nPlease save the image to your computer and then drag-and-drop it onto the board.";
+					alert(message);
+					console.log(message);
 					hideSpinner();
 					return;
 				}
