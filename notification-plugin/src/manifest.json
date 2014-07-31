@@ -12,7 +12,8 @@
 	"permissions": [
 		"storage",
 		"notifications",
-		"http://*/"
+		"http://*/",
+		"https://*/"
 	],
 	"icons": {
 		"16": "icon_16.png",
