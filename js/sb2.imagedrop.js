@@ -55,7 +55,7 @@ $(function() {
 				// Test if the URL is of an image (http://stackoverflow.com/a/9714891)
 				
 				if (!(/^https?:\/\//.test(url))) {
-					// Require image to be served over HTTPS (not HTTP or DATA)
+					// Require image to be served over HTTP or HTTPS (not data URIs or anything exotic)
 					var message = "The image that you dropped is not served over HTTP or HTTPS.\nPlease save the image to your computer and then drag-and-drop it onto the board.";
 					alert(message);
 					console.log(message);
