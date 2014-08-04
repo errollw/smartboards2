@@ -25,10 +25,35 @@
 <script type="text/javascript" src="js/archive/sb2.archive.js"></script>
 
 <style>
+#imagecontainer a {
+    margin:5px;
+    display:inline-block;
+    transition: all 0.3s ease-in-out;
+    position:relative;
+    z-index:1000;
+}
+
 #imagecontainer img {
     height:384px;
     width:216px;
-    margin:5px;
+    border:1px solid #999;
+    border-radius:3px;
+    
+    transition: all 0.3s ease-in-out;
+    z-index:1001;
+}
+
+#imagecontainer a:hover {
+    z-index:1002;
+}
+
+#imagecontainer a:hover img {
+    -webkit-transform:scale(1.5); /* Safari and Chrome */
+    -moz-transform:scale(1.5); /* Firefox */
+    -ms-transform:scale(1.5); /* IE 9 */
+    -o-transform:scale(1.5); /* Opera */
+     transform:scale(1.5);
+     z-index:1003;
 }
 </style>
 
@@ -36,6 +61,23 @@
 <body>
 	<div>
 		<h1>NetBoards Archive</h1>
+        <form action="archive.html" method="get">
+            <p>
+                Select a board to view screenshots from only that board:
+                <select id="board" name="r_id">
+                    <option value="">All Boards</option>
+                    <option value="r_ss04">SS04</option>
+                    <option value="r_ss06">SS06</option>
+                    <option value="r_ss08">SS08</option>
+                    <option value="r_ss10">SS10</option>
+                    <option value="r_ss12">SS12</option>
+                    <option value="r_ss14">SS14</option>
+                    <option value="r_ss16">SS16</option>
+                    <option value="r_ss20">SS20</option>
+                    <option value="r_ss22">SS22</option>
+                </select>
+            </p>
+        </form>
 	</div>
     <div id="imagecontainer">
     
