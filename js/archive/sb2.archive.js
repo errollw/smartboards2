@@ -107,7 +107,7 @@ $(function() {
                         "src": imageUrl
                     }).appendTo(link);
                     
-                    $("<div />").addClass("star").appendTo(link);
+                    $("<div />").text("★").addClass("star").appendTo(link);
                     
                     $.data(link[0], "imageName", imageName);
                     
