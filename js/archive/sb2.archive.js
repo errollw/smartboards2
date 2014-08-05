@@ -66,9 +66,14 @@ $(function() {
     };
     
     var starredImages, starringEnabled = false;
+    var displayOnlyStarredImages = false;
+    if ("displayOnlyStarredImages" in urlParams && urlParams["displayOnlyStarredImages"].length > 1) {
+        displayOnlyStarredImages = true;
+        $("#displayOnlyStarredImages").prop('checked', true);
+    }
     
     $.ajax({
-        "url": "cgi-bin/get_archive_images.py",
+        "url": displayOnlyStarredImages ? "content/starredImages/starredImages.json" : "cgi-bin/get_archive_images.py",
         "data": getData,
         "success": function(response) {
             var imageContainer = $("#imagecontainer");
@@ -119,8 +124,8 @@ $(function() {
                 "success": function(data) {
                     starredImages = data;
                     starringEnabled = true;
-                    for (i in starredImages.starredImages) {
-                        var imageName = starredImages.starredImages[i];
+                    for (i in starredImages.images) {
+                        var imageName = starredImages.images[i];
                         $("#imagecontainer img[src*=" + imageName.replace(/\./g, "\\.") + "] + div").addClass("star-selected");
                     }
                 },
@@ -173,16 +178,16 @@ $(function() {
             if ($(this).hasClass("star-selected") == false) {
                 // Starring the item
                 // Only insert if not already present
-                if (starredImages.starredImages.indexOf(imageName) == -1) {
-                    starredImages.starredImages.push(imageName);
+                if (starredImages.images.indexOf(imageName) == -1) {
+                    starredImages.images.push(imageName);
                     $(this).addClass("star-selected");
                     changesMade = true;
                 }
             } else {
                 // Un-starring the item
                 // Only delete if already present
-                if (starredImages.starredImages.indexOf(imageName) != -1) {
-                    starredImages.starredImages = _.without(starredImages.starredImages, imageName);
+                if (starredImages.images.indexOf(imageName) != -1) {
+                    starredImages.images = _.without(starredImages.images, imageName);
                     $(this).removeClass("star-selected");
                     changesMade = true;
                 }
