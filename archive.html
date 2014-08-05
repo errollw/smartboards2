@@ -13,6 +13,8 @@
 <link rel="stylesheet" href="css/normalize.css">
 <link rel="stylesheet" href="css/styles-page.css">
 
+<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+  
 <!-- load libraries -->
 <script type="text/javascript" src="js/lib/jquery.js"></script>
 <script type="text/javascript" src="js/lib/jquery.simplemessage.js"></script>
@@ -25,12 +27,17 @@
 <script type="text/javascript" src="js/archive/sb2.archive.js"></script>
 
 <style>
+form input {
+    position:relative;
+    z-index:10;
+}
+
 #imagecontainer a {
     margin:5px;
     display:inline-block;
     transition: all 0.3s ease-in-out;
     position:relative;
-    z-index:1000;
+    z-index:5;
 }
 
 #imagecontainer > div {
@@ -69,21 +76,36 @@
     border-radius:3px;
     
     transition: all 0.3s ease-in-out;
-    z-index:1001;
+    z-index:6;
     vertical-align:bottom;
 }
 
 #imagecontainer a:hover {
     z-index:1002;
-}
-
-#imagecontainer a:hover img {
     -webkit-transform:scale(1.5); /* Safari and Chrome */
     -moz-transform:scale(1.5); /* Firefox */
     -ms-transform:scale(1.5); /* IE 9 */
     -o-transform:scale(1.5); /* Opera */
      transform:scale(1.5);
-     z-index:1003;
+}
+
+#imagecontainer a:hover img {
+     z-index:7;
+}
+.ui-widget {
+    font-size:12px;
+}
+
+.star {
+    position:absolute;
+    top:4px;
+    right:4px;
+    background:#999;
+    width:20px;
+    height:20px;
+}
+.star-selected {
+    background:yellow;
 }
 </style>
 
@@ -106,6 +128,13 @@
                     <option value="r_ss20">SS20</option>
                     <option value="r_ss22">SS22</option>
                 </select>
+            </p>
+            <p>
+                <label for="from">From</label>
+                <input type="text" name="from" id="from" />
+                <label for="to">To</label>
+                <input type="text" name="to" id="to" />
+                <input type="submit" value="Update View" />
             </p>
         </form>
 	</div>

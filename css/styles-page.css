@@ -147,39 +147,6 @@ aside span {
   }
 }
 
-input {
-  float: left;
-  display: block;
-  margin-right: 2.84259%;
-  width: 69.14722%;
-  margin-right: 0;
-  height: 2.427em;
-  padding: 0 0.4854em;
-  margin-bottom: 0.809em;
-  border-radius: 2px;
-  border: 1px solid #DDD;
-}
-input:last-child {
-  margin-right: 0;
-}
-@media screen and (max-width: 480px) {
-  input {
-    float: left;
-    display: block;
-    margin-right: 7.42297%;
-    width: 73.14426%;
-    margin-right: 0;
-  }
-  input:last-child {
-    margin-right: 0;
-  }
-}
-input:active, input:focus {
-  outline: none;
-  box-shadow: none;
-  border: 1px solid #3498db;
-}
-
 button {
   height: 2.427em;
   padding: 0 0.9708em;

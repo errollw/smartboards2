@@ -76,28 +76,6 @@ aside {
 }
 
 
-input {
-	@include span-columns(7 of 10);
-	@include omega;
-	@include media($mobile) {
-		@include span-columns(3);
-		@include omega;
-	}
-	
-
-	height: golden-ratio(1.5em, 1);
-	padding: 0 golden-ratio(0.3em, 1);
-	margin-bottom: golden-ratio(0.5em, 1);
-
-	border-radius: 2px;
-	border: 1px solid #DDD;
-
-	&:active, &:focus {
-		outline:none;
-		box-shadow:none;
-		border: 1px solid $PETER-RIVER;
-	}
-}
 
 button {
 	height: golden-ratio(1.5em, 1);
