@@ -41,15 +41,26 @@ $(function() {
         "data": getData,
         "success": function(response) {
             var imageContainer = $("#imagecontainer");
+            var lastDate = "";
+            var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
             
             for (var i = 0; i < response.images.length; i++) {
                 var imageName = response.images[i];
                 var imageUrl = "content/archive/" + imageName;
                 var imageMetadata = extractImageMetadata(imageName);
+                var formattedDate = pad(imageMetadata.date.getDate(),2) + "/" + pad(imageMetadata.date.getMonth() + 1, 2) + "/" + imageMetadata.date.getFullYear();
+                var formattedTime = pad(imageMetadata.date.getHours(), 2) + ":" + pad(imageMetadata.date.getMinutes(), 2);
+                
+                // Display the date whenever it changes
+                if (lastDate != formattedDate) {
+                    $("<div />").html("<div><span class=\"day\">" + imageMetadata.date.getDate() + "</span><br /><span class=\"month\">" + monthNames[imageMetadata.date.getMonth()] + "</span></div>").appendTo(imageContainer);
+                }
+                lastDate = formattedDate;
+                
                 var link = $("<a />").attr({
                    "href": imageUrl,
                    "target": "_blank",
-                   "title": imageMetadata.room + ": " + pad(imageMetadata.date.getDate(),2) + "/" + pad(imageMetadata.date.getMonth() + 1, 2) + "/" + imageMetadata.date.getFullYear() + " " + pad(imageMetadata.date.getHours(), 2) + ":" + pad(imageMetadata.date.getMinutes(), 2)
+                   "title": imageMetadata.room + ": " + formattedDate + " " + formattedTime
                 });
                 var image = $("<img />").attr({
                     "src": imageUrl
