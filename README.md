@@ -29,4 +29,4 @@ In our deployment, each NetBoard uses a 22-inch portrait-oriented wall-mounted t
 
 These PCs are configured to auto-login at boot and to start the Chrome web browser automatically. The [Window Positioner plugin for Chrome](https://github.com/s-haines/chrome-window-positioner) is used to load, position, and fullscreen the browser windows.
 
-The server currently runs on a university-based shared hosting platform that supports Python. It is due to be migrated to a virtual server on the department's services.
+The project is hosted on a Virtual Machine in the Computer Laboratory's VM pool. The server supports Python for the server-side scripts, and also runs board-rendering scripts periodically.
