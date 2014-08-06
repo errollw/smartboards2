@@ -14,7 +14,11 @@ All files should be placed on a webserver. Python files in the cgi-bin directory
 * __cgi-bin/__ back-end Python scripts
 * __css/__ CSS for front-end, including SASS code
 * __js/__ JavaScript scripts and libraries
-* __index.html__ interactive viewer/editor
+* __archive.html__ view images screenshots of the boards over time
+* __board.html__ interactive viewer/editor
+* __index.html__ index page for users
+* __information.html__ info about the project, and a QR code to the index page
+* __logviewer.html__ view usage logs
 * __set_status.html__ page to set text status
 * __settings.html__ page to configure users for each room
 * __viewer.html__ static viewer
