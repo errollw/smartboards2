@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>NetBoards - Log Viewer</title>
+
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<!-- fonts -->
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,400,600,700' rel='stylesheet' type='text/css'>
+
+<!-- stylesheets -->
+<link rel="stylesheet" href="css/normalize.css">
+<link rel="stylesheet" href="css/styles-page.css">
+
+<!-- load libraries -->
+<script type="text/javascript" src="js/lib/paper.js"></script>
+<script type="text/javascript" src="js/lib/jquery.js"></script>
+<script type="text/javascript" src="js/lib/moment.min.js"></script>
+<script type="text/javascript" src="js/lib/lodash.js"></script>
+<script type="text/javascript" src="js/lib/jquery.csv-0.71.min.js"></script>
+<script type="text/javascript" src="js/lib/stupidtable.min.js"></script>
+
+<script type="text/javascript" src="js/logviewer/sb2.logviewer.js"></script>
+
+<style type="text/css">
+body {
+    padding: 0 10px;
+}
+
+#logs {
+    border-collapse: collapse;
+}
+#logs, #logs th, #logs td {
+    border:1px solid #999;
+}
+
+#logs th, #logs td {
+    padding:3px 6px;
+}
+
+#logs th {
+    -moz-user-select:-moz-none;
+    -moz-user-select:none;
+    -o-user-select:none;
+    -khtml-user-select:none;
+    -webkit-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+    cursor:pointer;
+}
+
+#logs tr:hover td {
+    background:#F5F4C1;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>NetBoards Log Viewer</h1>
+<p>
+    <button id="returntoindex" class="PETER-RIVER">return to index</button>
+    <button id="downloadcsv" class="PETER-RIVER">download csv</button>
+</p>
+
+<table id="logs">
+    <thead>
+        <tr>
+            <th data-sort="string">Date &amp; Time</th>
+            <th data-sort="string">IP Address</th>
+            <th data-sort="string">User Agent</th>
+            <th data-sort="string">Room</th>
+            <th data-sort="string">Action</th>
+            <th data-sort="string">Action Data</th>
+        </tr>
+    </thead>
+    <tbody>
+    
+    </tbody>
+</table>
+
+
+</body>
+
+</html>
