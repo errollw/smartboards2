@@ -30,16 +30,14 @@ body {
 
 #logs {
     border-collapse: collapse;
+    font-size: 12pt;
 }
 #logs, #logs th, #logs td {
     border:1px solid #999;
 }
 
-#logs th, #logs td {
-    padding:3px 6px;
-}
-
 #logs th {
+    padding:4px 6px;
     -moz-user-select:-moz-none;
     -moz-user-select:none;
     -o-user-select:none;
@@ -48,6 +46,9 @@ body {
     -ms-user-select:none;
     user-select:none;
     cursor:pointer;
+}
+ #logs td {
+    padding:2px 6px;
 }
 
 #logs tr:hover td {
@@ -69,7 +70,7 @@ body {
 <table id="logs">
     <thead>
         <tr>
-            <th data-sort="string">Date &amp; Time</th>
+            <th data-sort="string" style="width:170px">Date &amp; Time</th>
             <th data-sort="string">IP Address</th>
             <th data-sort="string">User Agent</th>
             <th data-sort="string">Room</th>
