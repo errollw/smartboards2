@@ -35,8 +35,15 @@ $(document).ready(function(){
     if (urlParams['r_id']) r_id = urlParams['r_id'].toLowerCase();
 
     // page has been opened in render mode for server-side rendering
-    if (urlParams['render'] && urlParams['render'] !== 'false'){
+    if (urlParams['render'] && urlParams['render'] !== 'false') {
         $('#controls').hide();
+    }
+    // If we're on a NetBoard, auto-hide the controls
+    if (navigator.userAgent.indexOf("NetBoard/") > -1) {
+        var $controls = $("#controls, #color_picker").addClass("notransition");
+        hide_controls();
+        $controls[0].offsetHeight;
+        $controls.removeClass("notransition");
     }
 
     // avoid caching .json files
