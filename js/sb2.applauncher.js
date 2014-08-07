@@ -11,7 +11,8 @@ $(function() {
             "text-align":"center",
             "line-height":"30px",
             "padding":"10px 0",
-            "height":"60px"
+            "height":"60px",
+            "color":"#a7a9ac"
         }).on("click", function() {
             var img = new Image();
             img.src = "http://localhost:8080/?rand=" + Math.random();
