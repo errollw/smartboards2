@@ -36,8 +36,6 @@ function handle_mouse_down_pen(evt) {
     pen_mouse_stroke.strokeWidth = get_thickness_as_width();
     pen_mouse_stroke.strokeJoin = 'round';
 
-    pen_speed_path = new Path();
-    pen_speed_path.strokeColor ='black'
 
     pen_mouse_stroke.add(currentMouse);
 
