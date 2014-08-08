@@ -2,21 +2,26 @@
 
 $(function() {   
 
-    var enabled_rooms = [ "r_ss12" ];
+    var enabled_rooms = [ {"r_id": "r_ss12", "port": 8080} ];
 
-    if (enabled_rooms.indexOf(r_id) > -1) {
-        $controls = $("#controls");
-        $button = $("<div />").addClass("button").attr("id", "applauncher").html("Start<br />App").css({
-            "font-weight":"bold",
-            "text-align":"center",
-            "line-height":"30px",
-            "padding":"10px 0",
-            "height":"60px",
-            "color":"#a7a9ac"
-        }).on("click", function() {
-            var img = new Image();
-            img.src = "http://localhost:8080/?rand=" + Math.random();
-        });
-        $("<section />").append($button).appendTo($controls);
+    for (var i = 0; i < enabled_rooms.length; i++) {
+        if (enabled_rooms[i].r_id == r_id) {
+            $controls = $("#controls");
+            $button = $("<div />").addClass("button").attr("id", "applauncher").html("Start<br />App").css({
+                "font-weight":"bold",
+                "text-align":"center",
+                "line-height":"30px",
+                "padding":"10px 0",
+                "height":"60px",
+                "color":"#a7a9ac"
+            }).on("click", function() {
+                var img = new Image();
+                img.src = "http://localhost:" + enabled_rooms[i].port + "/?rand=" + Math.random();
+            });
+            $("<section />").append($button).appendTo($controls);
+            
+            // Don't continue searching
+            break;
+        }
     }
 });
