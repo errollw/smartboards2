@@ -1,0 +1,29 @@
+@import "bourbon/bourbon";
+@import "neat/neat";
+
+
+#shortcuts {
+    @include outer-container;
+    
+   div {
+        @include span-columns(6);
+        p {
+            line-height:70px;
+        }
+        
+    }
+}
+
+$keyDimension: 60px;
+.key {
+    display:inline-block;
+    background:url("../assets/key.svg") no-repeat center center;
+    height:$keyDimension;
+    width:$keyDimension;
+    line-height:$keyDimension;
+    text-align:center;
+    font-weight:bold;
+    font-size:18px;
+    vertical-align:middle;
+    margin-right:5px;
+}

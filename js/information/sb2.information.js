@@ -18,9 +18,9 @@ $(function() {
 	initializeUrlParams();
 	
 	
-	$("#btn_return").text(urlParams["r_id"] ? "return to board" : "return to index page");
+	$(".btn_return").text(urlParams["r_id"] ? "return to board" : "return to index page");
 	
-	$("#btn_return").on("click", function() {
+	$(".btn_return").on("click", function() {
 		if (urlParams["r_id"]) {
 			window.location.href = window.location.href.replace("information.html", "board.html");
 		} else {

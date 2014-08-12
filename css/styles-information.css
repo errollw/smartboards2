@@ -1,0 +1,41 @@
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+#shortcuts {
+  max-width: 68em;
+  margin-left: auto;
+  margin-right: auto;
+}
+#shortcuts:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+#shortcuts div {
+  float: left;
+  display: block;
+  margin-right: 2.35765%;
+  width: 48.82117%;
+}
+#shortcuts div:last-child {
+  margin-right: 0;
+}
+#shortcuts div p {
+  line-height: 70px;
+}
+
+.key {
+  display: inline-block;
+  background: url("../assets/key.svg") no-repeat center center;
+  height: 60px;
+  width: 60px;
+  line-height: 60px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 18px;
+  vertical-align: middle;
+  margin-right: 5px;
+}

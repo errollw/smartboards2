@@ -75,6 +75,10 @@ $(document).on("keydown", function (evt) {
                 show_floatie(selected_items_rect.position);
                 dealtWith = true;
                 break;
+            case 82: // R key for Ctrl-R reset board
+                project.clear();
+                dealtWith = true;
+                break;
         }
     } else if (!evt.ctrlKey && evt.altKey) {
         // Alt key only
@@ -85,10 +89,6 @@ $(document).on("keydown", function (evt) {
             case 46: // Delete key for delete item
                 remove_selected_items();
                 hide_floatie();
-                dealtWith = true;
-                break;
-            case 78: // N key for new
-                project.clear();
                 dealtWith = true;
                 break;
             case 36: // Home key for bring to top
@@ -109,9 +109,7 @@ $(document).on("keydown", function (evt) {
                     while (item.nextSibling !== null && (item.selected == true || item instanceof Shape)) {
                         item = item.nextSibling;
                     }
-                    console.log("Index was", project.selectedItems[i].index);
                     project.selectedItems[i].insertAbove(item);
-                    console.log("Index now", project.selectedItems[i].index);
                 }
                 dealtWith = true;
                 break;
@@ -121,9 +119,7 @@ $(document).on("keydown", function (evt) {
                     while (item.previousSibling !== null && (item.selected == true || item instanceof Shape)) {
                         item = item.previousSibling;
                     }
-                    console.log("Index was", project.selectedItems[i].index);
                     project.selectedItems[i].insertBelow(item);
-                    console.log("Index now", project.selectedItems[i].index);
                 }
                 dealtWith = true;
                 break;
@@ -145,6 +141,11 @@ $(document).on("keydown", function (evt) {
                 break;
             case  73: // I for image tool selection
                 imageUrlPrompt();
+                dealtWith = true;
+                break;
+            case 27: // Escape for cancel selection
+                deselect_all();
+                hide_floatie();
                 dealtWith = true;
                 break;
         }

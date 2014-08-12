@@ -12,6 +12,7 @@
 <!-- stylesheets -->
 <link rel="stylesheet" href="css/normalize.css">
 <link rel="stylesheet" href="css/styles-page.css">
+<link rel="stylesheet" href="css/styles-information.css">
 
 <!-- load libraries -->
 <script type="text/javascript" src="js/lib/jquery.js"></script>
@@ -52,9 +53,58 @@ button { margin-bottom:0.809em; }
 	</section>
 
 	<section>
-		<p><button id="btn_return" class="TURQUOISE">return</button></p>
+		<p><button class="btn_return TURQUOISE">return</button></p>
 	</section>
 	
+    <section>
+        <h2>Keyboard shortcuts</h2>
+        <div id="shortcuts">
+            <div id="shortcuts-left">
+                <h3>Undo and Redo</h3>
+                <p>
+                    <span class="key">Ctrl</span><span class="key">Z</span> Undo<br/>
+                    <span class="key">Ctrl</span><span class="key">Y</span> Redo
+                </p>
+                <h3>Clipboard</h3>
+                <p>
+                    <span class="key">Ctrl</span><span class="key">X</span> Cut<br/>
+                    <span class="key">Ctrl</span><span class="key">C</span> Copy<br/>
+                    <span class="key">Ctrl</span><span class="key">V</span> Paste
+                </p>
+                <h3>Ordering</h3>
+                <p>
+                    <span class="key">Home</span> Bring to front<br/>
+                    <span class="key">End</span> Send to back<br/>
+                    <span class="key">PgUp</span> Bring forward<br/>
+                    <span class="key">PgDn</span> Send backward
+                </p>
+            </div>
+            <div id="shortcuts-right">
+                <h3>Tools</h3>
+                <p>
+                    <span class="key">C</span> Cursor<br/>
+                    <span class="key">D</span> Drawing (Pen)<br/>
+                    <span class="key">E</span> Eraser<br/>
+                    <span class="key">P</span> Pan
+                </p>
+                <h3>Selection</h3>
+                <p>
+                    <span class="key">Ctrl</span><span class="key">A</span> Select all<br/>
+                    <span class="key">Esc</span> Clear selection
+                </p>
+                <h3>Other</h3>
+                <p>
+                    <span class="key">Ctrl</span><span class="key">D</span> Duplicate<br/>
+                    <span class="key">Del</span> Delete<br/>
+                    <span class="key">Ctrl</span><span class="key">R</span> Reset board<br/>
+                    <span class="key">I</span> Image URL
+                </p>
+            </div>
+        </div>
+    </section>
 
+	<section>
+		<p><button class="btn_return TURQUOISE">return</button></p>
+	</section>
 </body>
 </html>
