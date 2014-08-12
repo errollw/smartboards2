@@ -39,3 +39,9 @@
   vertical-align: middle;
   margin-right: 5px;
 }
+
+.key-longtext {
+  font-size: 14px;
+  line-height: 25px;
+  padding: 5px 0;
+}

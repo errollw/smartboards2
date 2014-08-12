@@ -4,6 +4,14 @@ default_edit_mode = "SELECTING";
 
 // Clipboard (array of exported JSON strings)
 var clipboard = [];
+var moveSelectedItems = function (d) {
+    for (var i = 0; i < project.selectedItems.length; i++) {
+        project.selectedItems[i].position = project.selectedItems[i].position.add(d);
+    }
+    if (project.selectedItems.length > 0) {
+        show_floatie(selected_items_rect.position);
+    }
+}
 
 $(document).on("keydown", function (evt) {
     
@@ -77,6 +85,7 @@ $(document).on("keydown", function (evt) {
                 break;
             case 82: // R key for Ctrl-R reset board
                 project.clear();
+                hide_floatie();
                 dealtWith = true;
                 break;
         }
@@ -146,6 +155,22 @@ $(document).on("keydown", function (evt) {
             case 27: // Escape for cancel selection
                 deselect_all();
                 hide_floatie();
+                dealtWith = true;
+                break;
+            case 38: // Up arrow for move up (Shift-Up for fine movement)
+                moveSelectedItems(new Point(0,evt.shiftKey ? -1 : -10));
+                dealtWith = true;
+                break;
+            case 40: // Down arrow for move up (Shift-Down for fine movement)
+                moveSelectedItems(new Point(0,evt.shiftKey ? 1 : 10));
+                dealtWith = true;
+                break;
+            case 37: // Left arrow for move up (Shift-Left for fine movement)
+                moveSelectedItems(new Point(evt.shiftKey ? -1 : -10, 0));
+                dealtWith = true;
+                break;
+            case 39: // Right arrow for move up (Shift-Right for fine movement)
+                moveSelectedItems(new Point(evt.shiftKey ? 1 : 10, 0));
                 dealtWith = true;
                 break;
         }
