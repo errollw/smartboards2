@@ -44,7 +44,8 @@ $(document).ready(function(){
     controls.addEventListener("touchmove",  set_busy);
     controls.addEventListener("mousemove",  set_busy);
     controls.addEventListener("touchstart", set_busy);
-    controls.addEventListener("mousedown",  set_busy);
+    controls.addEventListener("mousedown",  set_busy); 
+    window.addEventListener("keydown",  set_busy, true);
 
     set_idle();
 });

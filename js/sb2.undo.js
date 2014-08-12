@@ -9,7 +9,7 @@ function FixedQueue(e,t){t=t||[];var n=Array.apply(null,t);n.fixedSize=e;n.push=
 var undo_stackLength = 25;
 var undo_undoStack = FixedQueue(undo_stackLength);
 var undo_redoStack = FixedQueue(undo_stackLength);
-var undo_saveState, undo_performUndo, undo_updateButtons, tidyJSONProject;
+var undo_saveState, undo_performUndo, undo_performRedo, undo_updateButtons, tidyJSONProject;
 $(function(){
 	
 	/* Function to perform an in-place tidy up the generated JSON representation
@@ -145,13 +145,7 @@ $(function(){
 		}
 	});
 	
-	/* Bind undo_performUndo to the Control-Z keyboard shortcut
-	 */
-	$(document).on("keyup", function(event) {
-		if (event.ctrlKey && event.keyCode == 90) {
-			 undo_performUndo();
-		}
-	});
+	
 	
 	/* Bind to undo button in controls
 	 */
