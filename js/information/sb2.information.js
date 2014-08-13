@@ -38,7 +38,7 @@ $(function() {
 	
 	$("#customiselink").text(customiseLink);
 	// Only make link clickable if it isn't the NetBoards browser
-	if (navigator.userAgent.indexOf("NetBoards") == -1) {
+	if (navigator.userAgent.indexOf("NetBoard/") == -1) {
 		$("#customiselink").attr("href", customiseLink);
 	}
 	
