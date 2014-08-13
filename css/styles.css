@@ -193,6 +193,7 @@
   padding: 0px;
   background-color: #EEE;
   -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
 }
 
 #trash {
