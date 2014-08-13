@@ -44,9 +44,6 @@ $(document).ready(function(){
         hide_controls();
         $controls[0].offsetHeight;
         $controls.removeClass("notransition");
-    } else {
-        // Allow vertical scrolling on desktop
-        $("body").css("overflow-y", "scroll");
     }
 
     // avoid caching .json files
