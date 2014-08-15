@@ -10,8 +10,9 @@ var ctrl_pts_resize = [],
 function select_items_in_rect(){
     var items_raster =  project.getItems({ position: pos_fn, class: Raster });
     var items_path =  project.getItems({ position: pos_fn, class: Path });
+    var items_text =  project.getItems({ position: pos_fn, class: PointText });
 
-    return items_raster.concat(items_path);
+    return items_raster.concat(items_path.concat(items_text));
 }
 
 function pos_fn(pos) {

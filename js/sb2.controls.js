@@ -28,7 +28,6 @@ $(document).on("keydown", function (evt) {
                 remove_selection_rects();
                 for (var i = 0; i < project.layers.length; i++) {
                     for (var j = 0; j < project.layers[i].children.length; j++) {
-                        console.log(i,j);
                         project.layers[i].children[j].selected = true;
                     }
                 }
@@ -171,6 +170,10 @@ $(document).on("keydown", function (evt) {
                 break;
             case 39: // Right arrow for move up (Shift-Right for fine movement)
                 moveSelectedItems(new Point(evt.shiftKey ? 1 : 10, 0));
+                dealtWith = true;
+                break;
+            case 84: // T for text modes
+                set_edit_mode("TEXT");
                 dealtWith = true;
                 break;
         }
