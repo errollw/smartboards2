@@ -51,7 +51,9 @@ function build_color_picker(){
 		if (is_color_picker_open){
 			$.cookie("penColour", $(this).css("backgroundColor"), {expires:7});
 			set_pen_color($(this).css('backgroundColor'));
-			set_edit_mode("DRAWING");
+            if (edit_mode != "TEXT") {
+                set_edit_mode("DRAWING");
+            }
 		}
 	});
 }

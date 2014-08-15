@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="200"
+   height="200"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.4 r9939"
+   sodipodi:docname="icon_text.svg">
+  <defs
+     id="defs4">
+    <inkscape:path-effect
+       effect="skeletal"
+       id="path-effect3000"
+       is_visible="true"
+       pattern="M 0,5 C 0,2.24 2.24,0 5,0 7.76,0 10,2.24 10,5 10,7.76 7.76,10 5,10 2.24,10 0,7.76 0,5 z"
+       copytype="single_stretched"
+       prop_scale="1"
+       scale_y_rel="false"
+       spacing="0"
+       normal_offset="0"
+       tang_offset="0"
+       prop_units="false"
+       vertical_pattern="false"
+       fuse_tolerance="0" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="3.959798"
+     inkscape:cx="104.50468"
+     inkscape:cy="99.081316"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="1137"
+     inkscape:window-x="1072"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-852.36218)">
+    <g
+       transform="matrix(4.264141,0,0,4.264141,254.52514,755.24019)"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#a7a9ac;fill-opacity:1;stroke:none;font-family:Times New Roman;-inkscape-font-specification:Times New Roman"
+       id="flowRoot2984">
+      <path
+         d="m -25.417969,32.985641 0.292969,6.210938 -0.742187,0 c -0.143252,-1.093729 -0.338565,-1.874978 -0.585938,-2.34375 -0.403668,-0.755185 -0.940776,-1.311825 -1.611328,-1.669922 -0.670593,-0.358049 -1.552753,-0.537085 -2.646484,-0.53711 l -3.730469,0 0,20.234375 c -1.4e-5,1.627607 0.175767,2.643231 0.527344,3.046875 0.494776,0.546876 1.256494,0.820314 2.285156,0.820313 l 0.917969,0 0,0.722656 -11.230469,0 0,-0.722656 0.9375,0 c 1.119783,10e-7 1.914053,-0.338541 2.382812,-1.015625 0.286448,-0.416665 0.429677,-1.367185 0.429688,-2.851563 l 0,-20.234375 -3.183594,0 c -1.236985,2.5e-5 -2.11589,0.09117 -2.636719,0.273438 -0.677087,0.24742 -1.256513,0.72268 -1.738281,1.425781 -0.481773,0.703148 -0.768231,1.653667 -0.859375,2.851563 l -0.742187,0 0.3125,-6.210938 z"
+         id="path2988"
+         inkscape:connector-curvature="0" />
+    </g>
+  </g>
+</svg>

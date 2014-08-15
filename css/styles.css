@@ -431,6 +431,9 @@ header div.profile-pic {
 #controls div.button#pan {
   background-image: url("../assets/icon_pan.svg");
 }
+#controls div.button#text {
+  background-image: url("../assets/icon_text.svg");
+}
 #controls div.button#undo {
   background-image: url("../assets/icon_undo-disabled.svg");
 }

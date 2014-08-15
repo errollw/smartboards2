@@ -5,10 +5,8 @@ $(function() {
     // Is the user's finger/mouse dragging?
     var isPointerDown = false, touchID, startPosition;
 
-    
     // Bind event handlers
     $("canvas").on("mousedown touchstart", function(e) {
-        // Starting pan
         if (edit_mode != "TEXT" || isPointerDown == true) return;
         isPointerDown = true;
         
@@ -21,7 +19,6 @@ $(function() {
         }
         
     }).on("mouseup mouseout touchend touchcancel touchleave", function(e) {
-        // Ending pan
         if (edit_mode != "TEXT" || isPointerDown == false) return;
         
         var endPosition = null;
@@ -85,5 +82,10 @@ $(function() {
             }
         }
     });
-		
+	
+    // If it is the NetBoard, remove the icon (but still allow interaction via keyboard shortcut)
+    if (navigator.userAgent.indexOf("NetBoard/") > -1) {
+        $("#controls #text").remove();
+    }
+    
 });
