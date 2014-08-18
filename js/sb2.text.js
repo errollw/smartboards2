@@ -49,38 +49,42 @@ $(function() {
         // Find midpoint
         var midpoint = new Point((startPosition.x + endPosition.x)/2, (startPosition.y + endPosition.y)/2);
         
-        // If we've clicked on a PointText, edit it. If not, create a new text object
-        var result = project.hitTest(midpoint);
-        if (result && result.item instanceof PointText) {
-            var pos = result.item.position.clone();
-            var content = prompt("Edit existing text:", result.item.content);
-            if (content != null) {
-                content = content.trim();
-                if (content.length > 0) {
-                    result.item.position = pos;
-                    result.item.content = content;
-                } else {
-                    result.item.remove();
+        // Wrap in a timeout for https://code.google.com/p/chromium/issues/detail?id=404621
+        setTimeout(function() {
+            // If we've clicked on a PointText, edit it. If not, create a new text object
+            var result = project.hitTest(midpoint);
+            if (result && result.item instanceof PointText) {
+                var pos = result.item.position.clone();
+                var content = prompt("Edit existing text:", result.item.content);
+                if (content != null) {
+                    content = content.trim();
+                    if (content.length > 0) {
+                        result.item.position = pos;
+                        result.item.content = content;
+                    } else {
+                        result.item.remove();
+                    }
+                }
+            } else {
+                // Prompt for string
+                var string = prompt("Enter text to add:");
+                
+                if (string != null) {
+                    string = string.trim();
+                    if (string.length > 0) {
+                        // Create the PointText
+                        var textObj = new PointText({
+                            content: string,
+                            fontSize: 50,
+                            fillColor: get_pen_color(),
+                            fontFamily: "Open Sans"
+                        });
+                        textObj.position = midpoint;
+                    }
                 }
             }
-        } else {
-            // Prompt for string
-            var string = prompt("Enter text to add:");
-            
-            if (string != null) {
-                string = string.trim();
-                if (string.length > 0) {
-                    // Create the PointText
-                    var textObj = new PointText({
-                        content: string,
-                        fontSize: 50,
-                        fillColor: get_pen_color(),
-                        fontFamily: "Open Sans"
-                    });
-                    textObj.position = midpoint;
-                }
-            }
-        }
+            view.update();
+        }, 0);
     });
 	
     // If it is the NetBoard, remove the icon (but still allow interaction via keyboard shortcut)
