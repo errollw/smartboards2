@@ -77,7 +77,7 @@ $(function() {
                             content: string,
                             fontSize: 50,
                             fillColor: get_pen_color(),
-                            fontFamily: "Open Sans"
+                            fontFamily: "Segoe UI Symbol"
                         });
                         textObj.position = midpoint;
                     }
