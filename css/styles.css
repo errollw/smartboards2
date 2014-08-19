@@ -166,8 +166,8 @@
   user-select: none;
   z-index: 200;
   position: absolute;
-  margin-top: 30px;
-  margin-left: -160px;
+  margin-top: 21px;
+  margin-left: -166px;
   background-color: #EEE;
   border-radius: 8px;
   overflow: hidden;
@@ -190,6 +190,7 @@
   width: 30px;
   height: 30px;
   margin-left: -15px;
+  margin-top: 6px;
   padding: 0px;
   background-color: #EEE;
   -webkit-transform: rotate(45deg);
