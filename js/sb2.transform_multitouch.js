@@ -2,9 +2,9 @@
 paper.install(window);
 
 // special cases for multi-touch drag/scale/rotate
-var mt_start_pts = [],
-    vec_mt_start_pts,       // vector from one mt start point to the other
-    midpt_mt_start_pts;     // midpoint between both mt start pts
+var mt_start_points = [],
+    mt_vector_start_points,       // vector from one mt start point to the other
+    mt_start_midpoint;  // midpoint of starting pair of touches
 
 var is_transforming_with_multitouch = false;
 
@@ -32,17 +32,18 @@ function handle_touch_start_transform(evt) {
 
     // if now multitouching, initialize multitouch transform data
     if (getNumberOfTouches() == 2) {
-        mt_start_pts[0] = currentTouches[0];
-        mt_start_pts[1] = currentTouches[1];
+        mt_start_points[0] = currentTouches[0];
+        mt_start_points[1] = currentTouches[1];
         
-        vec_mt_start_pts = mt_start_pts[0].subtract(mt_start_pts[1]);
-        midpt_mt_start_pts = mt_start_pts[0].add(mt_start_pts[1]).divide(2);
-
+        mt_vector_start_points = mt_start_points[1].subtract(mt_start_points[0]);
+        mt_start_midpoint = mt_start_points[0].add(mt_vector_start_points.divide(2))
+        
         _.forEach(project.selectedItems, function(sel_item){
-            sel_item.mt_start_pos = sel_item.position;
-            sel_item.mt_start_rot = sel_item.rotation;
+            sel_item.mt_start_position = sel_item.position;
+            sel_item.mt_start_rotation = sel_item.rotation;
             sel_item.mt_start_scaling = sel_item.scaling;
         });
+        
     }
 }
 
@@ -56,6 +57,7 @@ function handle_touch_move_transform(evt) {
     if (getNumberOfTouches() == 1) {
 
         // update position of each selected item based on touch delta
+        // TODO: Fix this - items shouldn't slide under the finger
         var t_idx = getOnlyTouchIdx();
         var d_pos = currentTouches[t_idx].subtract(previousTouches[t_idx]);
         _.forEach(project.selectedItems, function(sel_item){
@@ -63,32 +65,27 @@ function handle_touch_move_transform(evt) {
         });
     }
 
-    // TODO: WORK OUT TRANSFORMS BETWEEN POINTS AS 4x3 MATRIX
     // more complex transform operations for two touch points
     if (getNumberOfTouches() >= 2) {
+    
 
-        var vec_touch = currentTouches[0].subtract(currentTouches[1]);
-        var midpt_touch = currentTouches[0].add(currentTouches[1]).divide(2);
-
-        // see http://stackoverflow.com/questions/563198/
-        var t = ((mt_start_pts[0].subtract(currentTouches[0])).cross(vec_mt_start_pts)) /
-            (vec_touch.cross(vec_mt_start_pts));
-        var intersect = currentTouches[0].add(vec_touch.multiply(t));
-
-        // calculate transform deltas from start of multitouch
-        var d_rot = vec_touch.angle - vec_mt_start_pts.angle;
-        var rotated_st_pt = midpt_mt_start_pts.rotate(d_rot, intersect)
-        var d_pos = midpt_touch.subtract(rotated_st_pt)
-        var d_scale = vec_touch.length/vec_mt_start_pts.length;
+        var mt_vector_end_points = currentTouches[1].subtract(currentTouches[0]);
+        var mt_end_midpoint = currentTouches[0].add(mt_vector_end_points.divide(2));
+        
+        var translation = mt_end_midpoint.subtract(mt_start_midpoint);
+        var rotation = mt_vector_end_points.angle - mt_vector_start_points.angle;
+        var scale = mt_vector_end_points.length / mt_vector_start_points.length;
+        
 
         // do not transform if not necessary, this avoids a weird bug I haven't worked out
-        if (d_rot == 0 && d_pos.length == 0) return;
+        if (scale == 1 && rotation == 0) return;
 
         // create transform matrix
         m = new Matrix();
         m.reset();
-        m.translate(d_pos);
-        m.rotate(d_rot, intersect);
+        m.translate(translation);
+        m.rotate(rotation, mt_start_midpoint);
+        m.scale(scale, mt_start_midpoint);
 		
 		/* Sometimes m.tx may become NaN
 		 * If the matrix were applied with NaN, the item will disappear from view
@@ -101,19 +98,15 @@ function handle_touch_move_transform(evt) {
 
             // reset transform properties of all items
             sel_item.transformContent = false;
-            sel_item.rotation = sel_item.mt_start_rot;
-            sel_item.position = sel_item.mt_start_pos;
+            sel_item.rotation = sel_item.mt_start_rotation;
+            sel_item.position = sel_item.mt_start_position;
+            sel_item.scaling = sel_item.mt_start_scaling;
 			
 
             // transform each item with multitouch
             sel_item.transform(m);
         });
 
-        // handle scaling afterwards separately
-        _.forEach(project.selectedItems, function(sel_item){
-            sel_item.scaling = sel_item.mt_start_scaling;
-            sel_item.scale(d_scale, selected_items_rect.position)
-        });
 
     }
 
