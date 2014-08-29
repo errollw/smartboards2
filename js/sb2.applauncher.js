@@ -1,7 +1,8 @@
 // Shows the button to launch an app if this board is on the whitelist
 
 $(function() {   
-
+    // Array describing boards that show the "Start App" icon
+    // Array of objects. Each object has a "r_id" property and a "port" property.
     var enabled_rooms = [ {"r_id": "r_ss12", "port": 8080} ];
 
     for (var i = 0; i < enabled_rooms.length; i++) {
