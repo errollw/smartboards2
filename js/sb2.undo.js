@@ -48,7 +48,6 @@ $(function(){
 		var prevState =  undo_undoStack.pop();
 		if (typeof prevState != "undefined") { // was there even a previous state?
 			if (prevState != newState) { // only add a state if there has been a change
-				console.log("Adding new undo state");
 				undo_undoStack.push(prevState);
 				undo_undoStack.push(newState);
 				
@@ -58,7 +57,6 @@ $(function(){
 				 undo_undoStack.push(prevState);
 			}
 		} else {
-			console.log("Adding new undo state");
 			undo_undoStack.push(newState);
 			// Clear the redo-stack
 			undo_redoStack = new FixedQueue(undo_stackLength);
@@ -69,12 +67,10 @@ $(function(){
 	/* Function to undo changes to the last saved state that is different to the current state
 	 */
 	undo_performUndo = function() {
-		console.log("undo stack length: " +  undo_undoStack.length);
 		var lastState =  undo_undoStack.pop();
 		if (lastState) { // Only attempt to undo if there is actually an undo state
 			var current = JSON.stringify(tidyJSONProject(project.exportJSON({asString:false})));
 			if (lastState != current) { // Only undo if the previous state is different
-				console.log("Undone");
 				project.clear();
 				project.importJSON(lastState);
 				hide_floatie();
@@ -82,11 +78,9 @@ $(function(){
 				// Save 'current' state to redo stack
 				undo_redoStack.push(current);
 			} else {
-				console.log("Last state no different, going further back");
 				 undo_performUndo(); // previous state is no different, so try undoing again
 			}
 		} else {
-			console.log("Nothing to undo");
 		}
 		undo_updateButtons();
 	};
@@ -94,12 +88,10 @@ $(function(){
 	/* Function to redo changes after an undo
 	 */
 	undo_performRedo = function() {
-		console.log("redo stack length: " +  undo_redoStack.length);
 		var nextState =  undo_redoStack.pop();
 		if (nextState) { // Only attempt to undo if there is actually an undo state
 			var current = JSON.stringify(tidyJSONProject(project.exportJSON({asString:false})));
 			if (nextState != current) { // Only undo if the previous state is different
-				console.log("Redone");
 				project.clear();
 				project.importJSON(nextState);
 				hide_floatie();
@@ -107,11 +99,9 @@ $(function(){
 				// Save 'current' state to undo stack
 				undo_undoStack.push(current);
 			} else {
-				console.log("Next state no different, going further forward");
 				 undo_performRedo(); // previous state is no different, so try undoing again
 			}
 		} else {
-			console.log("Nothing to redo");
 		}
 		undo_updateButtons();
 	};
