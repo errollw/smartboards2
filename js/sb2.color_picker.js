@@ -51,7 +51,20 @@ function build_color_picker(){
 		if (is_color_picker_open){
 			$.cookie("penColour", $(this).css("backgroundColor"), {expires:7});
 			set_pen_color($(this).css('backgroundColor'));
-            if (edit_mode != "TEXT") {
+            
+            var count = 0;
+            if (edit_mode == "SELECTING" && project.selectedItems.length > 0) {
+                _.forEach(project.selectedItems, function(i) {
+                    if (i instanceof Path || i instanceof PointText) {
+                        i.fillColor = get_pen_color();
+                        count++;
+                    }
+                });
+                if (count != 0) {
+                    view.update();
+                }
+            }
+            if (edit_mode != "TEXT" && edit_mode != "DRAWING" && count == 0) {
                 set_edit_mode("DRAWING");
             }
 		}
