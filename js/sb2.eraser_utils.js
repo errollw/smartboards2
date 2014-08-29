@@ -16,7 +16,7 @@ function hitTest_along_line(point1, point2){
 		var hitTest_pt = point1.add(delta_step.multiply(i));
 		var hitTest_result = project.hitTest(hitTest_pt)//, eraser_hit_options);
 
-		if (hitTest_result && (hitTest_result.item instanceof Path || hitTest_result.item instanceof Raster || hitTest_result.item instanceof PointText)) {
+		if (hitTest_result && hitTest_result.item instanceof Path) {
 			hit_items.push(hitTest_result.item)
 			// hitTest_result.item.fullySelected = true;
 		}
