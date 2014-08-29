@@ -33,8 +33,19 @@ function offsetBezier(pen_mouse_stroke){
 
     outer_path.reverse()
     inner_path.join(outer_path)
-
-    inner_path.fillColor = get_pen_color();
+    
+    // Code for rainbow (dash) pen mode
+    if (typeof rainbow !== "undefined" && rainbow == true) {
+        inner_path.fillColor = {
+            gradient: {
+                stops: ['red', 'orange', 'yellow', 'green', 'blue', 'purple']
+            },
+            origin: inner_path.bounds.topLeft,
+            destination: inner_path.bounds.bottomRight
+        };
+    } else {
+        inner_path.fillColor = get_pen_color();
+    }
 }
 
 

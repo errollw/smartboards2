@@ -176,6 +176,14 @@ $(document).on("keydown", function (evt) {
                 set_edit_mode("TEXT");
                 dealtWith = true;
                 break;
+            case 189: // - for toggling rainbow (dash) pen mode
+                if (typeof window.rainbow !== "undefined" && window.rainbow == true) {
+                    window.rainbow = false;
+                } else {
+                    window.rainbow = true;
+                }
+                dealtWith = true;
+                break;
         }
     }
     

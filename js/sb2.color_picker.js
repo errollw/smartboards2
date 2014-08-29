@@ -61,10 +61,15 @@ function build_color_picker(){
 
 function set_pen_icon_color(){
 
-	// change color of icon in main controls
+	// change color of pen icon in main controls
 	$('#pen>svg').attr('width', $('#pen').width()+'px');
 	$('#pen>svg').attr('height', $('#pen').height()+'px');
 	$('#pen path').attr('fill', pen_color);
+    
+    // text icon
+	$('#text>svg').attr('width', $('#text').width()+'px');
+	$('#text>svg').attr('height', $('#text').height()+'px');
+	$('#text path').attr('fill', pen_color);
 
 	// change color of thickness selector icon
 	$('#pen_thin_container   .pen_thin'  ).css('background-color',get_pen_color());
@@ -104,6 +109,12 @@ $(document).ready(function(){
 	var cookiePenColour = $.cookie("penColour");
 	
 	$('#pen').load('assets/icon_pen.svg', function() {
+		if (typeof cookiePenColour != "undefined") {
+			pen_color = cookiePenColour;
+		}
+		set_pen_icon_color();
+	});
+	$('#text').load('assets/icon_text.svg', function() {
 		if (typeof cookiePenColour != "undefined") {
 			pen_color = cookiePenColour;
 		}
