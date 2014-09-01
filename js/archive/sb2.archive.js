@@ -38,7 +38,7 @@ $(function() {
     
     // Default from and to dates
     var dateFilter = {};
-    dateFilter.from = new Date(); dateFilter.from.setMonth(dateFilter.from.getMonth() - 3); dateFilter.from.setHours(0,0,0); // 3 months ago
+    dateFilter.from = new Date(); dateFilter.from.setMonth(dateFilter.from.getMonth() - 1); dateFilter.from.setHours(0,0,0); // 3 months ago
     dateFilter.to = new Date(); dateFilter.to.setHours(23,59,59); // End of current day (to allow for clocks not lining up properly)
     
     // Override the default dates if supplied in the URL
