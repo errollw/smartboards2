@@ -160,15 +160,15 @@ $(document).on("keydown", function (evt) {
                 moveSelectedItems(new Point(0,evt.shiftKey ? -1 : -10));
                 dealtWith = true;
                 break;
-            case 40: // Down arrow for move up (Shift-Down for fine movement)
+            case 40: // Down arrow for move down (Shift-Down for fine movement)
                 moveSelectedItems(new Point(0,evt.shiftKey ? 1 : 10));
                 dealtWith = true;
                 break;
-            case 37: // Left arrow for move up (Shift-Left for fine movement)
+            case 37: // Left arrow for move left (Shift-Left for fine movement)
                 moveSelectedItems(new Point(evt.shiftKey ? -1 : -10, 0));
                 dealtWith = true;
                 break;
-            case 39: // Right arrow for move up (Shift-Right for fine movement)
+            case 39: // Right arrow for move right (Shift-Right for fine movement)
                 moveSelectedItems(new Point(evt.shiftKey ? 1 : 10, 0));
                 dealtWith = true;
                 break;
