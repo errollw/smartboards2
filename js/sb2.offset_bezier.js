@@ -28,15 +28,11 @@ function offsetBezier(pen_mouse_stroke){
 
     inner_path.add(pen_mouse_stroke.lastSegment.point);
     
-    console.log("before simplify", inner_path, outer_path);
-    
     inner_path = robust_simplify(inner_path);
     outer_path = robust_simplify(outer_path);
-    
-    console.log("after simplyify", inner_path, outer_path);
-    
     outer_path.reverse();
-    if (inner_path.segments.length > 0 && outer_path.segments.length > 0) {
+    
+    if (inner_path.segments.length > 0 && outer_path.segments.length > 0) { // workaround for bug https://github.com/paperjs/paper.js/issues/516
         inner_path.join(outer_path);
     }
     
