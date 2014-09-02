@@ -27,7 +27,7 @@ var pen_speed_path;
 function handle_mouse_down_pen(evt) {
 
     if (edit_mode != "DRAWING") return;
-
+    
     is_drawing_with_mouse = true;
 
     // start drawing by making a new path
@@ -44,7 +44,7 @@ function handle_mouse_down_pen(evt) {
 function handle_mouse_move_pen(evt) {
 
     if (edit_mode != "DRAWING" || !is_drawing_with_mouse) return;
-
+    
     has_pen_moved = true;
     pen_mouse_stroke.add(currentMouse);
 }
@@ -54,15 +54,14 @@ function handle_mouse_up_pen(evt) {
     if (edit_mode != "DRAWING" || !is_drawing_with_mouse) return;
 
     if (!has_pen_moved) {
-
         // if not moved, draw a dot, otherwise finish stroke
-        draw_dot(previousMouse);
-
+        draw_dot(previousMouse.clone());
     } else {
-        
-        pen_mouse_stroke = robust_simplify(pen_mouse_stroke)
-
-        offsetBezier(pen_mouse_stroke);
+        // Check that the path has at least two points after simplification. if not, remove it
+        pen_mouse_stroke = robust_simplify(pen_mouse_stroke);
+        if (pen_mouse_stroke.segments.length > 0) {
+            offsetBezier(pen_mouse_stroke);
+        }
         pen_mouse_stroke.remove();
 
         has_pen_moved = false;

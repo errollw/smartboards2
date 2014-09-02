@@ -22,17 +22,23 @@ function offsetBezier(pen_mouse_stroke){
         thick = get_thickness_as_width()/2;
         normal = pen_mouse_stroke.getNormalAt(offset).normalize(thick);
 
-        inner_path.add(point.add(normal))
-        outer_path.add(point.subtract(normal))
+        inner_path.add(point.add(normal));
+        outer_path.add(point.subtract(normal));
     }
 
-    inner_path.add(pen_mouse_stroke.lastSegment.point)
-
-    inner_path = robust_simplify(inner_path)
-    outer_path = robust_simplify(outer_path)
-
-    outer_path.reverse()
-    inner_path.join(outer_path)
+    inner_path.add(pen_mouse_stroke.lastSegment.point);
+    
+    console.log("before simplify", inner_path, outer_path);
+    
+    inner_path = robust_simplify(inner_path);
+    outer_path = robust_simplify(outer_path);
+    
+    console.log("after simplyify", inner_path, outer_path);
+    
+    outer_path.reverse();
+    if (inner_path.segments.length > 0 && outer_path.segments.length > 0) {
+        inner_path.join(outer_path);
+    }
     
     // Code for rainbow (dash) pen mode
     if (typeof rainbow !== "undefined" && rainbow == true) {
