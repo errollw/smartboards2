@@ -52,7 +52,8 @@ function speed_to_thickness(speed, touch_id){
 function draw_dot(point){
 
     var dot_path = new Path();
-    dot_path.fillColor = get_pen_color();
+    
+    
     dot_path.closed = true;
     
     for (var i = 0; i < 4; i++) {
@@ -63,6 +64,20 @@ function draw_dot(point){
         dot_path.add(point.add(delta));
     }
     dot_path.smooth();
+    
+    // Code for rainbow (dash) pen mode
+    if (typeof rainbow !== "undefined" && rainbow == true) {
+        dot_path.fillColor = {
+            gradient: {
+                stops: ['red', 'orange', 'yellow', 'green', 'blue', 'purple']
+            },
+            origin: dot_path.bounds.topLeft,
+            destination: dot_path.bounds.bottomRight
+        };
+    } else {
+        dot_path.fillColor = get_pen_color();
+    }
+
 }
 
 function clamp_speed(speed){
