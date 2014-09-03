@@ -48,6 +48,10 @@ function offsetBezier(pen_mouse_stroke){
     } else {
         inner_path.fillColor = get_pen_color();
     }
+    
+    if (inner_path.length < 2) {
+        inner_path.remove();
+    }
 }
 
 
