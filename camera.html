@@ -3,6 +3,8 @@
 <head>
 <title>NetBoards Camera</title>
 
+<meta name="viewport" content="width=480,initial-scale=1" id="testViewport">
+
 <script type="text/javascript" src="js/lib/jquery.js"></script>
 <script type="text/javascript">
 $(function() {
@@ -59,6 +61,9 @@ $(function() {
                 "width": video.videoWidth,
                 "line-height": video.videoHeight + "px"
             });
+            
+            var mvp = document.getElementById('testViewport');
+            mvp.setAttribute('content','width=' + video.videoWidth);
         }, 2000);
     }
 
