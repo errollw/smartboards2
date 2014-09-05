@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>NetBoards Camera</title>
+
+<script type="text/javascript" src="js/lib/jquery.js"></script>
+<script type="text/javascript">
+$(function() {
+    function errorCallback(e) {
+      if (e.code == 1) {
+        alert('User denied access to their camera');
+      } else {
+        alert('Access to your camera is not supported by your browser.');
+      }
+    }
+
+
+    var video = document.querySelector('#video');
+    var canvas = document.querySelector('#canvas');
+    var ctx = canvas.getContext('2d');
+    var localMediaStream = null;
+    var cameraButtons = document.querySelector("#camera-buttons");
+    var photoButtons = document.querySelector("#photo-buttons");
+    var uploadedButtons = document.querySelector("#uploaded-buttons");
+
+    function correctLayout() {
+        // This function sets the position and widths of various items according to the video dimensions
+        // video.onloadedmetadata not firing in Chrome so we have to hack.
+        // See crbug.com/110938.
+        setTimeout(function() {
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            $("#camera-buttons, #photo-buttons, #uploaded-buttons").css({
+                "top": (video.videoHeight - $("#camera-buttons").outerHeight()) + "px",
+                "width": video.videoWidth + "px",
+            });
+        }, 2000);
+    }
+
+
+
+    if (navigator.getUserMedia) {
+        navigator.getUserMedia('video', function(stream) {
+            video.src = stream;
+            localMediaStream = stream;
+            correctLayout();
+        }, errorCallback);
+    } else if (navigator.webkitGetUserMedia) {
+        navigator.webkitGetUserMedia({video: true}, function(stream) {
+            video.src = window.URL.createObjectURL(stream);
+            localMediaStream = stream;
+            correctLayout();
+        }, errorCallback);
+    } else {
+        errorCallback({target: video});
+    }
+    
+    $("#camera-shutter").click(function() {
+        // Draw the image
+        ctx.drawImage(video, 0, 0);
+        // Change to photo mode
+        $(canvas).show();
+        $(photoButtons).show();
+        $(cameraButtons).hide();
+        $(video).hide();
+    });
+    
+    $("#photo-cancel").click(function() {
+        // Clear the canvas
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        // Change to camera mode
+        $(cameraButtons).show();
+        $(video).show();
+        $(canvas).hide();
+        $(photoButtons).hide();
+    });
+});
+
+
+</script>
+
+<link rel="stylesheet" href="css/normalize.css">
+<style>
+body {
+    font-family:sans-serif;
+}
+#canvas {
+    display:none;
+    position:absolute;
+    top:0;
+    left:0;
+}
+#camera-buttons, #photo-buttons, #uploaded-buttons {
+    background: rgba(0,0,0,0.3);
+    position:absolute;
+    left:0;
+    top:0;
+    width:300px;
+    height:40px;
+    text-align:center;
+    padding:5px 0;
+    display:none;
+    
+}
+#camera-buttons {
+    display:block;
+}
+button {
+    width:45%;
+    height:40px;
+}
+</style>
+</head>
+<body>
+<video id="video" class="videostream" autoplay></video>
+<canvas id="canvas"></canvas>
+
+<div id="camera-buttons">
+    <button id="camera-shutter">Take Photo</button>
+</div>
+<div id="photo-buttons">
+    <button id="photo-cancel">Cancel</button>
+    <button id="photo-upload">Upload</button>
+</div>
+<div id="uploaded-buttons">
+    <button id="uploaded-ok">Ok</button>
+</div>
+
+</body>
+</html>
