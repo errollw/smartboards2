@@ -13,7 +13,27 @@ $(function() {
         alert('Access to your camera is not supported by your browser.');
       }
     }
+    
+    var urlParams, r_id;
 
+    function initializeUrlParams() {
+        var match,
+            pl     = /\+/g,  // Regex for replacing addition symbol with a space
+            search = /([^&=]+)=?([^&]*)/g,
+            decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); },
+            query  = window.location.search.substring(1);
+
+        urlParams = {};
+        while (match = search.exec(query))
+           urlParams[decode(match[1])] = decode(match[2]);
+    }
+    initializeUrlParams();
+    if (typeof urlParams.r_id == "undefined") {
+        alert("Room ID not specified.");
+        return;
+    } else {
+        r_id = urlParams.r_id.toLowerCase();
+    }
 
     var video = document.querySelector('#video');
     var canvas = document.querySelector('#canvas');
@@ -21,7 +41,7 @@ $(function() {
     var localMediaStream = null;
     var cameraButtons = document.querySelector("#camera-buttons");
     var photoButtons = document.querySelector("#photo-buttons");
-    var uploadedButtons = document.querySelector("#uploaded-buttons");
+    var message = document.querySelector("#message");
 
     function correctLayout() {
         // This function sets the position and widths of various items according to the video dimensions
@@ -30,9 +50,14 @@ $(function() {
         setTimeout(function() {
             canvas.width = video.videoWidth;
             canvas.height = video.videoHeight;
-            $("#camera-buttons, #photo-buttons, #uploaded-buttons").css({
+            $("#camera-buttons, #photo-buttons").css({
                 "top": (video.videoHeight - $("#camera-buttons").outerHeight()) + "px",
                 "width": video.videoWidth + "px",
+            });
+            $(message).css({
+                "height": video.videoHeight, 
+                "width": video.videoWidth,
+                "line-height": video.videoHeight + "px"
             });
         }, 2000);
     }
@@ -55,7 +80,7 @@ $(function() {
         errorCallback({target: video});
     }
     
-    $("#camera-shutter").click(function() {
+    $("#camera-shutter, #video").click(function() {
         // Draw the image
         ctx.drawImage(video, 0, 0);
         // Change to photo mode
@@ -74,6 +99,65 @@ $(function() {
         $(canvas).hide();
         $(photoButtons).hide();
     });
+    
+    $("#photo-upload").click(function() {
+       /* Actually post the photo onto the NetBoard
+        * 
+        * Steps:
+        * 1. Upload to imgur and obtain image URL
+        * 2. Obtain board data
+        * 3. Insert into board at appropriate place
+        * 4. Save board data
+        * 5. Display a confirmation message-box
+        */
+        $(message).text("Uploading...").fadeIn();
+        $.ajax({
+        url: 'https://api.imgur.com/3/image',
+        type: 'post',
+        headers: {
+            Authorization: 'Client-ID c51cfd61471e714'
+        },
+        data: {
+            image: canvas.toDataURL().split(',')[1]
+        },
+        dataType: 'json',
+        success: function (json, status, jqXHR) {
+            var imageUrl = json.data.link.replace("http://", "https://");
+            $.ajaxSetup({ cache: false });
+            $.getJSON("content/"+r_id+".json", function(board_data){
+                var x = video.videoWidth*0.6+ Math.floor((1080 - video.videoWidth*1.2) * Math.random());
+                var y = video.videoHeight*0.6 + Math.floor((1920 - video.videoHeight*1.2) * Math.random());
+                board_data[0][1].children.push(["Raster", {
+                    "applyMatrix": false,
+                    "matrix": [1, 0, 0, 1, x, y],
+                    "source": imageUrl
+                }]);
+                var version = board_data[1] + 1;
+                board_data.length = 1;
+                var jsonString = JSON.stringify(board_data);
+                var saveObject = {
+                    "r_id": r_id,
+                    "json_data": jsonString,
+                    "ver": version
+                };
+                $.ajax({
+                    "url": "cgi-bin/upload_board_json.py",
+                    "type": "post",
+                    "data": saveObject,
+                    "success": function() {
+                        $(photoButtons).hide();
+                        $("#photo-cancel").trigger("click");
+                        $(message).text("Posted!").delay(1000).fadeOut();
+                    }
+                });
+
+            });
+        },
+        error: function (json) {
+            console.log(json);
+        }
+    });
+    });
 });
 
 
@@ -84,13 +168,17 @@ $(function() {
 body {
     font-family:sans-serif;
 }
+#video {
+    z-index:10;
+}
 #canvas {
     display:none;
     position:absolute;
     top:0;
     left:0;
+    z-index:20;
 }
-#camera-buttons, #photo-buttons, #uploaded-buttons {
+#camera-buttons, #photo-buttons {
     background: rgba(0,0,0,0.3);
     position:absolute;
     left:0;
@@ -100,10 +188,22 @@ body {
     text-align:center;
     padding:5px 0;
     display:none;
-    
+    z-index:30;
+
 }
 #camera-buttons {
     display:block;
+}
+#message {
+    background:#000000;
+    font-size:140%;
+    text-align:center;
+    color:#ffffff;
+    position:absolute;
+    top:0;
+    left:0;
+    z-index:40;
+    display:none;
 }
 button {
     width:45%;
@@ -115,6 +215,7 @@ button {
 <video id="video" class="videostream" autoplay></video>
 <canvas id="canvas"></canvas>
 
+
 <div id="camera-buttons">
     <button id="camera-shutter">Take Photo</button>
 </div>
@@ -122,9 +223,8 @@ button {
     <button id="photo-cancel">Cancel</button>
     <button id="photo-upload">Upload</button>
 </div>
-<div id="uploaded-buttons">
-    <button id="uploaded-ok">Ok</button>
-</div>
+
+<div id="message">Uploading...</div>
 
 </body>
 </html>
