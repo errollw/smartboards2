@@ -33,30 +33,34 @@ function handle_mouse_down_cursor(evt) {
         selection_start_pt = currentMouse;
         is_selecting_with_mouse = true;
 
-    // 
+    //  time to resize the items
     } else if (hitTest_result.item.counter_pt) {
 
         set_edit_mode("TRANSFORMING");
         mouse_transform_mode = "RESIZE";
         document.body.style.cursor = hitTest_result.item.cursor;
+        mouse_transform_start_pt = currentMouse;
         mouse_transform_anchor_pt = hitTest_result.item.counter_pt.position;
         is_transforming_with_mouse = true;
 
-    //
+    // time to rotate the items
     } else if (hitTest_result.item.cp_rotate) {
 
         set_edit_mode("TRANSFORMING");
         mouse_transform_mode = "ROTATE";
+        mouse_transform_start_pt = currentMouse;
         document.body.style.cursor = hitTest_result.item.cursor;
         is_transforming_with_mouse = true;
 
-    //
+    // have clicked a slected item - move it
     } else if (hitTest_result.item.selected) {
 
         set_edit_mode("TRANSFORMING");
+        mouse_transform_mode = "MOVE";
+        mouse_transform_start_pt = currentMouse;
         is_transforming_with_mouse = true;
 
-    // have clicked a non-selected item
+    // have clicked a non-selected item - move it
     } else {
 
         project.deselectAll(); 
@@ -65,6 +69,8 @@ function handle_mouse_down_cursor(evt) {
         make_selection_rect();
 
         set_edit_mode("TRANSFORMING");
+        mouse_transform_mode = "MOVE";
+        mouse_transform_start_pt = currentMouse;
         is_transforming_with_mouse = true;
 
     }

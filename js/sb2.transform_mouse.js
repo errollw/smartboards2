@@ -25,31 +25,73 @@ $(document).ready(function() {
 function handle_mouse_move_transform(evt) {
     if (edit_mode != "TRANSFORMING" || !is_transforming_with_mouse) return;
 
+    // when transforming, now reset to pre-transform item before applying transfrom
+    // no longer works on a delta-transform basis
+    // add orig_item to each selected item
+    _.forEach(project.selectedItems, function(sel_item){
+        if (sel_item.orig_item == undefined){
+            orig_item = sel_item.clone(false);
+            sel_item.orig_item = orig_item;
+        }
+    });
+
     if (mouse_transform_mode == "RESIZE"){
 
-        vec_prev = mouse_transform_anchor_pt.subtract(previousMouse);
+        vec_start = mouse_transform_anchor_pt.subtract(mouse_transform_start_pt)
         vec_new = mouse_transform_anchor_pt.subtract(currentMouse);
-        d_scale = vec_new.length/vec_prev.length;
+        d_scale = Math.min(vec_new.x/vec_start.x, vec_new.y/vec_start.y);
 
         _.forEach(project.selectedItems, function(sel_item){
-            sel_item.scale(d_scale, mouse_transform_anchor_pt);
+
+            // clone original item before transforming it
+            cloned_item = sel_item.orig_item.clone();
+            cloned_item.orig_item = sel_item.orig_item;
+
+            // replace old item with new item
+            cloned_item.insertAbove(sel_item)
+            cloned_item.selected = true;
+            sel_item.remove(); delete sel_item; 
+
+            cloned_item.scale(d_scale, mouse_transform_anchor_pt);
         });
 
     } else if (mouse_transform_mode == "ROTATE"){
 
-        vec_prev = selected_items_rect.position.subtract(previousMouse);
+        vec_start = selected_items_rect.position.subtract(mouse_transform_start_pt);
         vec_new = selected_items_rect.position.subtract(currentMouse);
-        d_rot = vec_new.angle - vec_prev.angle;
+        d_rot = vec_new.angle - vec_start.angle;
 
         _.forEach(project.selectedItems, function(sel_item){
-            sel_item.rotate(d_rot, selected_items_rect.position);
+
+            // clone original item before transforming it
+            cloned_item = sel_item.orig_item.clone();
+            cloned_item.orig_item = sel_item.orig_item;
+
+            // replace old item with new item
+            cloned_item.insertAbove(sel_item)
+            cloned_item.selected = true;
+            sel_item.remove(); delete sel_item; 
+
+            cloned_item.rotate(d_rot, selected_items_rect.position);
         });
 
-    } else {
+    } else if (mouse_transform_mode == "MOVE"){
 
-        // update position of each selected item based on mouse delta
+        vec_delta_pos = currentMouse.subtract(mouse_transform_start_pt)
+        console.log(vec_delta_pos)
+
         _.forEach(project.selectedItems, function(sel_item){
-            sel_item.position = sel_item.position.add(currentMouse.subtract(previousMouse));
+
+            // clone original item before transforming it
+            cloned_item = sel_item.orig_item.clone();
+            cloned_item.orig_item = sel_item.orig_item;
+
+            // replace old item with new item
+            cloned_item.insertAbove(sel_item)
+            cloned_item.selected = true;
+            sel_item.remove(); delete sel_item; 
+
+            cloned_item.position = cloned_item.position.add(vec_delta_pos);
         });
 
     }
@@ -57,6 +99,11 @@ function handle_mouse_move_transform(evt) {
 
 function handle_mouse_up_transform(evt){
     if (edit_mode != "TRANSFORMING" || !is_transforming_with_mouse) return;
+
+    // remove original items so they can be generated fresh for new transforms
+    _.forEach(project.selectedItems, function(sel_item){
+        delete sel_item.orig_item
+    });
 
     is_transforming_with_mouse = false;
 
