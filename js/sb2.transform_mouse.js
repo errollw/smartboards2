@@ -25,16 +25,6 @@ $(document).ready(function() {
 function handle_mouse_move_transform(evt) {
     if (edit_mode != "TRANSFORMING" || !is_transforming_with_mouse) return;
 
-    // when transforming, now reset to pre-transform item before applying transfrom
-    // no longer works on a delta-transform basis
-    // add orig_item to each selected item
-    _.forEach(project.selectedItems, function(sel_item){
-        if (sel_item.orig_item == undefined){
-            orig_item = sel_item.clone(false);
-            sel_item.orig_item = orig_item;
-        }
-    });
-
     if (mouse_transform_mode == "RESIZE"){
 
         vec_start = mouse_transform_anchor_pt.subtract(mouse_transform_start_pt)
@@ -42,16 +32,7 @@ function handle_mouse_move_transform(evt) {
         d_scale = Math.min(vec_new.x/vec_start.x, vec_new.y/vec_start.y);
 
         _.forEach(project.selectedItems, function(sel_item){
-
-            // clone original item before transforming it
-            cloned_item = sel_item.orig_item.clone();
-            cloned_item.orig_item = sel_item.orig_item;
-
-            // replace old item with new item
-            cloned_item.insertAbove(sel_item)
-            cloned_item.selected = true;
-            sel_item.remove(); delete sel_item; 
-
+            cloned_item = switch_sel_item_with_orig(sel_item);
             cloned_item.scale(d_scale, mouse_transform_anchor_pt);
         });
 
@@ -62,16 +43,7 @@ function handle_mouse_move_transform(evt) {
         d_rot = vec_new.angle - vec_start.angle;
 
         _.forEach(project.selectedItems, function(sel_item){
-
-            // clone original item before transforming it
-            cloned_item = sel_item.orig_item.clone();
-            cloned_item.orig_item = sel_item.orig_item;
-
-            // replace old item with new item
-            cloned_item.insertAbove(sel_item)
-            cloned_item.selected = true;
-            sel_item.remove(); delete sel_item; 
-
+            cloned_item = switch_sel_item_with_orig(sel_item);
             cloned_item.rotate(d_rot, selected_items_rect.position);
         });
 
@@ -81,16 +53,7 @@ function handle_mouse_move_transform(evt) {
         console.log(vec_delta_pos)
 
         _.forEach(project.selectedItems, function(sel_item){
-
-            // clone original item before transforming it
-            cloned_item = sel_item.orig_item.clone();
-            cloned_item.orig_item = sel_item.orig_item;
-
-            // replace old item with new item
-            cloned_item.insertAbove(sel_item)
-            cloned_item.selected = true;
-            sel_item.remove(); delete sel_item; 
-
+            cloned_item = switch_sel_item_with_orig(sel_item);
             cloned_item.position = cloned_item.position.add(vec_delta_pos);
         });
 

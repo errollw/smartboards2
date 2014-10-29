@@ -1,11 +1,23 @@
 
-// Gets the matrix to transform from vector P1>P2 to Q1>Q2
-function get_multitouch_transform_matrix(P1, P2, Q1, Q2){
+// when transforming, now reset to pre-transform item before applying transfrom
+// no longer works on a delta-transform basis
+// add orig_item to each selected item
+function switch_sel_item_with_orig(sel_item){
 
-	var M = new Matrix(1,0,1,0,0,0);
+	// add orig_item if it doesn't already exist
+	if (sel_item.orig_item == undefined){
+        orig_item = sel_item.clone(false);
+        sel_item.orig_item = orig_item;
+    }
 
-	M.translate(P2.x-P1.x, P2.y-P1.y)
+	// clone original item before transforming it
+    cloned_item = sel_item.orig_item.clone();
+    cloned_item.orig_item = sel_item.orig_item;
 
-	return M;
+    // replace old item with new item
+    cloned_item.insertAbove(sel_item)
+    cloned_item.selected = true;
+    sel_item.remove(); delete sel_item;
 
+    return cloned_item;
 }
