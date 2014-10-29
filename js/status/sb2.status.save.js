@@ -2,6 +2,7 @@
 var status_data = {};	// object for entire room settings
 var users = [];			// list of users in this room
 
+// IDEA: maybe use http://tristanedwards.me/sweetalert instead?
 
 function saveSuccess() {
 	$.simpleMessage("flashMessage", "Saved successfully");

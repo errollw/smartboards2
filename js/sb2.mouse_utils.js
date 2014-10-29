@@ -23,6 +23,8 @@ function handle_mouse_down(evt) {
     currentMouse = mouseToPoint(evt);
     previousMouse = mouseToPoint(evt);
     isMouseDown = true;
+
+    hide_gifs();
 }
 
 function handle_mouse_move(evt) {
@@ -41,6 +43,8 @@ function handle_mouse_move(evt) {
 function handle_mouse_up(evt) {
     previousMouse = mouseToPoint(evt);
     isMouseDown = false;
+
+    if (noTouches()) update_gifs();
 }
 
 function noMouse(){

@@ -10,6 +10,7 @@ hideSpinner = function () {
 }
 
 $(function () {
+
     $("html").on("dragover", function (event) {
         event.preventDefault();
         event.stopPropagation();
@@ -19,9 +20,12 @@ $(function () {
         event.preventDefault();
         event.stopPropagation();
     });
+
     $("html").on("drop", function (e) {
+
         // Function to draw an image onto the page, and resize to fit
         function drawImage(url) {
+
             // Require a non-empty URL starting with http
             var margin = 100, new_img = new Raster(url);
             new_img.onLoad = function () {
@@ -33,7 +37,9 @@ $(function () {
                 if (new_img.bounds.width > view.bounds.width - 2 * margin) {
                     new_img.scale(($("#myCanvas").width() - 2 * margin) / new_img.bounds.width);
                 }
+
                 view.update();
+                update_gifs();
                 hideSpinner();
             };
         }
@@ -83,11 +89,15 @@ $(function () {
                 
                 reader.readAsDataURL(file);
             }
+
         } else if (dataTransfer.types.length > 0 && dataTransfer.getData("Text") != "") {
+
             // Image drop from browser
+
             showSpinner();
             var url = dataTransfer.getData("Text");
             console.log(url, e.originalEvent.pageX, e.originalEvent.pageY);
+
             // Test if the URL is of an image (http://stackoverflow.com/a/9714891)
             
             if (!(/^https?:\/\//.test(url))) {

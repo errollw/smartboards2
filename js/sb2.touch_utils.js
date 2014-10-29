@@ -83,6 +83,10 @@ function getNumberOfTouches(){
     return Object.keys(currentTouches).length;
 }
 
+function noTouches(){
+    return (getNumberOfTouches() == 0);
+}
+
 function getOnlyTouch(){
     keys = Object.keys(currentTouches);
     return currentTouches[keys[0]]; 
