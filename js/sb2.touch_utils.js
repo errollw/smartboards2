@@ -2,6 +2,7 @@
 // keep track of touches
 var currentTouches = {};  // touches currently active on this frame
 var previousTouches = {}; // touches that registered last frame
+var startTouches = {};    // where that touch started
 
 min_delta_touch = 1;
 
@@ -29,6 +30,7 @@ function handle_touch_start(evt) {
     for (var i=0; i < ts.length; i++) {
 		currentTouches[ts[i].identifier] = touchToPoint(ts[i]);
         previousTouches[ts[i].identifier] = touchToPoint(ts[i]);
+        startTouches[ts[i].identifier] = touchToPoint(ts[i]);
     }
 }
 
@@ -89,4 +91,13 @@ function getOnlyTouch(){
 function getOnlyTouchIdx(){
     keys = Object.keys(currentTouches);
     return keys[0]; 
+}
+
+// called to update touch starts for when user is adding and removing touches
+// simulates the user taking all fingers off then only putting the remainder fingers back on
+function update_start_touches(){
+
+    for (var key in startTouches) {
+        startTouches[key] = currentTouches[key];
+    }
 }

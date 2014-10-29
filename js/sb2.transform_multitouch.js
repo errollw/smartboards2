@@ -30,6 +30,11 @@ function handle_touch_start_transform(evt) {
 
     if (edit_mode != "TRANSFORMING" || !is_transforming_with_multitouch) return;
 
+    // remove original items so they can be generated fresh for new transforms
+    _.forEach(project.selectedItems, function(sel_item){
+        delete sel_item.orig_item
+    });
+
     // if now multitouching, initialize multitouch transform data
     if (getNumberOfTouches() == 2) {
         mt_start_points[0] = currentTouches[0];
@@ -53,21 +58,24 @@ function handle_touch_move_transform(evt) {
 
     if (edit_mode != "TRANSFORMING" || !is_transforming_with_multitouch) return;
 
-    // if just one touch, move the selected_group
+    // if just one touch, move the selected items
     if (getNumberOfTouches() == 1) {
 
         // update position of each selected item based on touch delta
         // TODO: Fix this - items shouldn't slide under the finger
         var t_idx = getOnlyTouchIdx();
         var d_pos = currentTouches[t_idx].subtract(previousTouches[t_idx]);
+
+        var d_pos = currentTouches[t_idx].subtract(startTouches[t_idx])
+
         _.forEach(project.selectedItems, function(sel_item){
-            sel_item.position = sel_item.position.add(d_pos);
+            cloned_item = switch_sel_item_with_orig(sel_item);
+            cloned_item.position = cloned_item.position.add(d_pos);
         });
     }
 
     // more complex transform operations for two touch points
     if (getNumberOfTouches() >= 2) {
-    
 
         var mt_vector_end_points = currentTouches[1].subtract(currentTouches[0]);
         var mt_end_midpoint = currentTouches[0].add(mt_vector_end_points.divide(2));
@@ -96,15 +104,10 @@ function handle_touch_move_transform(evt) {
 
         _.forEach(project.selectedItems, function(sel_item){
 
-            // reset transform properties of all items
-            sel_item.transformContent = false;
-            sel_item.rotation = sel_item.mt_start_rotation;
-            sel_item.position = sel_item.mt_start_position;
-            sel_item.scaling = sel_item.mt_start_scaling;
-			
+            cloned_item = switch_sel_item_with_orig(sel_item);
 
             // transform each item with multitouch
-            sel_item.transform(m);
+            cloned_item.transform(m);
         });
 
 
@@ -113,9 +116,16 @@ function handle_touch_move_transform(evt) {
 }
 
 function handle_touch_end_transform(evt) {
-
     evt.preventDefault();
+
     if (edit_mode != "TRANSFORMING" || !is_transforming_with_multitouch || !selected_items_rect) return;
+
+    update_start_touches();
+
+    // remove original items so they can be generated fresh for new transforms
+    _.forEach(project.selectedItems, function(sel_item){
+        delete sel_item.orig_item
+    });
 
     if (getNumberOfTouches() == 1){
 
