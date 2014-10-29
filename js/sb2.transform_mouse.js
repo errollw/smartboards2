@@ -50,7 +50,6 @@ function handle_mouse_move_transform(evt) {
     } else if (mouse_transform_mode == "MOVE"){
 
         vec_delta_pos = currentMouse.subtract(mouse_transform_start_pt)
-        console.log(vec_delta_pos)
 
         _.forEach(project.selectedItems, function(sel_item){
             cloned_item = switch_sel_item_with_orig(sel_item);
