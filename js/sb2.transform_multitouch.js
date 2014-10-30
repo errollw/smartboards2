@@ -32,7 +32,7 @@ function handle_touch_start_transform(evt) {
 
     // remove original items so they can be generated fresh for new transforms
     _.forEach(project.selectedItems, function(sel_item){
-        delete sel_item.orig_item
+        delete sel_item.orig_mtx
     });
 
     // if now multitouching, initialize multitouch transform data
@@ -69,8 +69,8 @@ function handle_touch_move_transform(evt) {
         var d_pos = currentTouches[t_idx].subtract(startTouches[t_idx])
 
         _.forEach(project.selectedItems, function(sel_item){
-            cloned_item = switch_sel_item_with_orig(sel_item);
-            cloned_item.position = cloned_item.position.add(d_pos);
+            reset_item_with_orig_mtx(sel_item);
+            sel_item.position = sel_item.position.add(d_pos);
         });
     }
 
@@ -104,10 +104,10 @@ function handle_touch_move_transform(evt) {
 
         _.forEach(project.selectedItems, function(sel_item){
 
-            cloned_item = switch_sel_item_with_orig(sel_item);
+            reset_item_with_orig_mtx(sel_item);
 
             // transform each item with multitouch
-            cloned_item.transform(m);
+            sel_item.transform(m);
         });
 
 
@@ -124,7 +124,7 @@ function handle_touch_end_transform(evt) {
 
     // remove original items so they can be generated fresh for new transforms
     _.forEach(project.selectedItems, function(sel_item){
-        delete sel_item.orig_item
+        delete sel_item.orig_mtx
     });
 
     if (getNumberOfTouches() == 1){

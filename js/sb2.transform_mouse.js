@@ -32,8 +32,8 @@ function handle_mouse_move_transform(evt) {
         d_scale = Math.min(vec_new.x/vec_start.x, vec_new.y/vec_start.y);
 
         _.forEach(project.selectedItems, function(sel_item){
-            cloned_item = switch_sel_item_with_orig(sel_item);
-            cloned_item.scale(d_scale, mouse_transform_anchor_pt);
+            reset_item_with_orig_mtx(sel_item);
+            sel_item.scale(d_scale, mouse_transform_anchor_pt);
         });
 
     } else if (mouse_transform_mode == "ROTATE"){
@@ -43,8 +43,8 @@ function handle_mouse_move_transform(evt) {
         d_rot = vec_new.angle - vec_start.angle;
 
         _.forEach(project.selectedItems, function(sel_item){
-            cloned_item = switch_sel_item_with_orig(sel_item);
-            cloned_item.rotate(d_rot, selected_items_rect.position);
+            reset_item_with_orig_mtx(sel_item);
+            sel_item.rotate(d_rot, selected_items_rect.position);
         });
 
     } else if (mouse_transform_mode == "MOVE"){
@@ -52,8 +52,8 @@ function handle_mouse_move_transform(evt) {
         vec_delta_pos = currentMouse.subtract(mouse_transform_start_pt)
 
         _.forEach(project.selectedItems, function(sel_item){
-            cloned_item = switch_sel_item_with_orig(sel_item);
-            cloned_item.position = cloned_item.position.add(vec_delta_pos);
+            reset_item_with_orig_mtx(sel_item);
+            sel_item.position = sel_item.position.add(vec_delta_pos);
         });
 
     }
@@ -64,7 +64,7 @@ function handle_mouse_up_transform(evt){
 
     // remove original items so they can be generated fresh for new transforms
     _.forEach(project.selectedItems, function(sel_item){
-        delete sel_item.orig_item
+        delete sel_item.orig_mtx
     });
 
     is_transforming_with_mouse = false;
