@@ -6,6 +6,8 @@ var startTouches = {};    // where that touch started
 
 min_delta_touch = 1;
 
+// TODO: REFACTOR GIF CODE ELSEWHERE
+
 // Only executed our code once the DOM is ready.
 $(document).ready(function() {
 
@@ -32,6 +34,8 @@ function handle_touch_start(evt) {
         previousTouches[ts[i].identifier] = touchToPoint(ts[i]);
         startTouches[ts[i].identifier] = touchToPoint(ts[i]);
     }
+
+    hide_gifs();
 }
 
 function handle_touch_move(evt) {
@@ -61,6 +65,8 @@ function handle_touch_end(evt) {
         previousTouches[ts[i].identifier] = touchToPoint(ts[i]);
         delete currentTouches[ts[i].identifier];
     }
+
+    if (noTouches() && !isMouseDown) update_gifs();
 }
 
 function handle_touch_cancel(evt) {

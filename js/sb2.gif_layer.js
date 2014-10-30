@@ -26,7 +26,7 @@ function update_gifs(){
 	_.each(gif_items.reverse(), function(gif,i){
 
 		var img = $('<img>').attr('src', $(gif._image).attr("src"));
-		var gm = gif._globalMatrix
+		var gm = gif.getGlobalMatrix();
 
 		// add the image to the dedicated gif layer and copy transform
 		img.appendTo('#gifLayer');

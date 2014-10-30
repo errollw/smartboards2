@@ -1905,7 +1905,7 @@ var Matrix = Base.extend({
 			ok = false;
 		}
 		if (!ok)
-			throw new Error('Unsupported matrix parameters');
+			throw new Error('Unsupported matrix parameters: ' + arg);
 	},
 
 	set: function(a, c, b, d, tx, ty, _dontNotify) {

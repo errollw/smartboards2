@@ -17,6 +17,7 @@ function load(){
         // clear all before importing data
         project.clear();
         project.importJSON(json_data);
+        update_gifs();
         view.update();
 
         // update client last-mod

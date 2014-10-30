@@ -28,8 +28,12 @@ function reset_item_with_orig_mtx(sel_item){
 
 	// add orig_item if it doesn't already exist
 	if (sel_item.orig_mtx == undefined){
-        orig_mtx = sel_item._globalMatrix;
+        orig_mtx = sel_item.getGlobalMatrix();
         sel_item.orig_mtx = orig_mtx;
+    }
+
+    if (sel_item.orig_mtx == undefined){
+    	console.error("undefined matrix - investigate: " + sel_item)
     }
 
     sel_item.setApplyMatrix(false)
