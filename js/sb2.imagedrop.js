@@ -96,7 +96,7 @@ $(function () {
 
             showSpinner();
             var url = dataTransfer.getData("Text");
-            console.log(url, e.originalEvent.pageX, e.originalEvent.pageY);
+            console.log("image added:", url, e.originalEvent.pageX, e.originalEvent.pageY);
 
             // Test if the URL is of an image (http://stackoverflow.com/a/9714891)
             

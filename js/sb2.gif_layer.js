@@ -1,12 +1,14 @@
+// TODO: STILL NEED TO REFACTOR MOST GIF CODE INTO HERE
 
-$(function() {
+// small hack to re-update gifs after 1 second
+// this is because they don't know their size before they load, and so are displaced incorrectly
+$(document).ready(function(){
+    window.setTimeout(update_gifs, 1000);
 
-	// a little string contains function
-	if (typeof String.prototype.contains === 'undefined') {
+    // a little string contains function
+    if (typeof String.prototype.contains === 'undefined') {
 		String.prototype.contains = function(it) { return this.indexOf(it) != -1; };
 	}
-
-
 });
 
 function update_gifs(){
