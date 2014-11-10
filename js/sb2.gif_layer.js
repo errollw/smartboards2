@@ -38,6 +38,11 @@ function update_gifs(){
 			top: -gif._size.height/2+"px",
 			transform:  "matrix("+gm._a+","+gm._c+","+gm._b+","+gm._d+","+gm._tx+","+gm._ty+")"
 		})
+
+		// on loading an image, offset it by its size
+		img.load(function() {
+			$(this).css({ left: -$(this).width/2+"px", top: -$(this).height/2+"px", })
+		});
 	});
 
 	show_gifs();
