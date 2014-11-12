@@ -1,9 +1,9 @@
 // TODO: STILL NEED TO REFACTOR MOST GIF CODE INTO HERE
 
-// small hack to re-update gifs after 1 second
+// small hack to re-update gifs after 5 second
 // this is because they don't know their size before they load, and so are displaced incorrectly
 $(document).ready(function(){
-    window.setTimeout(update_gifs, 1000);
+    window.setTimeout(update_gifs, 5000);
 
     // a little string contains function
     if (typeof String.prototype.contains === 'undefined') {
