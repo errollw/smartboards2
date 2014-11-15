@@ -41,6 +41,7 @@ function handle_touch_start_pen(evt) {
 
         touch_pt = currentTouches[ts[i].identifier];
         new_stroke.add(touch_pt);
+        has_finger_moved[ts[i].identifier] = false;
         pen_touch_strokes[ts[i].identifier] = new_stroke;
     }
 
@@ -69,8 +70,8 @@ function handle_touch_end_pen(evt) {
     var ts = evt.changedTouches;
     for (var i=0; i < ts.length; i++) {
         var id = ts[i].identifier;
-        
-        if (!has_finger_moved[id]) {
+
+        if (!has_finger_moved[id] || pen_touch_strokes[id].length < 10) {
 
             // if not moved, draw a dot, otherwise finish stroke
             draw_dot(previousTouches[id]);
