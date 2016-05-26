@@ -99,7 +99,7 @@ $(document).on("keydown", function (evt) {
                 dealtWith = true;
                 break;
             case 82: // R key for Ctrl-R reset board
-                project.clear();
+                // project.clear();
                 hide_floatie();
                 dealtWith = true;
                 break;
