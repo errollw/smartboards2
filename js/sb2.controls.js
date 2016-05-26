@@ -261,7 +261,7 @@ function show_controls(){
 function imageUrlPrompt(){
     var url = prompt("Please enter image url", "image url");
 
-    if (url != null) {
+    if (url != null && (url.match(/\.(jpeg|jpg|gif|png)$/) != null)) {
         var new_img = new Raster(url);
         new_img.position = view.center;
     }
